@@ -1,0 +1,11 @@
+C:\Users\cenkkavsut\source\repos\JustRipe2018\bin\Debug\JustRipe2018.exe.config
+C:\Users\cenkkavsut\source\repos\JustRipe2018\bin\Debug\JustRipe2018.exe
+C:\Users\cenkkavsut\source\repos\JustRipe2018\bin\Debug\JustRipe2018.pdb
+C:\Users\cenkkavsut\source\repos\JustRipe2018\obj\Debug\JustRipe2018.csprojAssemblyReference.cache
+C:\Users\cenkkavsut\source\repos\JustRipe2018\obj\Debug\JustRipe2018.Login.resources
+C:\Users\cenkkavsut\source\repos\JustRipe2018\obj\Debug\JustRipe2018.Manager.resources
+C:\Users\cenkkavsut\source\repos\JustRipe2018\obj\Debug\JustRipe2018.Properties.Resources.resources
+C:\Users\cenkkavsut\source\repos\JustRipe2018\obj\Debug\JustRipe2018.csproj.GenerateResource.cache
+C:\Users\cenkkavsut\source\repos\JustRipe2018\obj\Debug\JustRipe2018.csproj.CoreCompileInputs.cache
+C:\Users\cenkkavsut\source\repos\JustRipe2018\obj\Debug\JustRipe2018.exe
+C:\Users\cenkkavsut\source\repos\JustRipe2018\obj\Debug\JustRipe2018.pdb
