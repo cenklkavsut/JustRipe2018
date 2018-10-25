@@ -19,15 +19,15 @@ namespace JustRipe2018
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Welcome");
             // Create a new instance of the Form2 class
-            Manager settingsForm = new Manager();
 
             //closes the login Page
             Login loginForm = new Login();
             this.Hide();
             loginForm.Close();
+            MessageBox.Show("Welcome");
 
+            Manager settingsForm = new Manager();
             // Show the settings form
             settingsForm.Show();
             //Note When Close then Exit code add later.
