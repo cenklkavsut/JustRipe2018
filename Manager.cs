@@ -32,7 +32,9 @@ namespace JustRipe2018
             tabUserCntrl.SizeMode = TabSizeMode.Fixed;
 
             //add an event to close the 1st form When shut down!
-
+            tabStoreOpt.Appearance = TabAppearance.FlatButtons;
+            tabStoreOpt.ItemSize = new Size(0, 1);
+            tabStoreOpt.SizeMode = TabSizeMode.Fixed;
         }
 
         private void btnAddBuyers_Click(object sender, EventArgs e)
@@ -94,7 +96,13 @@ namespace JustRipe2018
 
         private void btnCancelUser_Click_1(object sender, EventArgs e)
         {
-
+            //Allows To Clean text in the text box and dropdowns.
+            txtName.Text = "";
+            txtSurname.Text = "";
+            txtContactNum.Text = "";
+            txtUserEmail.Text = "";
+            cbCropAmount.Text = "";
+            cbCropType.Text = "";
         }
 
         private void button1_Click(object sender, EventArgs e)
