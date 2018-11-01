@@ -31,6 +31,17 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Manager));
             this.tabManager = new System.Windows.Forms.TabControl();
             this.tabReport = new System.Windows.Forms.TabPage();
+            this.tabReportOpt = new System.Windows.Forms.TabControl();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.tabPage7 = new System.Windows.Forms.TabPage();
+            this.button5 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.tabTimeTable = new System.Windows.Forms.TabPage();
             this.richTextBox6 = new System.Windows.Forms.RichTextBox();
             this.richTextBox5 = new System.Windows.Forms.RichTextBox();
@@ -125,6 +136,8 @@
             this.btnViewBuyers = new System.Windows.Forms.Button();
             this.btnViewStock = new System.Windows.Forms.Button();
             this.tabManager.SuspendLayout();
+            this.tabReport.SuspendLayout();
+            this.tabReportOpt.SuspendLayout();
             this.tabTimeTable.SuspendLayout();
             this.tabJob.SuspendLayout();
             this.formManageJob.SuspendLayout();
@@ -165,6 +178,12 @@
             // 
             this.tabReport.BackColor = System.Drawing.Color.Tan;
             this.tabReport.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("tabReport.BackgroundImage")));
+            this.tabReport.Controls.Add(this.tabReportOpt);
+            this.tabReport.Controls.Add(this.button5);
+            this.tabReport.Controls.Add(this.button4);
+            this.tabReport.Controls.Add(this.button3);
+            this.tabReport.Controls.Add(this.button2);
+            this.tabReport.Controls.Add(this.button1);
             this.tabReport.Location = new System.Drawing.Point(4, 29);
             this.tabReport.Margin = new System.Windows.Forms.Padding(2);
             this.tabReport.Name = "tabReport";
@@ -172,6 +191,125 @@
             this.tabReport.Size = new System.Drawing.Size(892, 648);
             this.tabReport.TabIndex = 0;
             this.tabReport.Text = "Report";
+            this.tabReport.Click += new System.EventHandler(this.tabReport_Click);
+            // 
+            // tabReportOpt
+            // 
+            this.tabReportOpt.Controls.Add(this.tabPage3);
+            this.tabReportOpt.Controls.Add(this.tabPage4);
+            this.tabReportOpt.Controls.Add(this.tabPage5);
+            this.tabReportOpt.Controls.Add(this.tabPage6);
+            this.tabReportOpt.Controls.Add(this.tabPage7);
+            this.tabReportOpt.Location = new System.Drawing.Point(178, 69);
+            this.tabReportOpt.Name = "tabReportOpt";
+            this.tabReportOpt.SelectedIndex = 0;
+            this.tabReportOpt.Size = new System.Drawing.Size(625, 340);
+            this.tabReportOpt.TabIndex = 5;
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.BackColor = System.Drawing.Color.Tan;
+            this.tabPage3.Location = new System.Drawing.Point(4, 29);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(617, 307);
+            this.tabPage3.TabIndex = 0;
+            this.tabPage3.Text = "tabPage3";
+            // 
+            // tabPage4
+            // 
+            this.tabPage4.Location = new System.Drawing.Point(4, 29);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage4.Size = new System.Drawing.Size(617, 307);
+            this.tabPage4.TabIndex = 1;
+            this.tabPage4.Text = "tabPage4";
+            this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // tabPage5
+            // 
+            this.tabPage5.Location = new System.Drawing.Point(4, 29);
+            this.tabPage5.Name = "tabPage5";
+            this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage5.Size = new System.Drawing.Size(617, 307);
+            this.tabPage5.TabIndex = 2;
+            this.tabPage5.Text = "tabPage5";
+            this.tabPage5.UseVisualStyleBackColor = true;
+            // 
+            // tabPage6
+            // 
+            this.tabPage6.Location = new System.Drawing.Point(4, 29);
+            this.tabPage6.Name = "tabPage6";
+            this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage6.Size = new System.Drawing.Size(617, 307);
+            this.tabPage6.TabIndex = 3;
+            this.tabPage6.Text = "tabPage6";
+            this.tabPage6.UseVisualStyleBackColor = true;
+            // 
+            // tabPage7
+            // 
+            this.tabPage7.Location = new System.Drawing.Point(4, 29);
+            this.tabPage7.Name = "tabPage7";
+            this.tabPage7.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage7.Size = new System.Drawing.Size(617, 307);
+            this.tabPage7.TabIndex = 4;
+            this.tabPage7.Text = "tabPage7";
+            this.tabPage7.UseVisualStyleBackColor = true;
+            // 
+            // button5
+            // 
+            this.button5.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.button5.Location = new System.Drawing.Point(33, 333);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(100, 60);
+            this.button5.TabIndex = 4;
+            this.button5.Text = "Report 5";
+            this.button5.UseVisualStyleBackColor = false;
+            this.button5.Click += new System.EventHandler(this.btnRep5_Click);
+            // 
+            // button4
+            // 
+            this.button4.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.button4.Location = new System.Drawing.Point(33, 267);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(100, 60);
+            this.button4.TabIndex = 3;
+            this.button4.Text = "Report 4";
+            this.button4.UseVisualStyleBackColor = false;
+            this.button4.Click += new System.EventHandler(this.btnRep4_Click);
+            // 
+            // button3
+            // 
+            this.button3.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.button3.Location = new System.Drawing.Point(33, 201);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(100, 60);
+            this.button3.TabIndex = 2;
+            this.button3.Text = "Report 3";
+            this.button3.UseVisualStyleBackColor = false;
+            this.button3.Click += new System.EventHandler(this.btnRep3_Click);
+            // 
+            // button2
+            // 
+            this.button2.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.button2.Location = new System.Drawing.Point(33, 135);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(100, 60);
+            this.button2.TabIndex = 1;
+            this.button2.Text = "Report 2";
+            this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.btnRep2_Click);
+            // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.button1.Location = new System.Drawing.Point(33, 69);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(100, 60);
+            this.button1.TabIndex = 0;
+            this.button1.Text = "Report 1";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.btnRep1_Click);
             // 
             // tabTimeTable
             // 
@@ -1214,6 +1352,8 @@
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.Manager_Load);
             this.tabManager.ResumeLayout(false);
+            this.tabReport.ResumeLayout(false);
+            this.tabReportOpt.ResumeLayout(false);
             this.tabTimeTable.ResumeLayout(false);
             this.tabTimeTable.PerformLayout();
             this.tabJob.ResumeLayout(false);
@@ -1337,5 +1477,16 @@
         private System.Windows.Forms.TextBox textBox9;
         private System.Windows.Forms.TextBox textBox15;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.TabControl tabReportOpt;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.TabPage tabPage4;
+        private System.Windows.Forms.TabPage tabPage5;
+        private System.Windows.Forms.TabPage tabPage6;
+        private System.Windows.Forms.TabPage tabPage7;
+        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button1;
     }
 }

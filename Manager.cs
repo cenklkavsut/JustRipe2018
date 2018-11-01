@@ -35,6 +35,10 @@ namespace JustRipe2018
             TabAppearance.FlatButtons;
             formManageJob.ItemSize = new Size(0, 1);
             formManageJob.SizeMode = TabSizeMode.Fixed;
+            //Hides the tabs on the Reports page.
+            tabReportOpt.Appearance = TabAppearance.FlatButtons;
+            tabReportOpt.ItemSize = new Size(0, 1);
+            tabReportOpt.SizeMode = TabSizeMode.Fixed;
 
             //add an event to close the 1st form When shut down!
             tabStoreOpt.Appearance = TabAppearance.FlatButtons;
@@ -300,6 +304,72 @@ namespace JustRipe2018
         private void cbJDate_ValueChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void tabReport_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnRep1_Click(object sender, EventArgs e)
+        {
+
+            //allows selecting tab
+            int tabCount = tabReportOpt.TabCount;
+            for (int i = 0; i < tabReportOpt.RowCount; i++)
+            {
+                tabReportOpt.SelectTab(0);
+                //implementation
+
+            }
+        }
+
+        private void btnRep2_Click(object sender, EventArgs e)
+        {
+            //allows selecting tab
+            int tabCount = tabReportOpt.TabCount;
+            for (int i = 0; i < tabReportOpt.RowCount; i++)
+            {
+                tabReportOpt.SelectTab(1);
+                //implementation
+
+            }
+        }
+
+        private void btnRep3_Click(object sender, EventArgs e)
+        {
+            //allows selecting tab
+            int tabCount = tabReportOpt.TabCount;
+            for (int i = 0; i < tabReportOpt.RowCount; i++)
+            {
+                tabReportOpt.SelectTab(2);
+                //implementation
+
+            }
+        }
+
+        private void btnRep4_Click(object sender, EventArgs e)
+        {
+            //allows selecting tab
+            int tabCount = tabReportOpt.TabCount;
+            for (int i = 0; i < tabReportOpt.RowCount; i++)
+            {
+                tabReportOpt.SelectTab(3);
+                //implementation
+
+            }
+        }
+
+        private void btnRep5_Click(object sender, EventArgs e)
+        {
+            //allows selecting tab
+            int tabCount = tabReportOpt.TabCount;
+            for (int i = 0; i < tabReportOpt.RowCount; i++)
+            {
+                tabReportOpt.SelectTab(4);
+                //implementation
+
+            }
         }
     }
 }
