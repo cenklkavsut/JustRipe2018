@@ -30,6 +30,11 @@ namespace JustRipe2018
             tabUserCntrl.Appearance = TabAppearance.FlatButtons;
             tabUserCntrl.ItemSize = new Size(0, 1);
             tabUserCntrl.SizeMode = TabSizeMode.Fixed;
+            //Hides the tabs on the Manage Job Page.
+            formManageJob.Appearance =
+            TabAppearance.FlatButtons;
+            formManageJob.ItemSize = new Size(0, 1);
+            formManageJob.SizeMode = TabSizeMode.Fixed;
 
             //add an event to close the 1st form When shut down!
             tabStoreOpt.Appearance = TabAppearance.FlatButtons;
@@ -218,6 +223,81 @@ namespace JustRipe2018
         }
 
         private void tabUser_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnAddJob_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnAddJobCancel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label7_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnAddJob_Click_1(object sender, EventArgs e)
+        {
+            //Tab Selection
+            int Tabcount = formManageJob.TabCount;
+            for (int count = 0; count < formManageJob.RowCount; count++)
+            {
+                //Change Tab
+                formManageJob.SelectTab(0);
+            }
+        }
+
+        private void btnEditJob_Click(object sender, EventArgs e)
+        {
+            //Tab Selection
+            int Tabcount = formManageJob.TabCount;
+            for (int count = 0; count < formManageJob.RowCount; count++)
+            {
+                //Changes the Tab
+                formManageJob.SelectTab(1);
+            }
+        }
+
+        private void btnAddJobSave_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnAddJobCancel_Click_1(object sender, EventArgs e)
+        {
+            //Clears the Job Text Boxes
+            cbJCrop.Text = "";
+            cbJLabouer.Text = "";
+            
+        }
+
+        private void btnEditJobSave_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnDeleteJobSave_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cbJDate_ValueChanged(object sender, EventArgs e)
         {
 
         }
