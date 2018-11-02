@@ -75,3 +75,26 @@ D:\Documents\Visual Studio\JustRipe2018-master\obj\Debug\JustRipe2018.csproj.Gen
 D:\Documents\Visual Studio\JustRipe2018-master\obj\Debug\JustRipe2018.csproj.CoreCompileInputs.cache
 D:\Documents\Visual Studio\JustRipe2018-master\obj\Debug\JustRipe2018.exe
 D:\Documents\Visual Studio\JustRipe2018-master\obj\Debug\JustRipe2018.pdb
+H:\Development\JustRipe2018\bin\Debug\JustRipe2018.exe.config
+H:\Development\JustRipe2018\bin\Debug\JustRipe2018.exe
+H:\Development\JustRipe2018\bin\Debug\JustRipe2018.pdb
+H:\Development\JustRipe2018\obj\Debug\JustRipe2018.csprojResolveAssemblyReference.cache
+H:\Development\JustRipe2018\obj\Debug\JustRipe2018.Login.resources
+H:\Development\JustRipe2018\obj\Debug\JustRipe2018.Manager.resources
+H:\Development\JustRipe2018\obj\Debug\JustRipe2018.Properties.Resources.resources
+H:\Development\JustRipe2018\obj\Debug\JustRipe2018.csproj.GenerateResource.cache
+H:\Development\JustRipe2018\obj\Debug\JustRipe2018.csproj.CoreCompileInputs.cache
+H:\Development\JustRipe2018\obj\Debug\JustRipe2018.exe
+H:\Development\JustRipe2018\obj\Debug\JustRipe2018.pdb
+H:\My Documents\Development\JustRipe2018\bin\Debug\JustRipe2018.exe.config
+H:\My Documents\Development\JustRipe2018\bin\Debug\JustRipe2018.exe
+H:\My Documents\Development\JustRipe2018\bin\Debug\JustRipe2018.pdb
+H:\My Documents\Development\JustRipe2018\obj\Debug\JustRipe2018.csprojResolveAssemblyReference.cache
+H:\My Documents\Development\JustRipe2018\obj\Debug\JustRipe2018.Login.resources
+H:\My Documents\Development\JustRipe2018\obj\Debug\JustRipe2018.Manager.resources
+H:\My Documents\Development\JustRipe2018\obj\Debug\JustRipe2018.Properties.Resources.resources
+H:\My Documents\Development\JustRipe2018\obj\Debug\JustRipe2018.csproj.GenerateResource.cache
+H:\My Documents\Development\JustRipe2018\obj\Debug\JustRipe2018.csproj.CoreCompileInputs.cache
+H:\My Documents\Development\JustRipe2018\obj\Debug\JustRipe2018.exe
+H:\My Documents\Development\JustRipe2018\obj\Debug\JustRipe2018.pdb
+H:\My Documents\Development\JustRipe2018\obj\Debug\JustRipe2018.Labourer.resources
