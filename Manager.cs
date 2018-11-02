@@ -283,6 +283,7 @@ namespace JustRipe2018
             //Clears the Job Text Boxes
             cbJCrop.Text = "";
             cbJLabouer.Text = "";
+            Cbjamount.Text = "";
             
         }
 
@@ -370,6 +371,11 @@ namespace JustRipe2018
                 //implementation
 
             }
+        }
+
+        private void textBox16_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
