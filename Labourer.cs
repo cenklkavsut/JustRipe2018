@@ -16,5 +16,10 @@ namespace JustRipe2018
         {
             InitializeComponent();
         }
+
+        private void btnLogoutLabourer_Click(object sender, EventArgs e)
+        {
+            Application.Restart();
+        }
     }
 }

@@ -8,6 +8,20 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+//[Name]:Brett leary
+//[SID]:1553265
+//[last updated]:06/11/2018
+//[Name]:Cenk latif kavsut
+//[SID]:1572556
+//[last updated]:06/11/2018
+//[Name]:Charlie bryant
+//[SID]:1706224
+//[last updated]:06/11/2018
+//[Name]:Bailey McQue
+//[SID]:1708431
+//[last updated]:06/11/2018
+
+
 namespace JustRipe2018
 {
     public partial class Login : Form
@@ -31,6 +45,11 @@ namespace JustRipe2018
             // Show the settings form
             settingsForm.Show();
             //Note When Close then Exit code add later.
+
+        }
+
+        private void Login_Load(object sender, EventArgs e)
+        {
 
         }
     }

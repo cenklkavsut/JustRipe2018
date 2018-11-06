@@ -130,6 +130,7 @@
             this.MaximizeBox = false;
             this.Name = "Login";
             this.Text = "JustRipe 2018";
+            this.Load += new System.EventHandler(this.Login_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
