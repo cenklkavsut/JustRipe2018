@@ -98,3 +98,15 @@ H:\My Documents\Development\JustRipe2018\obj\Debug\JustRipe2018.csproj.CoreCompi
 H:\My Documents\Development\JustRipe2018\obj\Debug\JustRipe2018.exe
 H:\My Documents\Development\JustRipe2018\obj\Debug\JustRipe2018.pdb
 H:\My Documents\Development\JustRipe2018\obj\Debug\JustRipe2018.Labourer.resources
+C:\Users\Charlie Bryant\Documents\GitHub\JustRipe2018\bin\Debug\JustRipe2018.exe.config
+C:\Users\Charlie Bryant\Documents\GitHub\JustRipe2018\bin\Debug\JustRipe2018.exe
+C:\Users\Charlie Bryant\Documents\GitHub\JustRipe2018\bin\Debug\JustRipe2018.pdb
+C:\Users\Charlie Bryant\Documents\GitHub\JustRipe2018\obj\Debug\JustRipe2018.csprojAssemblyReference.cache
+C:\Users\Charlie Bryant\Documents\GitHub\JustRipe2018\obj\Debug\JustRipe2018.Labourer.resources
+C:\Users\Charlie Bryant\Documents\GitHub\JustRipe2018\obj\Debug\JustRipe2018.Login.resources
+C:\Users\Charlie Bryant\Documents\GitHub\JustRipe2018\obj\Debug\JustRipe2018.Manager.resources
+C:\Users\Charlie Bryant\Documents\GitHub\JustRipe2018\obj\Debug\JustRipe2018.Properties.Resources.resources
+C:\Users\Charlie Bryant\Documents\GitHub\JustRipe2018\obj\Debug\JustRipe2018.csproj.GenerateResource.cache
+C:\Users\Charlie Bryant\Documents\GitHub\JustRipe2018\obj\Debug\JustRipe2018.csproj.CoreCompileInputs.cache
+C:\Users\Charlie Bryant\Documents\GitHub\JustRipe2018\obj\Debug\JustRipe2018.exe
+C:\Users\Charlie Bryant\Documents\GitHub\JustRipe2018\obj\Debug\JustRipe2018.pdb
