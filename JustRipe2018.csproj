@@ -60,6 +60,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DatabaseClass.cs" />
     <Compile Include="Labourer.cs">
       <SubType>Form</SubType>
     </Compile>

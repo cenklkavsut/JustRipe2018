@@ -21,5 +21,10 @@ namespace JustRipe2018
         {
             Application.Restart();
         }
+
+        private void Labourer_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

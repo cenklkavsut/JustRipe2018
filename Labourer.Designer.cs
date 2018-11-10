@@ -41,7 +41,7 @@
             this.tabLabourer.Controls.Add(this.tabTimetableLabourer);
             this.tabLabourer.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabLabourer.Location = new System.Drawing.Point(0, 0);
-            this.tabLabourer.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.tabLabourer.Margin = new System.Windows.Forms.Padding(6);
             this.tabLabourer.Name = "tabLabourer";
             this.tabLabourer.SelectedIndex = 0;
             this.tabLabourer.Size = new System.Drawing.Size(1820, 1385);
@@ -52,9 +52,9 @@
             this.tabTimetableLabourer.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("tabTimetableLabourer.BackgroundImage")));
             this.tabTimetableLabourer.Controls.Add(this.btnLogoutLabourer);
             this.tabTimetableLabourer.Location = new System.Drawing.Point(8, 51);
-            this.tabTimetableLabourer.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.tabTimetableLabourer.Margin = new System.Windows.Forms.Padding(6);
             this.tabTimetableLabourer.Name = "tabTimetableLabourer";
-            this.tabTimetableLabourer.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.tabTimetableLabourer.Padding = new System.Windows.Forms.Padding(6);
             this.tabTimetableLabourer.Size = new System.Drawing.Size(1804, 1326);
             this.tabTimetableLabourer.TabIndex = 0;
             this.tabTimetableLabourer.Text = "Timetable";
@@ -83,10 +83,11 @@
             this.Cursor = System.Windows.Forms.Cursors.Default;
             this.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.Margin = new System.Windows.Forms.Padding(6);
             this.MaximizeBox = false;
             this.Name = "Labourer";
             this.Text = "JustRipe2018 - Labourer";
+            this.Load += new System.EventHandler(this.Labourer_Load);
             this.tabLabourer.ResumeLayout(false);
             this.tabTimetableLabourer.ResumeLayout(false);
             this.ResumeLayout(false);
