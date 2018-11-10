@@ -23,15 +23,14 @@ namespace JustRipe2018.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string Setting {
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\JustRipeDatab" +
+            "ase.mdf;Integrated Security=True;Connect Timeout=30")]
+        public string connectionToDB {
             get {
-                return ((string)(this["Setting"]));
-            }
-            set {
-                this["Setting"] = value;
+                return ((string)(this["connectionToDB"]));
             }
         }
     }
