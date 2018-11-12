@@ -52,29 +52,32 @@ namespace JustRipe2018
             //labrer.show();
             // Show the settings form
             settingsForm.Show();
-                passwordCounter = 0;
+            passwordCounter = 0;
             }//this part in place of password counter it need to be txt user or password!= database value to activvate this code!
             else if (txtUserName.Text!="admin" && txtPassword.Text!= "admin")//if password is wrong!
             {
-                if (passwordCounter == 3 ||passwordCounter>3)//if 3 times or more
-                {
-                    if (passwordCounter > 3)//if more than 3
+                if (passwordCounter == 3 || passwordCounter>3)//if 3 times or more
+                { 
+                    /* (passwordCounter > 3)//if more than 3
                     {
                         MessageBox.Show("Exited the maximun limit of tries!");
                         Application.Exit();
-                    }
-                    else if (passwordCounter == 3)
+                    }*/
+                    if (passwordCounter == 3)
                     {
-                        lblLogin.Text = "3th try please "+"\nConntact a manager "+"\nbefore application shuts down!";
+                        MessageBox.Show("3rd attempt failed: Forcing Shutdown");
+                        Application.Exit(); 
                     }
                 }
                 else if (passwordCounter == 2)
                 {
-                    lblLogin.Text = "2nd try pleas try again!";
+                    MessageBox.Show("Last Attempt: Please Contact a Manager");
+                    lblLogin.Text = "2nd attempt failed: username or password is incorrect";
                 }
                 else if (passwordCounter == 1)
                 {
-                    lblLogin.Text = "1st try pleas try again!";
+                    lblLogin.Location = new Point(30, 160);
+                    lblLogin.Text = "1st attempt failed: username or password is incorrect";
                 }
                 passwordCounter += 1;//the counter for each time wrong
             }
