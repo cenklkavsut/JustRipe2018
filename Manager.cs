@@ -148,7 +148,8 @@ namespace JustRipe2018
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
-
+            //prevents Labourer check box from being selected if Manager is checked
+            chkbxManagerCreate.Checked = !chkbxLaborCreate.Checked;
         }
 
         private void textBox4_TextChanged(object sender, EventArgs e)
@@ -452,6 +453,24 @@ namespace JustRipe2018
         private void tabDeleteJob_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void chkbxManagerCreate_CheckedChanged(object sender, EventArgs e)
+        {
+            //prevents Manager check box from being selected if Labourer is checked
+            chkbxLaborCreate.Checked = !chkbxManagerCreate.Checked;
+        }
+
+        private void chkbxLaborEdit_CheckedChanged(object sender, EventArgs e)
+        {
+            //prevents Labourer check box from being selected if Manager is checked
+            chkbxManagerEdit.Checked = !chkbxLaborEdit.Checked;
+        }
+
+        private void chkbxManagerEdit_CheckedChanged(object sender, EventArgs e)
+        {
+            //prevents Manager check box from being selected if Labourer is checked
+            chkbxLaborEdit.Checked = !chkbxManagerEdit.Checked;
         }
     }
 }

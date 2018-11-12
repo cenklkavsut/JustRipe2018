@@ -124,3 +124,17 @@ C:\Users\cenkkavsut\source\repos\JustRipe2018X\JustRipe2018\obj\Debug\JustRipe20
 C:\Users\cenkkavsut\source\repos\JustRipe2018X\JustRipe2018\obj\Debug\JustRipe2018.csproj.CoreCompileInputs.cache
 C:\Users\cenkkavsut\source\repos\JustRipe2018X\JustRipe2018\obj\Debug\JustRipe2018.exe
 C:\Users\cenkkavsut\source\repos\JustRipe2018X\JustRipe2018\obj\Debug\JustRipe2018.pdb
+C:\Users\Brett\Documents\JustRipe2018\JustRipe2018\bin\Debug\JustRipeDatabase.mdf
+C:\Users\Brett\Documents\JustRipe2018\JustRipe2018\bin\Debug\JustRipeDatabase_log.ldf
+C:\Users\Brett\Documents\JustRipe2018\JustRipe2018\bin\Debug\JustRipe2018.exe.config
+C:\Users\Brett\Documents\JustRipe2018\JustRipe2018\bin\Debug\JustRipe2018.exe
+C:\Users\Brett\Documents\JustRipe2018\JustRipe2018\bin\Debug\JustRipe2018.pdb
+C:\Users\Brett\Documents\JustRipe2018\JustRipe2018\obj\Debug\JustRipe2018.csprojAssemblyReference.cache
+C:\Users\Brett\Documents\JustRipe2018\JustRipe2018\obj\Debug\JustRipe2018.Labourer.resources
+C:\Users\Brett\Documents\JustRipe2018\JustRipe2018\obj\Debug\JustRipe2018.Login.resources
+C:\Users\Brett\Documents\JustRipe2018\JustRipe2018\obj\Debug\JustRipe2018.Manager.resources
+C:\Users\Brett\Documents\JustRipe2018\JustRipe2018\obj\Debug\JustRipe2018.Properties.Resources.resources
+C:\Users\Brett\Documents\JustRipe2018\JustRipe2018\obj\Debug\JustRipe2018.csproj.GenerateResource.cache
+C:\Users\Brett\Documents\JustRipe2018\JustRipe2018\obj\Debug\JustRipe2018.csproj.CoreCompileInputs.cache
+C:\Users\Brett\Documents\JustRipe2018\JustRipe2018\obj\Debug\JustRipe2018.exe
+C:\Users\Brett\Documents\JustRipe2018\JustRipe2018\obj\Debug\JustRipe2018.pdb
