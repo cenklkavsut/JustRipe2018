@@ -1,6 +1,10 @@
 ﻿using System;
+using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
+using System.Data.SqlClient;
+using System.Data;
+
 
 
 namespace JustRipe2018
@@ -11,7 +15,7 @@ namespace JustRipe2018
         {
             InitializeComponent();
         }
-
+        public string ConnectionStrDB = @"Data Source = (LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\JustRipeDatabase.mdf;Integrated Security = True; Connect Timeout = 30";
         private void Manager_Load(object sender, EventArgs e)
         {
             //Helps to keep the form maximized.
@@ -80,6 +84,17 @@ namespace JustRipe2018
                 //implementation
 
             }
+            //change the query based on the buyers
+            DatabaseClass dbCon = new DatabaseClass(ConnectionStrDB);
+            var select = "Select * From [dbo].[CropsStorage]";
+            var c = new SqlConnection(ConnectionStrDB);
+            // Your Connection String here
+            var dataAdapter = new SqlDataAdapter(select, c);
+            var commandBuilder = new SqlCommandBuilder(dataAdapter);
+            var ds = new DataSet();
+            dataAdapter.Fill(ds);
+            dataGridAddStore.ReadOnly = true;
+            dataGridAddStore.DataSource = ds.Tables[0];
         }
 
         private void btnViewStock_Click_1(object sender, EventArgs e)
@@ -90,8 +105,17 @@ namespace JustRipe2018
             {
                 tabStoreOpt.SelectTab(0);
                 //implementation
-
             }
+          
+            DatabaseClass dbCon = new DatabaseClass (ConnectionStrDB);
+            var select = "Select * From [dbo].[Orders]";
+            var c = new SqlConnection(ConnectionStrDB);
+            var dataAdapter = new SqlDataAdapter(select, c);
+            var commandBuilder = new SqlCommandBuilder(dataAdapter);
+            var ds = new DataSet();
+            dataAdapter.Fill(ds);
+            dataGridAddStore.ReadOnly = true;
+            dataGridAddStore.DataSource = ds.Tables[0];
         }
 
         private void btnBuyer_Click(object sender, EventArgs e)

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -36,12 +37,30 @@ namespace JustRipe2018
          public int passwordCounter=0;//a counter for the password!
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            //changes to lower character.
-            txtUserName.Text.ToLower();
-            txtPassword.Text.ToLower();
-            //for loggin add database to the place where admin  is typed and connection
-            //in place of admin it need to be changed to the place from the database.
-            if (txtUserName.Text=="admin" && txtPassword.Text=="admin")//this is gonne be the name inputed in from the database
+            //DatabaseClass con = new DatabaseClass(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\JustRipeDatabase.mdf;Integrated Security=True;Connect Timeout=30");
+
+            //string dummyun = txtUserName.Text;
+            //string dummypw = txtPassword.Text;
+            //con.openConnection();
+
+            //SqlCommand StrQuer = new SqlCommand("Select * From[dbo].[Orders] WHERE Username=@userid AND Password =@password");
+            
+            //    StrQuer.Parameters.AddWithValue("@userid", dummyun);
+            //    StrQuer.Parameters.AddWithValue("@password", dummypw);
+            //    SqlDataReader user = StrQuer.ExecuteReader();
+            //    if(use.HasRows)
+            //      {
+            //        MessageBox.Show("loginSuccess");
+            //    }
+            //  else
+            //    {
+            //        //invalid login
+            //    }
+
+
+                //for loggin add database to the place where admin  is typed and connection
+                //in place of admin it need to be changed to the place from the database.
+                if (txtUserName.Text.ToLower()=="admin" && txtPassword.Text.ToLower()=="admin")//this is gonne be the name inputed in from the database
             {    
             //closes the login Page
             Login loginForm = new Login();
@@ -84,7 +103,7 @@ namespace JustRipe2018
                 }
                 passwordCounter += 1;//the counter for each time wrong
             }
-        }
+    }
 
         private void Login_Load(object sender, EventArgs e)
         {
@@ -93,12 +112,13 @@ namespace JustRipe2018
 
         private void txtUserName_TextChanged(object sender, EventArgs e)
         {
+         
            
         }
 
         private void txtPassword_TextChanged(object sender, EventArgs e)
         {
-           
+
         }
     }
 }

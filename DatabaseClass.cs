@@ -10,7 +10,8 @@ namespace JustRipe2018
 {
     class DatabaseClass
     {
-        private string connectionStr;//Connection string for connecting to the db
+        private string connectionStr= @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\JustRipeDatabase.mdf;Integrated Security=True;Connect Timeout=30";
+        //Connection string for connecting to the db
         SqlConnection connectionToDB;//change to db name this is the string that connect the database.
         private SqlDataAdapter dataAdapter;
        
@@ -25,24 +26,25 @@ namespace JustRipe2018
         {//close the connection to the database
             connectionToDB.Close();//change to db name
         }
-
+        //fill the data base with the sql statment.
         public DataSet getDataSet(string sqlStatement)
         {
             dataAdapter = new SqlDataAdapter(sqlStatement,connectionToDB);// create the 
-            DataSet dataSet = new System.Data.DataSet();
+           DataSet dataSet = new System.Data.DataSet();
+
             dataAdapter.Fill(dataSet);//return the dataSet
 
             return dataSet;  
         }
 
         //this needs to be changed based on the implementation and the database
-        private void FillInTextFields(DataTable table, int ind)
+        public void FillInTextFields(DataTable table, int ind)
         {
         //// get the table row specified 
         //byte ind
         DataRow dataRow= table.Rows[ind];//allows for obtaining data from table
         ////get the SID
-        //tbSID.Text= dataRow.ItemArray.GetValue(0).ToString();//name based on the colum and on the table
+       //username.Text= dataRow.ItemArray.GetValue(0).ToString();//name based on the colum and on the table
         ////get the name
         //tbName.Text= dataRow.ItemArray.GetValue(1).ToString();//name based on the colum and on the table
         ////get the start
