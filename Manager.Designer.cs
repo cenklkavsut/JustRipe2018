@@ -135,7 +135,7 @@
             this.btnLogoutStore = new System.Windows.Forms.Button();
             this.tabStoreOpt = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dataGridAddStore = new System.Windows.Forms.DataGridView();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.cbCropAmount = new System.Windows.Forms.ComboBox();
             this.cbCropType = new System.Windows.Forms.ComboBox();
@@ -171,7 +171,7 @@
             this.Store.SuspendLayout();
             this.tabStoreOpt.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridAddStore)).BeginInit();
             this.tabPage2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -187,7 +187,7 @@
             this.tabManager.Controls.Add(this.Store);
             this.tabManager.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabManager.Location = new System.Drawing.Point(0, 0);
-            this.tabManager.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabManager.Margin = new System.Windows.Forms.Padding(2);
             this.tabManager.Name = "tabManager";
             this.tabManager.SelectedIndex = 0;
             this.tabManager.Size = new System.Drawing.Size(910, 720);
@@ -205,9 +205,9 @@
             this.tabReport.Controls.Add(this.button2);
             this.tabReport.Controls.Add(this.button1);
             this.tabReport.Location = new System.Drawing.Point(4, 29);
-            this.tabReport.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabReport.Margin = new System.Windows.Forms.Padding(2);
             this.tabReport.Name = "tabReport";
-            this.tabReport.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabReport.Padding = new System.Windows.Forms.Padding(2);
             this.tabReport.Size = new System.Drawing.Size(902, 687);
             this.tabReport.TabIndex = 0;
             this.tabReport.Text = "Report";
@@ -243,7 +243,7 @@
             this.tabPage3.BackColor = System.Drawing.Color.Tan;
             this.tabPage3.Location = new System.Drawing.Point(4, 29);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage3.Size = new System.Drawing.Size(617, 307);
             this.tabPage3.TabIndex = 0;
             this.tabPage3.Text = "tabPage3";
@@ -252,7 +252,7 @@
             // 
             this.tabPage4.Location = new System.Drawing.Point(4, 29);
             this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage4.Size = new System.Drawing.Size(617, 307);
             this.tabPage4.TabIndex = 1;
             this.tabPage4.Text = "tabPage4";
@@ -262,7 +262,7 @@
             // 
             this.tabPage5.Location = new System.Drawing.Point(4, 29);
             this.tabPage5.Name = "tabPage5";
-            this.tabPage5.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage5.Size = new System.Drawing.Size(617, 307);
             this.tabPage5.TabIndex = 2;
             this.tabPage5.Text = "tabPage5";
@@ -272,7 +272,7 @@
             // 
             this.tabPage6.Location = new System.Drawing.Point(4, 29);
             this.tabPage6.Name = "tabPage6";
-            this.tabPage6.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage6.Size = new System.Drawing.Size(617, 307);
             this.tabPage6.TabIndex = 3;
             this.tabPage6.Text = "tabPage6";
@@ -282,7 +282,7 @@
             // 
             this.tabPage7.Location = new System.Drawing.Point(4, 29);
             this.tabPage7.Name = "tabPage7";
-            this.tabPage7.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPage7.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage7.Size = new System.Drawing.Size(617, 307);
             this.tabPage7.TabIndex = 4;
             this.tabPage7.Text = "tabPage7";
@@ -362,9 +362,9 @@
             this.tabTimeTable.Controls.Add(this.textBox15);
             this.tabTimeTable.Controls.Add(this.dateTimePicker1);
             this.tabTimeTable.Location = new System.Drawing.Point(4, 29);
-            this.tabTimeTable.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabTimeTable.Margin = new System.Windows.Forms.Padding(2);
             this.tabTimeTable.Name = "tabTimeTable";
-            this.tabTimeTable.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabTimeTable.Padding = new System.Windows.Forms.Padding(2);
             this.tabTimeTable.Size = new System.Drawing.Size(902, 687);
             this.tabTimeTable.TabIndex = 1;
             this.tabTimeTable.Text = "Time table";
@@ -493,9 +493,9 @@
             this.tabJob.Controls.Add(this.btnEditJob);
             this.tabJob.Controls.Add(this.btnAddJob);
             this.tabJob.Location = new System.Drawing.Point(4, 29);
-            this.tabJob.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabJob.Margin = new System.Windows.Forms.Padding(2);
             this.tabJob.Name = "tabJob";
-            this.tabJob.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabJob.Padding = new System.Windows.Forms.Padding(2);
             this.tabJob.Size = new System.Drawing.Size(902, 687);
             this.tabJob.TabIndex = 2;
             this.tabJob.Text = "Manage Job";
@@ -539,7 +539,7 @@
             this.Tabaddjob.Controls.Add(this.label7);
             this.Tabaddjob.Location = new System.Drawing.Point(4, 29);
             this.Tabaddjob.Name = "Tabaddjob";
-            this.Tabaddjob.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.Tabaddjob.Padding = new System.Windows.Forms.Padding(3);
             this.Tabaddjob.Size = new System.Drawing.Size(510, 459);
             this.Tabaddjob.TabIndex = 0;
             this.Tabaddjob.Text = "Add Job";
@@ -553,7 +553,7 @@
             "Harvesting",
             "Special Treatment"});
             this.addJobType.Location = new System.Drawing.Point(155, 50);
-            this.addJobType.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.addJobType.Margin = new System.Windows.Forms.Padding(2);
             this.addJobType.Name = "addJobType";
             this.addJobType.Size = new System.Drawing.Size(200, 28);
             this.addJobType.TabIndex = 12;
@@ -572,7 +572,7 @@
             // Cbjamount
             // 
             this.Cbjamount.Location = new System.Drawing.Point(155, 84);
-            this.Cbjamount.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Cbjamount.Margin = new System.Windows.Forms.Padding(2);
             this.Cbjamount.Name = "Cbjamount";
             this.Cbjamount.Size = new System.Drawing.Size(200, 26);
             this.Cbjamount.TabIndex = 10;
@@ -678,7 +678,7 @@
             this.tabDeleteJob.Controls.Add(this.label12);
             this.tabDeleteJob.Location = new System.Drawing.Point(4, 29);
             this.tabDeleteJob.Name = "tabDeleteJob";
-            this.tabDeleteJob.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabDeleteJob.Padding = new System.Windows.Forms.Padding(3);
             this.tabDeleteJob.Size = new System.Drawing.Size(510, 459);
             this.tabDeleteJob.TabIndex = 1;
             this.tabDeleteJob.Text = "Edit Job";
@@ -693,7 +693,7 @@
             "Harvesting",
             "Special Treatment"});
             this.editJobType.Location = new System.Drawing.Point(176, 218);
-            this.editJobType.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.editJobType.Margin = new System.Windows.Forms.Padding(2);
             this.editJobType.Name = "editJobType";
             this.editJobType.Size = new System.Drawing.Size(200, 28);
             this.editJobType.TabIndex = 18;
@@ -829,9 +829,9 @@
             this.tabUser.Controls.Add(this.btnEditUser);
             this.tabUser.Controls.Add(this.btnCreateUsr);
             this.tabUser.Location = new System.Drawing.Point(4, 29);
-            this.tabUser.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabUser.Margin = new System.Windows.Forms.Padding(2);
             this.tabUser.Name = "tabUser";
-            this.tabUser.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabUser.Padding = new System.Windows.Forms.Padding(2);
             this.tabUser.Size = new System.Drawing.Size(902, 687);
             this.tabUser.TabIndex = 3;
             this.tabUser.Text = "Manage User";
@@ -854,7 +854,7 @@
             this.tabUserCntrl.Controls.Add(this.tabCreateUsr);
             this.tabUserCntrl.Controls.Add(this.tabEditUsr);
             this.tabUserCntrl.Location = new System.Drawing.Point(140, 24);
-            this.tabUserCntrl.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabUserCntrl.Margin = new System.Windows.Forms.Padding(2);
             this.tabUserCntrl.Name = "tabUserCntrl";
             this.tabUserCntrl.SelectedIndex = 0;
             this.tabUserCntrl.Size = new System.Drawing.Size(580, 554);
@@ -881,7 +881,7 @@
             this.tabCreateUsr.Controls.Add(this.dataGridView2);
             this.tabCreateUsr.Location = new System.Drawing.Point(4, 29);
             this.tabCreateUsr.Name = "tabCreateUsr";
-            this.tabCreateUsr.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabCreateUsr.Padding = new System.Windows.Forms.Padding(3);
             this.tabCreateUsr.Size = new System.Drawing.Size(572, 521);
             this.tabCreateUsr.TabIndex = 0;
             this.tabCreateUsr.Text = "Create User";
@@ -1058,7 +1058,7 @@
             this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView2.GridColor = System.Drawing.Color.Tan;
             this.dataGridView2.Location = new System.Drawing.Point(0, 2);
-            this.dataGridView2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dataGridView2.Margin = new System.Windows.Forms.Padding(2);
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.RowTemplate.Height = 33;
             this.dataGridView2.Size = new System.Drawing.Size(576, 557);
@@ -1087,7 +1087,7 @@
             this.tabEditUsr.Controls.Add(this.dataGridView3);
             this.tabEditUsr.Location = new System.Drawing.Point(4, 29);
             this.tabEditUsr.Name = "tabEditUsr";
-            this.tabEditUsr.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabEditUsr.Padding = new System.Windows.Forms.Padding(3);
             this.tabEditUsr.Size = new System.Drawing.Size(572, 521);
             this.tabEditUsr.TabIndex = 1;
             this.tabEditUsr.Text = "Edit User";
@@ -1296,7 +1296,7 @@
             this.dataGridView3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView3.GridColor = System.Drawing.Color.Tan;
             this.dataGridView3.Location = new System.Drawing.Point(-4, 2);
-            this.dataGridView3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dataGridView3.Margin = new System.Windows.Forms.Padding(2);
             this.dataGridView3.Name = "dataGridView3";
             this.dataGridView3.RowTemplate.Height = 33;
             this.dataGridView3.Size = new System.Drawing.Size(580, 549);
@@ -1336,9 +1336,9 @@
             this.Store.Controls.Add(this.btnViewBuyers);
             this.Store.Controls.Add(this.btnViewStock);
             this.Store.Location = new System.Drawing.Point(4, 29);
-            this.Store.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Store.Margin = new System.Windows.Forms.Padding(2);
             this.Store.Name = "Store";
-            this.Store.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Store.Padding = new System.Windows.Forms.Padding(2);
             this.Store.Size = new System.Drawing.Size(902, 687);
             this.Store.TabIndex = 4;
             this.Store.Text = "Store";
@@ -1360,7 +1360,7 @@
             this.tabStoreOpt.Controls.Add(this.tabPage1);
             this.tabStoreOpt.Controls.Add(this.tabPage2);
             this.tabStoreOpt.Location = new System.Drawing.Point(138, 22);
-            this.tabStoreOpt.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabStoreOpt.Margin = new System.Windows.Forms.Padding(2);
             this.tabStoreOpt.Name = "tabStoreOpt";
             this.tabStoreOpt.SelectedIndex = 0;
             this.tabStoreOpt.ShowToolTips = true;
@@ -1371,26 +1371,26 @@
             // tabPage1
             // 
             this.tabPage1.BackColor = System.Drawing.Color.Tan;
-            this.tabPage1.Controls.Add(this.dataGridView1);
+            this.tabPage1.Controls.Add(this.dataGridAddStore);
             this.tabPage1.Location = new System.Drawing.Point(4, 29);
-            this.tabPage1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPage1.Margin = new System.Windows.Forms.Padding(2);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(2);
             this.tabPage1.Size = new System.Drawing.Size(566, 521);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Stock/Buyers";
             // 
-            // dataGridView1
+            // dataGridAddStore
             // 
-            this.dataGridView1.BackgroundColor = System.Drawing.Color.Tan;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.GridColor = System.Drawing.Color.Tan;
-            this.dataGridView1.Location = new System.Drawing.Point(0, 0);
-            this.dataGridView1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowTemplate.Height = 33;
-            this.dataGridView1.Size = new System.Drawing.Size(591, 554);
-            this.dataGridView1.TabIndex = 0;
+            this.dataGridAddStore.BackgroundColor = System.Drawing.Color.Tan;
+            this.dataGridAddStore.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridAddStore.GridColor = System.Drawing.Color.Tan;
+            this.dataGridAddStore.Location = new System.Drawing.Point(0, 0);
+            this.dataGridAddStore.Margin = new System.Windows.Forms.Padding(2);
+            this.dataGridAddStore.Name = "dataGridAddStore";
+            this.dataGridAddStore.RowTemplate.Height = 33;
+            this.dataGridAddStore.Size = new System.Drawing.Size(591, 554);
+            this.dataGridAddStore.TabIndex = 0;
             // 
             // tabPage2
             // 
@@ -1411,9 +1411,9 @@
             this.tabPage2.Controls.Add(this.label2);
             this.tabPage2.Controls.Add(this.label1);
             this.tabPage2.Location = new System.Drawing.Point(4, 29);
-            this.tabPage2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPage2.Margin = new System.Windows.Forms.Padding(2);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(2);
             this.tabPage2.Size = new System.Drawing.Size(566, 521);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Add User";
@@ -1423,7 +1423,7 @@
             // 
             this.cbCropAmount.FormattingEnabled = true;
             this.cbCropAmount.Location = new System.Drawing.Point(124, 198);
-            this.cbCropAmount.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cbCropAmount.Margin = new System.Windows.Forms.Padding(2);
             this.cbCropAmount.Name = "cbCropAmount";
             this.cbCropAmount.Size = new System.Drawing.Size(172, 28);
             this.cbCropAmount.TabIndex = 15;
@@ -1432,7 +1432,7 @@
             // 
             this.cbCropType.FormattingEnabled = true;
             this.cbCropType.Location = new System.Drawing.Point(124, 166);
-            this.cbCropType.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cbCropType.Margin = new System.Windows.Forms.Padding(2);
             this.cbCropType.Name = "cbCropType";
             this.cbCropType.Size = new System.Drawing.Size(172, 28);
             this.cbCropType.TabIndex = 14;
@@ -1440,7 +1440,7 @@
             // txtUserEmail
             // 
             this.txtUserEmail.Location = new System.Drawing.Point(334, 88);
-            this.txtUserEmail.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtUserEmail.Margin = new System.Windows.Forms.Padding(2);
             this.txtUserEmail.Name = "txtUserEmail";
             this.txtUserEmail.Size = new System.Drawing.Size(226, 26);
             this.txtUserEmail.TabIndex = 13;
@@ -1448,7 +1448,7 @@
             // txtContactNum
             // 
             this.txtContactNum.Location = new System.Drawing.Point(398, 56);
-            this.txtContactNum.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtContactNum.Margin = new System.Windows.Forms.Padding(2);
             this.txtContactNum.Name = "txtContactNum";
             this.txtContactNum.Size = new System.Drawing.Size(162, 26);
             this.txtContactNum.TabIndex = 12;
@@ -1456,7 +1456,7 @@
             // txtSurname
             // 
             this.txtSurname.Location = new System.Drawing.Point(98, 88);
-            this.txtSurname.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtSurname.Margin = new System.Windows.Forms.Padding(2);
             this.txtSurname.Name = "txtSurname";
             this.txtSurname.Size = new System.Drawing.Size(172, 26);
             this.txtSurname.TabIndex = 9;
@@ -1464,7 +1464,7 @@
             // txtName
             // 
             this.txtName.Location = new System.Drawing.Point(98, 55);
-            this.txtName.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtName.Margin = new System.Windows.Forms.Padding(2);
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(172, 26);
             this.txtName.TabIndex = 8;
@@ -1495,7 +1495,7 @@
             this.btnCancelUser.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.btnCancelUser.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCancelUser.Location = new System.Drawing.Point(293, 259);
-            this.btnCancelUser.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnCancelUser.Margin = new System.Windows.Forms.Padding(2);
             this.btnCancelUser.Name = "btnCancelUser";
             this.btnCancelUser.Size = new System.Drawing.Size(122, 41);
             this.btnCancelUser.TabIndex = 5;
@@ -1508,7 +1508,7 @@
             this.btnBuyer.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.btnBuyer.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnBuyer.Location = new System.Drawing.Point(152, 259);
-            this.btnBuyer.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnBuyer.Margin = new System.Windows.Forms.Padding(2);
             this.btnBuyer.Name = "btnBuyer";
             this.btnBuyer.Size = new System.Drawing.Size(122, 41);
             this.btnBuyer.TabIndex = 4;
@@ -1561,7 +1561,7 @@
             this.btnAddBuyers.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.btnAddBuyers.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAddBuyers.Location = new System.Drawing.Point(9, 322);
-            this.btnAddBuyers.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnAddBuyers.Margin = new System.Windows.Forms.Padding(2);
             this.btnAddBuyers.Name = "btnAddBuyers";
             this.btnAddBuyers.Size = new System.Drawing.Size(120, 77);
             this.btnAddBuyers.TabIndex = 7;
@@ -1575,7 +1575,7 @@
             this.btnViewBuyers.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.btnViewBuyers.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnViewBuyers.Location = new System.Drawing.Point(9, 219);
-            this.btnViewBuyers.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnViewBuyers.Margin = new System.Windows.Forms.Padding(2);
             this.btnViewBuyers.Name = "btnViewBuyers";
             this.btnViewBuyers.Size = new System.Drawing.Size(120, 77);
             this.btnViewBuyers.TabIndex = 6;
@@ -1589,7 +1589,7 @@
             this.btnViewStock.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.btnViewStock.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnViewStock.Location = new System.Drawing.Point(9, 116);
-            this.btnViewStock.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnViewStock.Margin = new System.Windows.Forms.Padding(2);
             this.btnViewStock.Name = "btnViewStock";
             this.btnViewStock.Size = new System.Drawing.Size(120, 77);
             this.btnViewStock.TabIndex = 5;
@@ -1606,7 +1606,7 @@
             this.ClientSize = new System.Drawing.Size(900, 681);
             this.Controls.Add(this.tabManager);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.MaximizeBox = false;
             this.Name = "Manager";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
@@ -1635,7 +1635,7 @@
             this.Store.ResumeLayout(false);
             this.tabStoreOpt.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridAddStore)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             this.ResumeLayout(false);
@@ -1652,7 +1652,7 @@
         private System.Windows.Forms.TabPage Store;
         private System.Windows.Forms.TabControl tabStoreOpt;
         private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dataGridAddStore;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.ComboBox cbCropAmount;
         private System.Windows.Forms.ComboBox cbCropType;

@@ -140,3 +140,5 @@ C:\Users\Brett\Documents\JustRipe2018\JustRipe2018\obj\Debug\JustRipe2018.exe
 C:\Users\Brett\Documents\JustRipe2018\JustRipe2018\obj\Debug\JustRipe2018.pdb
 C:\Users\Charlie Bryant\Documents\GitHub\JustRipe2018\bin\Debug\JustRipeDatabase.mdf
 C:\Users\Charlie Bryant\Documents\GitHub\JustRipe2018\bin\Debug\JustRipeDatabase_log.ldf
+H:\My Documents\Development\JustRipe2018\bin\Debug\JustRipeDatabase.mdf
+H:\My Documents\Development\JustRipe2018\bin\Debug\JustRipeDatabase_log.ldf

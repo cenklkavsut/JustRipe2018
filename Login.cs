@@ -36,6 +36,9 @@ namespace JustRipe2018
          public int passwordCounter=0;//a counter for the password!
         private void btnLogin_Click(object sender, EventArgs e)
         {
+            //changes to lower character.
+            txtUserName.Text.ToLower();
+            txtPassword.Text.ToLower();
             //for loggin add database to the place where admin  is typed and connection
             //in place of admin it need to be changed to the place from the database.
             if (txtUserName.Text=="admin" && txtPassword.Text=="admin")//this is gonne be the name inputed in from the database
@@ -90,12 +93,12 @@ namespace JustRipe2018
 
         private void txtUserName_TextChanged(object sender, EventArgs e)
         {
-            txtUserName.Text.ToLower();
+           
         }
 
         private void txtPassword_TextChanged(object sender, EventArgs e)
         {
-            txtPassword.Text.ToLower();
+           
         }
     }
 }

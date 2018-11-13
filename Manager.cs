@@ -149,7 +149,15 @@ namespace JustRipe2018
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
             //prevents Labourer check box from being selected if Manager is checked
-            chkbxManagerCreate.Checked = !chkbxLaborCreate.Checked;
+            if (chkbxLaborCreate.Checked == true)
+            {
+                chkbxManagerCreate.Enabled = false;
+            }
+            else if (chkbxLaborCreate.Checked == false)
+            {
+                chkbxManagerCreate.Enabled = true;
+            }
+
         }
 
         private void textBox4_TextChanged(object sender, EventArgs e)
@@ -458,19 +466,46 @@ namespace JustRipe2018
         private void chkbxManagerCreate_CheckedChanged(object sender, EventArgs e)
         {
             //prevents Manager check box from being selected if Labourer is checked
-            chkbxLaborCreate.Checked = !chkbxManagerCreate.Checked;
+            if (chkbxManagerCreate.Checked == true)
+            {
+                chkbxLaborCreate.Enabled = false;
+
+            }
+            else if (chkbxManagerCreate.Checked == false)
+            {
+                chkbxLaborCreate.Enabled = true;
+
+            }
+
         }
 
         private void chkbxLaborEdit_CheckedChanged(object sender, EventArgs e)
         {
             //prevents Labourer check box from being selected if Manager is checked
-            chkbxManagerEdit.Checked = !chkbxLaborEdit.Checked;
+            if (chkbxLaborEdit.Checked == true)
+            {
+                chkbxManagerEdit.Enabled=false ;
+
+            } else if (chkbxLaborEdit.Checked == false)
+            {
+                chkbxManagerEdit.Enabled = true;
+
+            } 
+
         }
 
         private void chkbxManagerEdit_CheckedChanged(object sender, EventArgs e)
         {
             //prevents Manager check box from being selected if Labourer is checked
-            chkbxLaborEdit.Checked = !chkbxManagerEdit.Checked;
+            if (chkbxManagerEdit.Checked == true)
+            {
+                chkbxLaborEdit.Enabled = false;
+
+            } else if (chkbxManagerEdit.Checked == false)
+            {
+                chkbxLaborEdit.Enabled = true;
+            }
+
         }
     }
 }

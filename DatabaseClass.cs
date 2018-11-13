@@ -36,17 +36,18 @@ namespace JustRipe2018
         }
 
         //this needs to be changed based on the implementation and the database
-        //private void FillInTextFields(DataTable table, int ind)
-        //{
+        private void FillInTextFields(DataTable table, int ind)
+        {
         //// get the table row specified 
-        //byte inddataRow= table.Rows[ind];//allows for obtaining data from table
+        //byte ind
+        DataRow dataRow= table.Rows[ind];//allows for obtaining data from table
         ////get the SID
         //tbSID.Text= dataRow.ItemArray.GetValue(0).ToString();//name based on the colum and on the table
         ////get the name
         //tbName.Text= dataRow.ItemArray.GetValue(1).ToString();//name based on the colum and on the table
         ////get the start
         //tbStart.Text= dataRow.ItemArray.GetValue(2).ToString();//name based on the colum and on the table
-        //}
+        }
         //add this to the place of implementation.also this connects to the grid.
         //using System.Data.SqlClient;
         //using System.Data;
