@@ -105,7 +105,7 @@ namespace JustRipe2018
             }
           
             DatabaseClass dbCon = new DatabaseClass (ConnectionStrDB);
-           var select = "Select * From [dbo].[CropsStorage]";
+            var select = "Select * From [dbo].[CropsStorage]";
             var ds = dbCon.getDataSet(select);
             dataGridAddStore.ReadOnly = true;
             dataGridAddStore.DataSource = ds.Tables[0];
@@ -115,8 +115,8 @@ namespace JustRipe2018
         {
 
             DatabaseClass dataB = new DatabaseClass(ConnectionStrDB);//class and confirms the connection string.
-            dataB.AdderOfStore(txtName.Text, txtSurname.Text,/*int.Parse(*/txtContactNum.Text/*)*/, txtUserEmail.Text,
-            /*int.Parse(*/cbCropAmount.Text/*)*/, cbCropType.Text); //input that info to the database.
+            dataB.AdderOfStore(txtName.Text, txtSurname.Text,txtContactNum.Text, txtUserEmail.Text,
+            double.Parse(cbCropAmount.Text)/*, cbCropType.Text*/); //input that info to the database.
             MessageBox.Show("Customer Saved!");//the result if no error.                                            
             
             //Allows To Clean text in the text box and dropdowns after finished.
@@ -534,6 +534,11 @@ namespace JustRipe2018
             {
                 chkbxLaborEdit.Enabled = true;
             }
+
+        }
+
+        private void dataGridAddStore_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
 
         }
     }

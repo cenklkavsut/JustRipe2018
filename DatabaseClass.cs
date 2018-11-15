@@ -36,58 +36,45 @@ namespace JustRipe2018
             return dataSet;
         }
 
-        //this needs to be changed based on the implementation and the database
-        public void FillInTextFields(DataTable table, int ind)
-        {
-        //// get the table row specified 
-        //byte ind
-        DataRow dataRow= table.Rows[ind];//allows for obtaining data from table
-        ////get the SID
-       //username.Text= dataRow.ItemArray.GetValue(0).ToString();//name based on the colum and on the table
-        ////get the name
-        //tbName.Text= dataRow.ItemArray.GetValue(1).ToString();//name based on the colum and on the table
-        ////get the start
-        //tbStart.Text= dataRow.ItemArray.GetValue(2).ToString();//name based on the colum and on the table
-        }
-
-        public void AdderOfStore(string valFirstN, string valSurname, string valContact, string valEmail, string ValAmount, string ValCrop)
+        public void AdderOfStore(string valFirstN, string valSurname, string valContact, string valEmail, double ValAmount/*, string ValCrop*/)
         {
             //This is the connection string that assigns to the database. 
             SqlConnection cnn = new SqlConnection(connectionStr);
-            try
-            {
+            //try
+            //{
                 //This is command class which will handle the query and connection object.  
                 SqlCommand MyCommand1 = new SqlCommand();
                 SqlCommand MyCommand2 = new SqlCommand();
-                SqlCommand MyCommand3 = new SqlCommand();
+                //SqlCommand MyCommand3 = new SqlCommand();
 
                 //This insert query 
                 //queries that input data and retive data based on the values from the store.
                 MyCommand1.CommandType = CommandType.Text;
                 MyCommand1.CommandText = "INSERT [dbo].[Customer] ([First Name], [Surname],[Contact Number],[Email]) VALUES" +
-              "(" + valFirstN + "," + valSurname + "," + valContact + "," + valEmail + ")";
+              "('" + valFirstN + "','" + valSurname + "'," + valContact + ",'" + valEmail + "')";
                 MyCommand1.Connection = cnn;
 
 
                 MyCommand2.CommandType = CommandType.Text;
                 MyCommand2.CommandText = "INSERT [dbo].[Orders] ([Amount]) VALUES (" + ValAmount + ")";
                 MyCommand2.Connection = cnn;
-
-                MyCommand3.CommandType = CommandType.Text;
-                MyCommand3.CommandText = "INSERT [dbo].[Crop] ([Crop Name]) VALUES (" + ValCrop + ")";
-                MyCommand3.Connection = cnn;
+                //// NEED TO ADD IN CROPS AND DROP DOWN NEEDS TO LINK TO CROPS 
+                //MyCommand3.CommandType = CommandType.Text;
+                //MyCommand3.CommandText = "INSERT [dbo].[crop] VALUES (" + ValCrop + ")";
+                //MyCommand3.Connection = cnn;
 
                 cnn.Open();
-                MyCommand1.ExecuteNonQuery();
+                //MyCommand3.ExecuteNonQuery();
                 MyCommand2.ExecuteNonQuery();
-                MyCommand3.ExecuteNonQuery();
+                MyCommand1.ExecuteNonQuery();
                 cnn.Close();//close the database connection.
-            }
-            catch (Exception ex)
+            //}
+            /*catch (Exception ex)
             {
                 //if error close application
-                Environment.Exit(1);
-            }
+                
+              //  Environment.Exit(1);
+            } */
         }
             public DatabaseClass(string connectionStr)
         {
