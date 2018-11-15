@@ -29,12 +29,11 @@ namespace JustRipe2018
         //fill the data base with the sql statment.
         public DataSet getDataSet(string sqlStatement)
         {
-            dataAdapter = new SqlDataAdapter(sqlStatement,connectionToDB);// create the 
-           DataSet dataSet = new System.Data.DataSet();
-
+            dataAdapter = new SqlDataAdapter(sqlStatement, connectionStr);// create the 
+            var dataSet = new DataSet();
+            var commandBuilder = new SqlCommandBuilder(dataAdapter);
             dataAdapter.Fill(dataSet);//return the dataSet
-
-            return dataSet;  
+            return dataSet;
         }
 
         //this needs to be changed based on the implementation and the database
@@ -50,19 +49,47 @@ namespace JustRipe2018
         ////get the start
         //tbStart.Text= dataRow.ItemArray.GetValue(2).ToString();//name based on the colum and on the table
         }
-        //add this to the place of implementation.also this connects to the grid.
-        //using System.Data.SqlClient;
-        //using System.Data;
-        //// get the connectionStringfrom the Settings 
-        //string connectionString= Properties.Settings.Default.Setting;// create the connection to the DB and open it 
-        //DatabaseClass dbCon = new DatabaseClass(connectionString);
-        //dbCon.openConnection();//get the dataSet 
-        //dataSet= dbCon.getDataSet(Constants.selectAll);
-        //DataTabletable = dataSet.Tables[0];FillInTextFields(table, 1);
-        ////set up the data grid 
-        //viewdgvStudents.DataSource= table;
 
-        public DatabaseClass(string connectionStr)
+        public void AdderOfStore(string valFirstN, string valSurname, string valContact, string valEmail, string ValAmount, string ValCrop)
+        {
+            //This is the connection string that assigns to the database. 
+            SqlConnection cnn = new SqlConnection(connectionStr);
+            try
+            {
+                //This is command class which will handle the query and connection object.  
+                SqlCommand MyCommand1 = new SqlCommand();
+                SqlCommand MyCommand2 = new SqlCommand();
+                SqlCommand MyCommand3 = new SqlCommand();
+
+                //This insert query 
+                //queries that input data and retive data based on the values from the store.
+                MyCommand1.CommandType = CommandType.Text;
+                MyCommand1.CommandText = "INSERT [dbo].[Customer] ([First Name], [Surname],[Contact Number],[Email]) VALUES" +
+              "(" + valFirstN + "," + valSurname + "," + valContact + "," + valEmail + ")";
+                MyCommand1.Connection = cnn;
+
+
+                MyCommand2.CommandType = CommandType.Text;
+                MyCommand2.CommandText = "INSERT [dbo].[Orders] ([Amount]) VALUES (" + ValAmount + ")";
+                MyCommand2.Connection = cnn;
+
+                MyCommand3.CommandType = CommandType.Text;
+                MyCommand3.CommandText = "INSERT [dbo].[Crop] ([Crop Name]) VALUES (" + ValCrop + ")";
+                MyCommand3.Connection = cnn;
+
+                cnn.Open();
+                MyCommand1.ExecuteNonQuery();
+                MyCommand2.ExecuteNonQuery();
+                MyCommand3.ExecuteNonQuery();
+                cnn.Close();//close the database connection.
+            }
+            catch (Exception ex)
+            {
+                //if error close application
+                Environment.Exit(1);
+            }
+        }
+            public DatabaseClass(string connectionStr)
         {
             this.connectionStr = connectionStr;
         }

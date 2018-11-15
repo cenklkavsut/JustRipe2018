@@ -72,6 +72,8 @@ namespace JustRipe2018
                 //implementation
 
             }
+
+
         }
 
         private void btnViewBuyers_Click_1(object sender, EventArgs e)
@@ -86,13 +88,8 @@ namespace JustRipe2018
             }
             //change the query based on the buyers
             DatabaseClass dbCon = new DatabaseClass(ConnectionStrDB);
-            var select = "Select * From [dbo].[CropsStorage]";
-            var c = new SqlConnection(ConnectionStrDB);
-            // Your Connection String here
-            var dataAdapter = new SqlDataAdapter(select, c);
-            var commandBuilder = new SqlCommandBuilder(dataAdapter);
-            var ds = new DataSet();
-            dataAdapter.Fill(ds);
+            var select = "Select * From [dbo].[Orders]";
+            var ds = dbCon.getDataSet(select);
             dataGridAddStore.ReadOnly = true;
             dataGridAddStore.DataSource = ds.Tables[0];
         }
@@ -108,12 +105,8 @@ namespace JustRipe2018
             }
           
             DatabaseClass dbCon = new DatabaseClass (ConnectionStrDB);
-            var select = "Select * From [dbo].[Orders]";
-            var c = new SqlConnection(ConnectionStrDB);
-            var dataAdapter = new SqlDataAdapter(select, c);
-            var commandBuilder = new SqlCommandBuilder(dataAdapter);
-            var ds = new DataSet();
-            dataAdapter.Fill(ds);
+           var select = "Select * From [dbo].[CropsStorage]";
+            var ds = dbCon.getDataSet(select);
             dataGridAddStore.ReadOnly = true;
             dataGridAddStore.DataSource = ds.Tables[0];
         }
@@ -121,6 +114,18 @@ namespace JustRipe2018
         private void btnBuyer_Click(object sender, EventArgs e)
         {
 
+            DatabaseClass dataB = new DatabaseClass(ConnectionStrDB);//class and confirms the connection string.
+            dataB.AdderOfStore(txtName.Text, txtSurname.Text,/*int.Parse(*/txtContactNum.Text/*)*/, txtUserEmail.Text,
+            /*int.Parse(*/cbCropAmount.Text/*)*/, cbCropType.Text); //input that info to the database.
+            MessageBox.Show("Customer Saved!");//the result if no error.                                            
+            
+            //Allows To Clean text in the text box and dropdowns after finished.
+            txtName.Text = "";
+            txtSurname.Text = "";
+            txtContactNum.Text = "";
+            txtUserEmail.Text = "";
+            cbCropAmount.Text = "";
+            cbCropType.Text = "";
         }
 
         private void btnCancelUser_Click_1(object sender, EventArgs e)
