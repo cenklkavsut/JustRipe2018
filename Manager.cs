@@ -113,12 +113,19 @@ namespace JustRipe2018
 
         private void btnBuyer_Click(object sender, EventArgs e)
         {
-
-            DatabaseClass dataB = new DatabaseClass(ConnectionStrDB);//class and confirms the connection string.
-            dataB.AdderOfStore(txtName.Text, txtSurname.Text,txtContactNum.Text, txtUserEmail.Text,
-            double.Parse(cbCropAmount.Text)/*, cbCropType.Text*/); //input that info to the database.
-            MessageBox.Show("Customer Saved!");//the result if no error.                                            
-            
+            if (txtName.Text == null || txtName.Text == "" || txtSurname.Text == null || txtSurname.Text == "" ||
+                            txtContactNum.Text == null || txtContactNum.Text == "" || txtUserEmail.Text == null || txtUserEmail.Text == "" ||
+                            cbCropAmount.Text == null || cbCropAmount.Text == "")
+            {
+                MessageBox.Show("No value entered!");
+            }
+            else
+            {
+                DatabaseClass dataB = new DatabaseClass(ConnectionStrDB);//class and confirms the connection string.
+                dataB.AdderOfStore(txtName.Text, txtSurname.Text, txtContactNum.Text, txtUserEmail.Text,
+                double.Parse(cbCropAmount.Text)/*, cbCropType.Text*/); //input that info to the database.
+                MessageBox.Show("Customer Saved!");//the result if no error.                                            
+            }
             //Allows To Clean text in the text box and dropdowns after finished.
             txtName.Text = "";
             txtSurname.Text = "";
@@ -398,6 +405,11 @@ namespace JustRipe2018
                 //implementation
 
             }
+            DatabaseClass dbCon = new DatabaseClass(ConnectionStrDB);//cals the class and inputs the connection string.
+            var select = "Select * From [dbo].[vehicle]";//query to list all vehicle information.
+            var ds = dbCon.getDataSet(select);//puts the query into the class to recieve information.
+            dataGridOpenVehicle.ReadOnly = true;//disables the ability to edit the grid.
+            dataGridOpenVehicle.DataSource = ds.Tables[0];//displays the table from the first value.
         }
 
         private void btnRep5_Click(object sender, EventArgs e)
