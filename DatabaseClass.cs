@@ -76,7 +76,21 @@ namespace JustRipe2018
               //  Environment.Exit(1);
             } */
         }
-            public DatabaseClass(string connectionStr)
+
+        DataSet ds2;
+        public DataSet dataToCb(string select)
+        {
+
+            SqlConnection conn = new SqlConnection();
+            conn.ConnectionString = connectionStr;
+            conn.Open();
+            SqlDataAdapter daSearch = new SqlDataAdapter(select, conn);
+            ds2 = new DataSet();
+            daSearch.Fill(ds2, select);
+            return ds2;
+        }
+
+        public DatabaseClass(string connectionStr)
         {
             this.connectionStr = connectionStr;
         }

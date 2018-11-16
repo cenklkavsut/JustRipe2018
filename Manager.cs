@@ -72,6 +72,13 @@ namespace JustRipe2018
                 //implementation
 
             }
+            DatabaseClass dbDropDown = new DatabaseClass(ConnectionStrDB);
+            var select = "SELECT [Crop_Name] FROM [dbo].[Crop]";
+            var ds2 = dbDropDown.dataToCb(select);
+            cbCropType.ValueMember = select;
+            cbCropType.DataSource = ds2.Tables[select];
+            cbCropType.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbCropType.Enabled = true;
 
 
         }
