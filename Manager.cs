@@ -72,14 +72,13 @@ namespace JustRipe2018
                 //implementation
 
             }
-            DatabaseClass dbDropDown = new DatabaseClass(ConnectionStrDB);
-            var select = "SELECT [Crop_Name] FROM [dbo].[Crop]";
-            var ds2 = dbDropDown.dataToCb(select);
-            cbCropType.ValueMember = select;
-            cbCropType.DataSource = ds2.Tables[select];
-            cbCropType.DropDownStyle = ComboBoxStyle.DropDownList;
-            cbCropType.Enabled = true;
-
+            //DatabaseClass dbDropDown = new DatabaseClass(ConnectionStrDB);
+            //var select = "SELECT [Crop_Name] FROM [dbo].[Crop]";
+            //var ds2 = dbDropDown.dataToCb(select);
+            //cbCropType.ValueMember = select;
+            //cbCropType.DataSource = ds2.Tables[select];
+            //cbCropType.DropDownStyle = ComboBoxStyle.DropDownList;
+            //cbCropType.Enabled = true;
 
         }
 
@@ -132,7 +131,7 @@ namespace JustRipe2018
                 dataB.AdderOfStore(txtName.Text, txtSurname.Text, txtContactNum.Text, txtUserEmail.Text,
                 double.Parse(cbCropAmount.Text)/*, cbCropType.Text*/); //input that info to the database.
                 MessageBox.Show("Customer Saved!");//the result if no error.                                            
-            }
+            } 
             //Allows To Clean text in the text box and dropdowns after finished.
             txtName.Text = "";
             txtSurname.Text = "";
@@ -412,11 +411,6 @@ namespace JustRipe2018
                 //implementation
 
             }
-            DatabaseClass dbCon = new DatabaseClass(ConnectionStrDB);//cals the class and inputs the connection string.
-            var select = "Select * From [dbo].[vehicle]";//query to list all vehicle information.
-            var ds = dbCon.getDataSet(select);//puts the query into the class to recieve information.
-            dataGridOpenVehicle.ReadOnly = true;//disables the ability to edit the grid.
-            dataGridOpenVehicle.DataSource = ds.Tables[0];//displays the table from the first value.
         }
 
         private void btnRep5_Click(object sender, EventArgs e)

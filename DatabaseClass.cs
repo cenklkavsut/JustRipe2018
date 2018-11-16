@@ -77,18 +77,19 @@ namespace JustRipe2018
             } */
         }
 
-        DataSet ds2;
-        public DataSet dataToCb(string select)
-        {
+        //DataSet ds2;
+        //public DataSet dataToCb(string select)
+        //{
 
-            SqlConnection conn = new SqlConnection();
-            conn.ConnectionString = connectionStr;
-            conn.Open();
-            SqlDataAdapter daSearch = new SqlDataAdapter(select, conn);
-            ds2 = new DataSet();
-            daSearch.Fill(ds2, select);
-            return ds2;
-        }
+        //    SqlConnection conn = new SqlConnection();
+        //    conn.ConnectionString = connectionStr;
+        //    conn.Open();
+        //    SqlDataAdapter daSearch = new SqlDataAdapter(select, conn);
+        //    ds2 = new DataSet();
+        //    daSearch.Fill(ds2, select);
+        //    return ds2;
+        //}
+
 
         public DatabaseClass(string connectionStr)
         {
