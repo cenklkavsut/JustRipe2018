@@ -37,58 +37,26 @@ namespace JustRipe2018
          public int passwordCounter=0;//a counter for the password!
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            //DatabaseClass con = new DatabaseClass(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\JustRipeDatabase.mdf;Integrated Security=True;Connect Timeout=30");
+            DatabaseClass con = new DatabaseClass(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\JustRipeDatabase.mdf;Integrated Security=True;Connect Timeout=30");
 
-            //string dummyun = txtUserName.Text;
-            //string dummypw = txtPassword.Text;
-            //con.openConnection();
-
-            //SqlCommand StrQuer = new SqlCommand("Select * From[dbo].[Orders] WHERE Username=@userid AND Password =@password");
-            
-            //    StrQuer.Parameters.AddWithValue("@userid", dummyun);
-            //    StrQuer.Parameters.AddWithValue("@password", dummypw);
-            //    SqlDataReader user = StrQuer.ExecuteReader();
-            //    if(use.HasRows)
-            //      {
-            //        MessageBox.Show("loginSuccess");
-            //    }
-            //  else
-            //    {
-            //        //invalid login
-            //    }
-
-
-                //for loggin add database to the place where admin  is typed and connection
-                //in place of admin it need to be changed to the place from the database.
-                if (txtUserName.Text.ToLower()=="admin" && txtPassword.Text.ToLower()=="admin")//this is gonne be the name inputed in from the database
-            {    
-            //closes the login Page
-            Login loginForm = new Login();
-            this.Hide();
-            loginForm.Close();
-            MessageBox.Show("Welcome");
-            // Create a new instance of the Form2 class
-            Manager settingsForm = new Manager();
-            //displays the labourer form
-            //Labourer labrer = new Labourer();
-            //labrer.show();
-            // Show the settings form
-            settingsForm.Show();
-            passwordCounter = 0;
-            }//this part in place of password counter it need to be txt user or password!= database value to activvate this code!
-            else if (txtUserName.Text!="admin" && txtPassword.Text!= "admin")//if password is wrong!
+            bool r = con.loginToSystem(txtUserName.Text, txtPassword.Text);
+            //for loggin add database to the place where admin  is typed and connection
+            if (/*txtUserName.Text.ToLower()=="admin" && txtPassword.Text.ToLower()=="admin"*/r == true)//this is gonne be the name inputed in from the database
             {
-                if (passwordCounter == 3 || passwordCounter>3)//if 3 times or more
-                { 
-                    /* (passwordCounter > 3)//if more than 3
-                    {
-                        MessageBox.Show("Exited the maximun limit of tries!");
-                        Application.Exit();
-                    }*/
-                    if (passwordCounter == 3)
+                ////closes the login Page
+                Login loginForm = new Login();
+                this.Hide();
+                loginForm.Close();
+                passwordCounter = 0;
+            }//this part in place of password counter it need to be txt user or password!= database value to activvate this code!
+            else if (/*txtUserName.Text!="admin" && txtPassword.Text!= "admin"||*/r == false)//if password is wrong!
+            {
+                if (passwordCounter == 3 || passwordCounter > 3)//if 3 times or more
+                {
+                    if (passwordCounter == 3 || passwordCounter > 3)
                     {
                         MessageBox.Show("3rd attempt failed: Forcing Shutdown");
-                        Application.Exit(); 
+                        Application.Exit();
                     }
                 }
                 else if (passwordCounter == 2)

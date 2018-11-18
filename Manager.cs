@@ -72,13 +72,13 @@ namespace JustRipe2018
                 //implementation
 
             }
-            //DatabaseClass dbDropDown = new DatabaseClass(ConnectionStrDB);
-            //var select = "SELECT [Crop_Name] FROM [dbo].[Crop]";
-            //var ds2 = dbDropDown.dataToCb(select);
-            //cbCropType.ValueMember = select;
-            //cbCropType.DataSource = ds2.Tables[select];
-            //cbCropType.DropDownStyle = ComboBoxStyle.DropDownList;
-            //cbCropType.Enabled = true;
+            DatabaseClass dbDropDown = new DatabaseClass(ConnectionStrDB);//takes info from the connection string
+            var select = "SELECT [Crop_Name] FROM [dbo].[Crop]";//sql query to be executed
+            var ds2 = dbDropDown.dataToCb(select);//the data to be selected
+            cbCropType.ValueMember = select;//member into the code
+            cbCropType.DataSource = ds2.Tables[0];//start from 1 st table to display.
+            cbCropType.DropDownStyle = ComboBoxStyle.DropDownList;//makes it a list
+            cbCropType.Enabled = true;
 
         }
 
@@ -375,6 +375,11 @@ namespace JustRipe2018
                 //implementation
 
             }
+            DatabaseClass dbCon = new DatabaseClass(ConnectionStrDB);
+            var select = "Select * From [dbo].[Crop]";
+            var ds = dbCon.getDataSet(select);
+            dataGridView1.ReadOnly = true;
+            dataGridView1.DataSource = ds.Tables[0];
         }
 
         private void btnRep2_Click(object sender, EventArgs e)
@@ -387,6 +392,11 @@ namespace JustRipe2018
                 //implementation
 
             }
+            DatabaseClass dbCon = new DatabaseClass(ConnectionStrDB);
+            var select = "Select * From [dbo].[Fertiliser]";
+            var ds = dbCon.getDataSet(select);
+            dataGridView4.ReadOnly = true;
+            dataGridView4.DataSource = ds.Tables[0];
         }
 
         private void btnRep3_Click(object sender, EventArgs e)
@@ -399,6 +409,11 @@ namespace JustRipe2018
                 //implementation
 
             }
+            DatabaseClass dbCon = new DatabaseClass(ConnectionStrDB);
+            var select = "Select * From [dbo].[StorageType]";
+            var ds = dbCon.getDataSet(select);
+            dataGridView5.ReadOnly = true;
+            dataGridView5.DataSource = ds.Tables[0];
         }
 
         private void btnRep4_Click(object sender, EventArgs e)
@@ -411,6 +426,11 @@ namespace JustRipe2018
                 //implementation
 
             }
+            DatabaseClass dbCon = new DatabaseClass(ConnectionStrDB);
+            var select = "Select * From [dbo].[Vehicle]";
+            var ds = dbCon.getDataSet(select);
+            dataGridView6.ReadOnly = true;
+            dataGridView6.DataSource = ds.Tables[0];
         }
 
         private void btnRep5_Click(object sender, EventArgs e)
