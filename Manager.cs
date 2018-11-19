@@ -70,16 +70,16 @@ namespace JustRipe2018
             {
                 tabStoreOpt.SelectTab(1);
                 //implementation
-
             }
             DatabaseClass dbDropDown = new DatabaseClass(ConnectionStrDB);//takes info from the connection string
             var select = "SELECT [Crop_Name] FROM [dbo].[Crop]";//sql query to be executed
             var ds2 = dbDropDown.dataToCb(select);//the data to be selected
             cbCropType.ValueMember = select;//member into the code
+            cbCropType.DisplayMember = select;//to display the value/
             cbCropType.DataSource = ds2.Tables[0];//start from 1 st table to display.
             cbCropType.DropDownStyle = ComboBoxStyle.DropDownList;//makes it a list
-            cbCropType.Enabled = true;
-
+            cbCropType.Enabled = true;//enables the dropdown.
+            this.cbCropType.SelectedIndex = -1;//allows to select the value from empty.
         }
 
         private void btnViewBuyers_Click_1(object sender, EventArgs e)
@@ -90,8 +90,8 @@ namespace JustRipe2018
             {
                 tabStoreOpt.SelectTab(0);
                 //implementation
-
             }
+
             //change the query based on the buyers
             DatabaseClass dbCon = new DatabaseClass(ConnectionStrDB);
             var select = "Select * From [dbo].[Orders]";
@@ -129,7 +129,7 @@ namespace JustRipe2018
             {
                 DatabaseClass dataB = new DatabaseClass(ConnectionStrDB);//class and confirms the connection string.
                 dataB.AdderOfStore(txtName.Text, txtSurname.Text, txtContactNum.Text, txtUserEmail.Text,
-                double.Parse(cbCropAmount.Text)/*, cbCropType.Text*/); //input that info to the database.
+                double.Parse(cbCropAmount.Text), cbCropType.Text); //input that info to the database.
                 MessageBox.Show("Customer Saved!");//the result if no error.                                            
             } 
             //Allows To Clean text in the text box and dropdowns after finished.
@@ -373,7 +373,6 @@ namespace JustRipe2018
             {
                 tabReportOpt.SelectTab(0);
                 //implementation
-
             }
             DatabaseClass dbCon = new DatabaseClass(ConnectionStrDB);
             var select = "Select * From [dbo].[Crop]";
@@ -411,6 +410,7 @@ namespace JustRipe2018
             }
             DatabaseClass dbCon = new DatabaseClass(ConnectionStrDB);
             var select = "Select * From [dbo].[StorageType]";
+            //JOIN [dbo].[FertiliserStorage] ON [StorageType].[FertiliserStorageId] = [dbo].[FertiliserStorage].[FertiliserStorageId]
             var ds = dbCon.getDataSet(select);
             dataGridView5.ReadOnly = true;
             dataGridView5.DataSource = ds.Tables[0];
@@ -441,7 +441,6 @@ namespace JustRipe2018
             {
                 tabReportOpt.SelectTab(4);
                 //implementation
-
             }
         }
 

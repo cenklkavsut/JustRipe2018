@@ -36,7 +36,7 @@ namespace JustRipe2018
             return dataSet;
         }
 
-        public void AdderOfStore(string valFirstN, string valSurname, string valContact, string valEmail, double ValAmount/*, string ValCrop*/)
+        public void AdderOfStore(string valFirstN, string valSurname, string valContact, string valEmail, double ValAmount, string ValCrop)
         {
             //This is the connection string that assigns to the database. 
             SqlConnection cnn = new SqlConnection(connectionStr);
@@ -45,11 +45,11 @@ namespace JustRipe2018
                 //This is command class which will handle the query and connection object.  
                 SqlCommand MyCommand1 = new SqlCommand();
                 SqlCommand MyCommand2 = new SqlCommand();
-                //SqlCommand MyCommand3 = new SqlCommand();
+            SqlCommand MyCommand3 = new SqlCommand();
 
-                //This insert query 
-                //queries that input data and retive data based on the values from the store.
-                MyCommand1.CommandType = CommandType.Text;
+            //This insert query 
+            //queries that input data and retive data based on the values from the store.
+            MyCommand1.CommandType = CommandType.Text;
                 MyCommand1.CommandText = "INSERT [dbo].[Customer] ([First Name], [Surname],[Contact Number],[Email]) VALUES" +
               "('" + valFirstN + "','" + valSurname + "'," + valContact + ",'" + valEmail + "')";
                 MyCommand1.Connection = cnn;
@@ -58,12 +58,12 @@ namespace JustRipe2018
                 MyCommand2.CommandType = CommandType.Text;
                 MyCommand2.CommandText = "INSERT [dbo].[Orders] ([Amount]) VALUES (" + ValAmount + ")";
                 MyCommand2.Connection = cnn;
-                //// NEED TO ADD IN CROPS AND DROP DOWN NEEDS TO LINK TO CROPS 
-                //MyCommand3.CommandType = CommandType.Text;
-                //MyCommand3.CommandText = "INSERT [dbo].[crop] VALUES (" + ValCrop + ")";
-                //MyCommand3.Connection = cnn;
+            //// NEED TO ADD IN CROPS AND DROP DOWN NEEDS TO LINK TO CROPS 
+            MyCommand3.CommandType = CommandType.Text;
+            MyCommand3.CommandText = "INSERT [dbo].[crop] VALUES (" + ValCrop + ")";
+            MyCommand3.Connection = cnn;
 
-                cnn.Open();
+            cnn.Open();
                 //MyCommand3.ExecuteNonQuery();
                 MyCommand2.ExecuteNonQuery();
                 MyCommand1.ExecuteNonQuery();
@@ -77,35 +77,32 @@ namespace JustRipe2018
             } */
         }
 
-        DataSet ds2;
         public DataSet dataToCb(string select)
         {
-            SqlConnection conn = new SqlConnection();
-            conn.ConnectionString = connectionStr;
-            conn.Open();
-            SqlDataAdapter daSearch = new SqlDataAdapter(select, conn);
-            ds2 = new DataSet();
-            daSearch.Fill(ds2, select);
+            SqlConnection conn = new SqlConnection();//call the connection.
+            conn.ConnectionString = connectionStr;//connection string to connect.
+            conn.Open();//open connection.
+            SqlDataAdapter daSearch = new SqlDataAdapter(select, conn);//execute the sql and confirm connection.
+            DataSet ds2 = new DataSet();//call the data set
+            daSearch.Fill(ds2, select);//fill it with the dataset and sql value.
             return ds2;
         }
 
-        public int passwordCounter = 0;//a counter for the password!
         public bool loginToSystem(string n, string pwd)
         {
             DatabaseClass con = new DatabaseClass(connectionStr);
             bool r;
-            //SqlCommand select = new SqlCommand("Select * From [dbo].[users] WHERE [Username]="+n+"  AND [Password] ="+pwd+"");
 
-            SqlCommand select0 = new SqlCommand("Select * From [dbo].[users] WHERE ([Username] =" + n + ")");
-            SqlCommand select1 = new SqlCommand("Select * From [dbo].[users] WHERE ([Password] =" + pwd + ")");
+            SqlCommand select0 = new SqlCommand("Select [Username] From [dbo].[users] WHERE ([Username] =" + n + ")");
+            SqlCommand select1 = new SqlCommand("Select [Password] From [dbo].[users] WHERE ([Password] =" + pwd + ")");
 
             //for loggin add database to the place where admin  is typed and connection
             //in place of admin it need to be changed to the place from the database.
             if (n.ToLower() == select0.ToString() && pwd.ToLower() == select1.ToString() || n.ToLower() == "admin" && pwd.ToLower() == "admin")//this is gonne be the name inputed in from the database
             {
                 r = true;
-                SqlCommand selectJo = new SqlCommand("Select * From [dbo].[JobType] WHERE ([JobName] = Manager)");
-                SqlCommand selectJo1 = new SqlCommand("Select * From [dbo].[JobType] WHERE ([JobName] = Labourer)");
+                SqlCommand selectJo = new SqlCommand("Select [JobName] From [dbo].[JobType] WHERE ([JobName] = Manager)");
+                SqlCommand selectJo1 = new SqlCommand("Select [JobName] From [dbo].[JobType] WHERE ([JobName] = Labourer)");
                 string M = "Manager";
                 string L = "Labourer";
                 //closes the login Page
@@ -114,12 +111,12 @@ namespace JustRipe2018
                 loginForm.Close();
 
                 if (n.ToLower() == "admin" && pwd.ToLower() == "admin")
-                {
+                {//for testing
                     // Create a new instance of the Form2 class
                     Manager settingsForm = new Manager();
                     // Show the settings form
                     settingsForm.Show();
-                }
+                }//For testing
 
                 if (selectJo.ToString() == M && selectJo.ToString() != L)
                 {
@@ -139,23 +136,6 @@ namespace JustRipe2018
             {
                 r = false;
             }
-            //return n+""+pwd ;
-
-            //string dummyun = txtUserName.Text;
-            //string dummypw = txtPassword.Text;
-            //con.openConnection();
-            //SqlCommand StrQuer = new SqlCommand("Select * From[dbo].[Orders] WHERE Username=@userid AND Password =@password");
-            //    StrQuer.Parameters.AddWithValue("@userid", dummyun);
-            //    StrQuer.Parameters.AddWithValue("@password", dummypw);
-            //    SqlDataReader user = StrQuer.ExecuteReader();
-            //    if(use.HasRows)
-            //      {
-            //        MessageBox.Show("loginSuccess");
-            //    }
-            //  else
-            //    {
-            //        //invalid login
-            //    }
 
             return r;
         }
