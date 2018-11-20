@@ -4,8 +4,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.Data;
-
-
+using System.IO;
 
 namespace JustRipe2018
 {
@@ -14,9 +13,60 @@ namespace JustRipe2018
         public Manager()
         {
             InitializeComponent();
+            fillcomboCropType();
+            fillcomboJobType();
+            fillcomboLabourer();
         }
-        public string ConnectionStrDB = @"Data Source = (LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\JustRipeDatabase.mdf;Integrated Security = True; Connect Timeout = 30";
-        private void Manager_Load(object sender, EventArgs e)
+        private static string mdfPath = Path.Combine(Application.StartupPath, "JustRipeDatabase.mdf");
+        //private string connectionStr= @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\JustRipeDatabase.mdf;Integrated Security=True;Connect Timeout=30";
+
+        private string connectionStr = string.Format(@"Data Source = (LocalDB)\MSSQLLocalDB;AttachDbFilename=" + mdfPath + ";Integrated Security = True; Connect Timeout = 30");
+
+
+        void fillcomboCropType()
+        {
+            DatabaseClass Connect = new DatabaseClass(connectionStr);
+            Connect.openConnection();
+            string queryCropsSelect = "Select * From [dbo].[Crop]";
+            SqlDataAdapter CropsSelect = new SqlDataAdapter(queryCropsSelect, connectionStr);
+            DataSet Crops = new DataSet();
+            CropsSelect.Fill(Crops);
+            for (int i = 0; i < Crops.Tables[0].Rows.Count; i++)
+            {
+                cbJCrop.Items.Add(Crops.Tables[0].Rows[i][1].ToString());
+            }
+        }
+        void fillcomboJobType()
+        {
+             DatabaseClass Connect = new DatabaseClass(connectionStr);
+             Connect.openConnection();
+             string queryJobsTypeSelect = "Select * From [dbo].[JobType]";
+             SqlDataAdapter JobsSelect = new SqlDataAdapter(queryJobsTypeSelect, connectionStr);
+             DataSet JobTypes = new DataSet();
+             JobsSelect.Fill(JobTypes);
+             for (int i = 0; i < JobTypes.Tables[0].Rows.Count; i++)
+             {
+                 addJobType.Items.Add(JobTypes.Tables[0].Rows[i][1].ToString());
+             }
+
+        }
+        void fillcomboLabourer()
+        {
+            DatabaseClass Connect = new DatabaseClass(connectionStr);
+            Connect.openConnection();
+            string Selection = "@Labourer";
+            string queryLabourerSelect = "SELECT * From [dbo].[users] WHERE [Role] = 'Labourer' ";
+            SqlDataAdapter LabourerSelect = new SqlDataAdapter(queryLabourerSelect, connectionStr);
+            DataSet users = new DataSet();
+            LabourerSelect.Fill(users);
+            for (int i = 0; i < users.Tables[0].Rows.Count; i++)
+            {
+                cbJLabouer.Items.Add(users.Tables[0].Rows[i][3].ToString());
+            }
+        }
+
+
+            private void Manager_Load(object sender, EventArgs e)
         {
             //Helps to keep the form maximized.
             //WindowState = FormWindowState.Maximized;
@@ -93,7 +143,8 @@ namespace JustRipe2018
 
             }
             //change the query based on the buyers
-            DatabaseClass dbCon = new DatabaseClass(ConnectionStrDB);
+
+            DatabaseClass dbCon = new DatabaseClass(connectionStr);
             var select = "Select * From [dbo].[Orders]";
             var ds = dbCon.getDataSet(select);
             dataGridAddStore.ReadOnly = true;
@@ -110,7 +161,7 @@ namespace JustRipe2018
                 //implementation
             }
           
-            DatabaseClass dbCon = new DatabaseClass (ConnectionStrDB);
+            DatabaseClass dbCon = new DatabaseClass (connectionStr);
             var select = "Select * From [dbo].[CropsStorage]";
             var ds = dbCon.getDataSet(select);
             dataGridAddStore.ReadOnly = true;
@@ -127,7 +178,7 @@ namespace JustRipe2018
             }
             else
             {
-                DatabaseClass dataB = new DatabaseClass(ConnectionStrDB);//class and confirms the connection string.
+                DatabaseClass dataB = new DatabaseClass(connectionStr);//class and confirms the connection string.
                 dataB.AdderOfStore(txtName.Text, txtSurname.Text, txtContactNum.Text, txtUserEmail.Text,
                 double.Parse(cbCropAmount.Text)/*, cbCropType.Text*/); //input that info to the database.
                 MessageBox.Show("Customer Saved!");//the result if no error.                                            
@@ -163,30 +214,7 @@ namespace JustRipe2018
             }
         }
 
-        private void tabPage2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txtName_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox2_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox3_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button1_Click_1(object sender, EventArgs e)
-        {
-
-        }
+      
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
@@ -202,40 +230,7 @@ namespace JustRipe2018
 
         }
 
-        private void textBox4_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox6_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox12_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox13_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox14_TextChanged(object sender, EventArgs e)
-        {
-
-        }
+       
 
         private void btnCreateUsr_Click(object sender, EventArgs e)
         {
@@ -326,7 +321,107 @@ namespace JustRipe2018
 
         private void btnAddJobSave_Click(object sender, EventArgs e)
         {
+            // Data Containers
+            string cropContainer;
+            string labourerContainer;
+            string dateContainer;
+            string jobTypeContainer;
+            string amountContainer;
+            // Valid Data Container for uncontrolled Variables
+            DateTime validDateContainer;
+            int validAmountContainer;
 
+            // Ifnest to Check for blank/null Entry
+            if (cbJCrop.Text == "" || cbJCrop.Text == null)
+            {
+                MessageBox.Show("Please Select a Crop Type");
+            } 
+            else if (cbJLabouer.Text == "" || cbJLabouer.Text == null)
+            {
+                MessageBox.Show("Please Select a Labourer");
+            }
+            else if (cbJDate.Text == "" || cbJDate.Text == null)
+            {
+                MessageBox.Show("Please Enter a Date");
+            }
+            else if (addJobType.Text == "" || addJobType.Text == null)
+            {
+                MessageBox.Show("Please Select a Job Type");
+            }
+            else if (Cbjamount.Text == "" || Cbjamount.Text == null)
+            {
+                MessageBox.Show("Please Enter a Valid Crop Amount");
+            }
+            else
+            {
+                // Saving User Input In Variables
+                cropContainer = cbJCrop.Text;
+                labourerContainer = cbJLabouer.Text;
+                dateContainer = cbJDate.Text;
+                jobTypeContainer = addJobType.Text;
+                amountContainer = Cbjamount.Text;
+                // Date Validation + Conversion to Date
+                //Checks that Date is of valid format 
+                if (DateTime.TryParse(dateContainer, out validDateContainer))
+                {
+                    String.Format("{0:d/MM/yyyy}", validDateContainer);
+                }
+                else
+                {
+                    MessageBox.Show("Date is Invalid Please Enter a correct Date");
+                    cbJDate.Text = "";
+                    dateContainer = null;
+                    return;
+                }
+                //Checks date is greater than todays date
+                if (validDateContainer < DateTime.Now)
+                {
+                    MessageBox.Show("Date entered is less than the current date");
+                    cbJDate.Text = "";
+                    dateContainer = null;
+                    validDateContainer = DateTime.Now;
+                    return;
+                }
+                // Amount Valdation + Conversion to Int 
+                if (Int32.TryParse(amountContainer, out validAmountContainer))
+                {
+                    // Int is Valid
+                }
+                else
+                {
+                    MessageBox.Show("Amount Entered is not a whole number");
+                    cbCropAmount.Text = "";
+                    amountContainer = "";
+                    return;
+                }
+                //DatabaseClass DatabaseConnect = new DatabaseClass(connectionStr);
+                ////var dataCrop = DatabaseConnect.getDataSet(selectCrop);
+                //string selectUsers = "Select * From [dbo].[users]";
+                //var dataUsers = DatabaseConnect.getDataSet(selectUsers);
+                //string selectJobType = "Select * From [dbo].[JobType]";
+                //var dataJobType = DatabaseConnect.getDataSet(selectJobType);
+                // Colums Search
+             
+                // data send 
+
+//                    { ddwadawd = data.colum 1 }
+
+                //class and confirms the connection string.
+              //  DatabaseConnect.Addjob(1,1,,1,1,1)
+                    
+                //    (txtName.Text, txtSurname.Text, txtContactNum.Text, txtUserEmail.Text,
+                //double.Parse(cbCropAmount.Text)/*, cbCropType.Text*/); //input that info to the database.
+                //MessageBox.Show("Customer Saved!");//the result if no error. 
+
+
+
+
+
+
+
+            }
+
+      
         }
 
         private void btnAddJobCancel_Click_1(object sender, EventArgs e)

@@ -5,16 +5,19 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.Data;
+using System.IO;
+using System.Windows.Forms;
 
 namespace JustRipe2018
 {
     class DatabaseClass
+
     {
-        private string connectionStr= @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\JustRipeDatabase.mdf;Integrated Security=True;Connect Timeout=30";
+        private string connectionStr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\JustRipeDatabase.mdf;Integrated Security=True;Connect Timeout=30";
         //Connection string for connecting to the db
         SqlConnection connectionToDB;//change to db name this is the string that connect the database.
         private SqlDataAdapter dataAdapter;
-       
+
         public void openConnection()
         {   //create the connection to the database as an instance of 
             SqlConnection connectionToDB = new SqlConnection(connectionStr);
@@ -30,8 +33,8 @@ namespace JustRipe2018
         public DataSet getDataSet(string sqlStatement)
         {
             dataAdapter = new SqlDataAdapter(sqlStatement, connectionStr);// create the 
-            var dataSet = new DataSet();
-            var commandBuilder = new SqlCommandBuilder(dataAdapter);
+            DataSet dataSet = new DataSet();
+            SqlCommandBuilder commandBuilder = new SqlCommandBuilder(dataAdapter);
             dataAdapter.Fill(dataSet);//return the dataSet
             return dataSet;
         }
@@ -75,6 +78,20 @@ namespace JustRipe2018
                 
               //  Environment.Exit(1);
             } */
+        }
+
+        public void Addjob (int valUser, int valCrop, DateTime valDate, int valAmount, int valJobID, int ValVehicleID)
+        {
+            SqlConnection Connect = new SqlConnection(connectionStr);
+            SqlCommand sendJob = new SqlCommand();
+
+            sendJob.CommandType = CommandType.Text;
+            sendJob.CommandText = "INSERT [dbo].[Job] ([UserID], [CropID],[Date],[amount],[JobTypeID],[VehicleID]) VALUES" +
+              "('" + valUser + "','" + valCrop + "'," + valDate + ",'" + valAmount + "'," + valJobID + "'," + ValVehicleID + "')";
+            sendJob.Connection = Connect;
+            Connect.Open();
+            sendJob.ExecuteNonQuery();
+            Connect.Close();
         }
 
         //DataSet ds2;
