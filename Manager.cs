@@ -577,5 +577,11 @@ namespace JustRipe2018
         {
 
         }
+
+        private void cbCropType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            DatabaseClass dbase = new DatabaseClass(ConnectionStrDB);
+            dbase.GetID = cbCropType.Text;
+        }
     }
 }

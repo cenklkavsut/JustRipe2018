@@ -10,6 +10,8 @@ namespace JustRipe2018
 {
     class DatabaseClass
     {
+        string getID;
+        public string GetID { get { return getID; } set { getID = value; } }
         private string connectionStr= @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\JustRipeDatabase.mdf;Integrated Security=True;Connect Timeout=30";
         //Connection string for connecting to the db
         SqlConnection connectionToDB;//change to db name this is the string that connect the database.
@@ -41,11 +43,10 @@ namespace JustRipe2018
             //This is the connection string that assigns to the database. 
             SqlConnection cnn = new SqlConnection(connectionStr);
             //try
-            //{
-                //This is command class which will handle the query and connection object.  
+            //{ //This is command class which will handle the query and connection object.  
                 SqlCommand MyCommand1 = new SqlCommand();
                 SqlCommand MyCommand2 = new SqlCommand();
-            //SqlCommand MyCommand3 = new SqlCommand();
+            SqlCommand MyCommand3 = new SqlCommand();
 
             //This insert query 
             //queries that input data and retive data based on the values from the store.
@@ -54,18 +55,18 @@ namespace JustRipe2018
               "('" + valFirstN + "','" + valSurname + "'," + valContact + ",'" + valEmail + "')";
                 MyCommand1.Connection = cnn;
 
-
-                MyCommand2.CommandType = CommandType.Text;
-                MyCommand2.CommandText = "INSERT [dbo].[Orders] ([Amount]) VALUES (" + ValAmount + ") SELECT Crop";
-                MyCommand2.Connection = cnn;
-            //// NEED TO ADD IN CROPS AND DROP DOWN NEEDS TO LINK TO CROPS 
-            //MyCommand3.CommandType = CommandType.Text;
-            //MyCommand3.CommandText = "INSERT [dbo].[Orders] ([Crop_Name]) VALUES (" + ValCrop + ") FROM [Orders] INNER JOIN [dbo].[Crop]"
-            //+ " ON [dbo].[Orders].[Crop_ID]=[dbo].[Crop].[Crop_ID])";//
-            //MyCommand3.Connection = cnn;
-
+            MyCommand2.CommandType = CommandType.Text;
+            MyCommand2.CommandText = "INSERT INTO [dbo].[Orders] ([Amount]) VALUES (" + ValAmount + ")";
+            MyCommand2.Connection = cnn;
+           
+            //allows for a nested query
+        MyCommand3.CommandType = CommandType.Text;
+        MyCommand3.CommandText = "INSERT INTO [dbo].[Orders] ([CropID])"
+         + " SELECT [dbo].[Orders].[CropID] FROM [Orders] RIGHT JOIN [Crop] ON [Orders].[CropID]=[Crop].[CropID] WHERE ([Crop].[Crop_Name] = '" + GetID + "')";
+     
+            MyCommand3.Connection = cnn;
             cnn.Open();
-            //MyCommand3.ExecuteNonQuery();//
+            MyCommand3.ExecuteNonQuery();//
             MyCommand2.ExecuteNonQuery();
                 MyCommand1.ExecuteNonQuery();
                 cnn.Close();//close the database connection.
@@ -101,7 +102,7 @@ namespace JustRipe2018
             if (n.ToLower() == select0.ToString() && pwd.ToLower() == select1.ToString() || n.ToLower() == "admin" && pwd.ToLower() == "admin")//this is gonne be the name inputed in from the database
             {
                 r = true;
-                SqlCommand selectJo = new SqlCommand("SELECT [Role] From [dbo].[users] WHERE ([Role] = 'Manager)");
+                SqlCommand selectJo = new SqlCommand("SELECT [Role] From [dbo].[users] WHERE ([Role] = 'Manager')");
                 SqlCommand selectJo1 = new SqlCommand("SELECT [Role] From [dbo].[users] WHERE ([Role] = 'Labourer')");
                 string M = "Manager";
                 string L = "Labourer";
@@ -111,28 +112,26 @@ namespace JustRipe2018
                 loginForm.Close();
 
                 if (n.ToLower() == "admin" && pwd.ToLower() == "admin")
-                {//for testing
-                    // Create a new instance of the Form2 class
+                {//for testing Create a new instance of the Form2 class
                     Manager settingsForm = new Manager();
                     // Show the settings form
                     settingsForm.Show();
                 }//For testing
 
                 if (selectJo.ToString() == M && selectJo.ToString() != L)
-                {
-                    // Create a new instance of the Form2 class
+                { // Create a new instance of the Form2 class
                     Manager settingsForm = new Manager();
                     // Show the settings form
                     settingsForm.Show();
                 }
                 else if (selectJo1.ToString() == L && selectJo1.ToString() != M)
-                {
-                    //displays the labourer form
+                {//displays the labourer form
                     Labourer labrerForm = new Labourer();
                     labrerForm.Show();
                 }
             }
-            else {
+            else
+            {
                 r = false;
             }
 
