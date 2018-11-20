@@ -72,14 +72,16 @@ namespace JustRipe2018
                 //implementation
             }
             DatabaseClass dbDropDown = new DatabaseClass(ConnectionStrDB);//takes info from the connection string
-            var select = "SELECT [Crop_Name] FROM [dbo].[Crop]";//sql query to be executed
+            var select = "SELECT DISTINCT [Crop_Name] FROM [dbo].[Crop]";//sql query to be executed
             var ds2 = dbDropDown.dataToCb(select);//the data to be selected
-            cbCropType.ValueMember = select;//member into the code
-            cbCropType.DisplayMember = select;//to display the value/
-            cbCropType.DataSource = ds2.Tables[0];//start from 1 st table to display.
             cbCropType.DropDownStyle = ComboBoxStyle.DropDownList;//makes it a list
             cbCropType.Enabled = true;//enables the dropdown.
-            this.cbCropType.SelectedIndex = -1;//allows to select the value from empty.
+            cbCropType.SelectedIndex = -1;//allows to select the value from empty.   
+            for (int i = 0; i < ds2.Tables[0].Rows.Count; i++)//a loop that inputs values based on the ro
+            {
+                cbCropType.Items.Add(ds2.Tables[0].Rows[i][0]);
+
+            }
         }
 
         private void btnViewBuyers_Click_1(object sender, EventArgs e)
@@ -99,6 +101,8 @@ namespace JustRipe2018
             dataGridAddStore.ReadOnly = true;
             dataGridAddStore.DataSource = ds.Tables[0];
         }
+        private int valForCCrop =0;
+        public int MyProperty { get { return valForCCrop; } set { valForCCrop = value; } }
 
         private void btnViewStock_Click_1(object sender, EventArgs e)
         {
