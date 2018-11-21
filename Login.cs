@@ -37,18 +37,16 @@ namespace JustRipe2018
          public int passwordCounter=0;//a counter for the password!
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            DatabaseClass con = new DatabaseClass(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\JustRipeDatabase.mdf;Integrated Security=True;Connect Timeout=30");
+            DatabaseClass dbLogin = new DatabaseClass(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\JustRipeDatabase.mdf;Integrated Security=True;Connect Timeout=30");
 
-            bool r = con.loginToSystem(txtUserName.Text, txtPassword.Text);
-            //for loggin add database to the place where admin  is typed and connection
-            if (/*txtUserName.Text.ToLower()=="admin" && txtPassword.Text.ToLower()=="admin"*/r == true)//this is gonne be the name inputed in from the database
+            bool r=dbLogin.loginFul(txtUserName.Text.ToLower(),txtPassword.Text.ToLower());
+            if (r==true)
             {
-                ////closes the login Page
-                Login loginForm = new Login();
-                this.Hide();
-                loginForm.Close();
                 passwordCounter = 0;
-            }//this part in place of password counter it need to be txt user or password!= database value to activvate this code!
+                Login loginForm = new Login();
+                this.Hide();//hides
+                loginForm.Close();//closes after hiding.
+            }
             else if (/*txtUserName.Text!="admin" && txtPassword.Text!= "admin"||*/r == false)//if password is wrong!
             {
                 if (passwordCounter == 3 || passwordCounter > 3)//if 3 times or more
@@ -71,7 +69,7 @@ namespace JustRipe2018
                 }
                 passwordCounter += 1;//the counter for each time wrong
             }
-    }
+        }
 
         private void Login_Load(object sender, EventArgs e)
         {
