@@ -117,37 +117,31 @@ namespace JustRipe2018
         {
             //variables for implementation.
             bool x = false;//confirms login
-            string Job="";//takes info
             SqlDataAdapter sda = new SqlDataAdapter("SELECT COUNT(*) FROM [dbo].[users] WHERE username='" + name.ToLower() + "' AND password='" + password.ToLower()  
-                + "'" ,connectionStr);
+                + "'" ,connectionStr);//gets data from the database system through a adapter
             /* in above line the program is selecting the whole data from table and the matching it with the user name and password provided by user. */
             DataTable dt = new DataTable(); //this is creating a virtual table  
             sda.Fill(dt);
+
+            //         
+            string job=getBasicVal(name,password);
             //
-
-            //SqlCommand selectJ = new SqlCommand("SELECT [Role] From [dbo].[users] WHERE (Role='" + Job.ToLower() + "' )");
-            //var reader = selectJ.ExecuteReader();
-            //reader.Read();
-            //string job = reader.GetString(0);
-            //string job = (string)selectJ.ExecuteScalar();//cast to string to get data
-
-            ////
 
             if (dt.Rows[0][0].ToString() == "1")
             {
-                //if (job=="'manager'")
-                //{ 
-                Manager settingsForm = new Manager();
-                // Show the settings form
+                if (job == "Manager")//
+                {//
+                    Manager settingsForm = new Manager();
+                 //Show the settings form
                 settingsForm.Show();
-                x = true;
-                //}
-                //else if (job == "'labourer'")
-                //{
-                //    //displays the labourer form
-                //    Labourer labrerForm = new Labourer();
-                //    labrerForm.Show();
-                //}
+                    x = true;
+                }//
+                else if (job == "Labourer")//
+                {//
+                    //displays the labourer form
+                    Labourer labrerForm = new Labourer();
+                    labrerForm.Show();
+                }//
             }
             else
             {
@@ -155,7 +149,19 @@ namespace JustRipe2018
             }
             return x;
         }
+        //
+        public string getBasicVal(string name,string password)
+        {
+            var selJob = "SELECT [Role] FROM [dbo].[users] WHERE username='" + name.ToLower() + "' AND password='" + password.ToLower() + "'";
 
+            SqlConnection sql = new SqlConnection(connectionStr);
+                SqlCommand myCommand = new SqlCommand(selJob, sql);
+                myCommand.Connection.Open();
+               string job= (string)myCommand.ExecuteScalar();
+         
+            return job ;
+        }
+        //
         public DatabaseClass(string connectionStr)
         {
             this.connectionStr = connectionStr;
