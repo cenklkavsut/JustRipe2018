@@ -46,12 +46,12 @@ namespace JustRipe2018
             //{ //This is command class which will handle the query and connection object.  
                 SqlCommand MyCommand1 = new SqlCommand();
                 SqlCommand MyCommand2 = new SqlCommand();
-                 SqlCommand MyCommand3 = new SqlCommand();
+                SqlCommand MyCommand3 = new SqlCommand();
 
             //This insert query 
             //queries that input data and retive data based on the values from the store.
             MyCommand1.CommandType = CommandType.Text;
-                MyCommand1.CommandText = "INSERT INTO [dbo].[Customer] ([First Name],[Surname],[Contact Number],[Email]) VALUES" +
+            MyCommand1.CommandText = "INSERT INTO [dbo].[Customer] ([First Name],[Surname],[Contact Number],[Email]) VALUES" +
               "('" + valFirstN + "','" + valSurname + "'," + valContact + ",'" + valEmail + "')";
                 MyCommand1.Connection = cnn;
 
@@ -59,47 +59,25 @@ namespace JustRipe2018
             MyCommand2.CommandText = "INSERT INTO [dbo].[Orders] ([Amount]) VALUES (" + ValAmount + ")";
             MyCommand2.Connection = cnn;
 
-            //allows for a nested query
-        MyCommand3.CommandType = CommandType.Text;
-        MyCommand3.CommandText = "INSERT INTO [dbo].[Orders] ([CropID])"
-         + " SELECT [dbo].[Orders].[CropID] FROM [Orders] RIGHT JOIN [Crop] ON [Orders].[CropID]=[Crop].[CropID] WHERE ([Crop].[Crop_Name] = '" + GetID + "')";
-            MyCommand3.Connection = cnn;
-            //
-            var val = MyCommand3.CommandText;
-            SqlDataAdapter adapter = new SqlDataAdapter(val, connectionStr);
-            // Create a DataTable and fill it.
-            DataTable categories = new DataTable();
-            adapter.Fill(categories);
-
-            var val1 = MyCommand1.CommandText;            
-                SqlDataAdapter adapter1 = new SqlDataAdapter(val1, connectionStr);
-            // Create a DataTable and fill it.
-            DataTable categories1 = new DataTable();
-            adapter.Fill(categories1);
-
-            var val2 = MyCommand2.CommandText;
-            SqlDataAdapter adapter2 = new SqlDataAdapter(val2, connectionStr);
-            // Create a DataTable and fill it.
-            DataTable categories2 = new DataTable();
-            adapter.Fill(categories2);
-
-            cnn.Open();
-            MyCommand3.ExecuteNonQuery();
-            MyCommand2.ExecuteNonQuery();
-            MyCommand1.ExecuteNonQuery();
-            MyCommand3.CommandType = CommandType.StoredProcedure;//Allows for saving
-            MyCommand2.CommandType = CommandType.StoredProcedure;//Allows for saving 
-            MyCommand1.CommandType = CommandType.StoredProcedure;//Allows for saving
+            //allows for a nested query 
+            MyCommand3.CommandType = CommandType.Text;
+            MyCommand3.CommandText = "INSERT INTO [dbo].[Orders] ([CropID]) "
+             + "SELECT [dbo].[Orders].[CropID] FROM [Orders] LEFT JOIN [Crop] ON [Orders].[CropID]=[Crop].[CropID] WHERE ([Crop].[Crop_Name] = '" + GetID + "')";
+            MyCommand3.Connection = cnn;//fix query and ask why it is not saving.//also could be foreign key issue ,fix the issue through by changing order.
+           //it adds 4 ids and id not to orders ,also it does not save after the input.//login open twice sometimes issue
+          
+            cnn.Open();//open the database connection.
+            MyCommand3.ExecuteNonQuery();//execute query.
+            MyCommand2.ExecuteNonQuery();//execute query.
+            MyCommand1.ExecuteNonQuery();//execute query.
             cnn.Close();//close the database connection.
 
             //}
-            /*catch (Exception ex)
-            {
-                //if error close application
+            /*catch (Exception ex) 
+             {
+              //if error close application
               //  Environment.Exit(1);
-            } */
-
-            // Create a SqlDataAdapter based on a SELECT query.
+            } */ // Create a SqlDataAdapter based on a SELECT query.
         }
 
         public DataSet dataToCb(string select)
@@ -123,9 +101,9 @@ namespace JustRipe2018
             DataTable dt = new DataTable(); //this is creating a virtual table  
             sda.Fill(dt);
 
-            //         
+            // This return input fromthe query         
             string job=getBasicVal(name,password);
-            //
+            //and stores it in the string job.
 
             if (dt.Rows[0][0].ToString() == "1")
             {
@@ -152,16 +130,17 @@ namespace JustRipe2018
         //
         public string getBasicVal(string name,string password)
         {
+            //query of the value/
             var selJob = "SELECT [Role] FROM [dbo].[users] WHERE username='" + name.ToLower() + "' AND password='" + password.ToLower() + "'";
-
-            SqlConnection sql = new SqlConnection(connectionStr);
-                SqlCommand myCommand = new SqlCommand(selJob, sql);
-                myCommand.Connection.Open();
-               string job= (string)myCommand.ExecuteScalar();
-         
+            SqlConnection sql = new SqlConnection(connectionStr);//set up the connection of it
+                SqlCommand myCommand = new SqlCommand(selJob, sql);//the command to search for it
+                myCommand.Connection.Open();//open the connection
+               string job= (string)myCommand.ExecuteScalar();//input the query result into the string through casting.
+            myCommand.Connection.Close();//Close the connection
             return job ;
         }
         //
+
         public DatabaseClass(string connectionStr)
         {
             this.connectionStr = connectionStr;
