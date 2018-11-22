@@ -96,7 +96,7 @@ namespace JustRipe2018
 
             //change the query based on the buyers
             DatabaseClass dbCon = new DatabaseClass();
-            var select = "Select Amount From [dbo].[Orders]";//fix
+            var select = "Select Amount,Crop_Name AS 'Crop Name' From [dbo].[Orders] INNER JOIN Crop ON Orders.CropID=Crop.CropID;";
             var ds = dbCon.getDataSet(select);
             dataGridAddStore.ReadOnly = true;
             dataGridAddStore.DataSource = ds.Tables[0];
@@ -115,7 +115,8 @@ namespace JustRipe2018
             }
           
             DatabaseClass dbCon = new DatabaseClass ();
-            var select = "Select * From [dbo].[CropsStorage]";//Fix
+            var select = "Select Crop_Name AS 'Crop Name',StorageName AS 'Storage Name' ,Capacity ,Temperature AS 'Temperature (°C)' From [dbo].[CropsStorage] " +
+                " JOIN Crop ON CropsStorage.CropID=Crop.CropID JOIN StorageType ON CropsStorage.StorageTypeId=StorageType.StorageTypeId ";
             var ds = dbCon.getDataSet(select);
             dataGridAddStore.ReadOnly = true;
             dataGridAddStore.DataSource = ds.Tables[0];

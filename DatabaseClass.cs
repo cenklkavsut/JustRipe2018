@@ -53,8 +53,7 @@ namespace JustRipe2018
 
             cmdInserOrderId.CommandType = CommandType.Text;//queries that input data and retive data based on the values from the store.
             cmdInserOrderId.CommandText = "INSERT INTO [dbo].[Orders] ([CropID],[Amount]) Values (" + valFromCrop +","+ ValAmount + ")";//get the id from the class.
-            cmdInserOrderId.Connection = cnn;//fix query and ask why it is not saving.//also could be foreign key issue ,fix the issue through by changing order.
-                                        //it adds 4 ids and id not to orders ,also it does not save after the input. 
+            cmdInserOrderId.Connection = cnn;
             cmdInserOrderId.ExecuteNonQuery();//execute query.
 
             SqlCommand cmdInserCustomer = new SqlCommand();
