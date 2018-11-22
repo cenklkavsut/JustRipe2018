@@ -12,9 +12,10 @@ namespace JustRipe2018
     {
         string getID;
         public string GetID { get { return getID; } set { getID = value; } }
-        private string connectionStr= @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\JustRipeDatabase.mdf;Integrated Security=True;Connect Timeout=30";
-        //Connection string for connecting to the db
-        SqlConnection connectionToDB;//change to db name this is the string that connect the database.
+        //private string connectionStr= @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\JustRipeDatabase.mdf;Integrated Security=True;Connect Timeout=30";
+        private string connectionStr = Properties.Settings.Default.connectionToDB;
+         //Connection string for connecting to the db
+         SqlConnection connectionToDB;//change to db name this is the string that connect the database.
         private SqlDataAdapter dataAdapter;
        
         public void openConnection()
@@ -43,35 +44,28 @@ namespace JustRipe2018
             //This is the connection string that assigns to the database. 
             SqlConnection cnn = new SqlConnection(connectionStr);
             //try
-            //{ //This is command class which will handle the query and connection object.  
-                SqlCommand MyCommand1 = new SqlCommand();
-                SqlCommand MyCommand2 = new SqlCommand();
-                SqlCommand MyCommand3 = new SqlCommand();
-
-            //This insert query 
-            //queries that input data and retive data based on the values from the store.
-            MyCommand1.CommandType = CommandType.Text;
-            MyCommand1.CommandText = "INSERT INTO [dbo].[Customer] ([First Name],[Surname],[Contact Number],[Email]) VALUES" +
-              "('" + valFirstN + "','" + valSurname + "'," + valContact + ",'" + valEmail + "')";
-                MyCommand1.Connection = cnn;
-
-            MyCommand2.CommandType = CommandType.Text;
-            MyCommand2.CommandText = "INSERT INTO [dbo].[Orders] ([Amount]) VALUES (" + ValAmount + ")";
-            MyCommand2.Connection = cnn;
-
-            //allows for a nested query 
-            MyCommand3.CommandType = CommandType.Text;
-            MyCommand3.CommandText = "INSERT INTO [dbo].[Orders] ([CropID]) "
-             + "SELECT [dbo].[Orders].[CropID] FROM [Orders] LEFT JOIN [Crop] ON [Orders].[CropID]=[Crop].[CropID] WHERE ([Crop].[Crop_Name] = '" + GetID + "')";
-            MyCommand3.Connection = cnn;//fix query and ask why it is not saving.//also could be foreign key issue ,fix the issue through by changing order.
-           //it adds 4 ids and id not to orders ,also it does not save after the input.//login open twice sometimes issue
-          
             cnn.Open();//open the database connection.
-            MyCommand3.ExecuteNonQuery();//execute query.
-            MyCommand2.ExecuteNonQuery();//execute query.
-            MyCommand1.ExecuteNonQuery();//execute query.
-            cnn.Close();//close the database connection.
+            //{ //This is command class which will handle the query and connection object.  
+            SqlCommand cmdInserOrderId = new SqlCommand();
 
+            //allows for a nested query
+            int valFromCrop= getBasicCrop();//
+
+            cmdInserOrderId.CommandType = CommandType.Text;//queries that input data and retive data based on the values from the store.
+            cmdInserOrderId.CommandText = "INSERT INTO [dbo].[Orders] ([CropID],[Amount]) Values (" + valFromCrop +","+ ValAmount + ")";//get the id from the class.
+            cmdInserOrderId.Connection = cnn;//fix query and ask why it is not saving.//also could be foreign key issue ,fix the issue through by changing order.
+                                        //it adds 4 ids and id not to orders ,also it does not save after the input. 
+            cmdInserOrderId.ExecuteNonQuery();//execute query.
+
+            SqlCommand cmdInserCustomer = new SqlCommand();
+            cmdInserCustomer.CommandType = CommandType.Text;
+            cmdInserCustomer.CommandText = "INSERT INTO [dbo].[Customer] ([First Name],[Surname],[Contact Number],[Email]) VALUES" +
+              "('" + valFirstN + "','" + valSurname + "'," + valContact + ",'" + valEmail + "')";
+                cmdInserCustomer.Connection = cnn;
+            cmdInserCustomer.ExecuteNonQuery();//execute query.
+
+            cnn.Close();//close the database connection.
+            
             //}
             /*catch (Exception ex) 
              {
@@ -127,23 +121,36 @@ namespace JustRipe2018
             }
             return x;
         }
-        //
+
         public string getBasicVal(string name,string password)
         {
-            //query of the value/
+            //query of the value
             var selJob = "SELECT [Role] FROM [dbo].[users] WHERE username='" + name.ToLower() + "' AND password='" + password.ToLower() + "'";
             SqlConnection sql = new SqlConnection(connectionStr);//set up the connection of it
-                SqlCommand myCommand = new SqlCommand(selJob, sql);//the command to search for it
-                myCommand.Connection.Open();//open the connection
-               string job= (string)myCommand.ExecuteScalar();//input the query result into the string through casting.
+            SqlCommand myCommand = new SqlCommand(selJob, sql);//the command to search for it
+            myCommand.Connection.Open();//open the connection
+            string job= (string)myCommand.ExecuteScalar();//input the query result into the string through casting.
             myCommand.Connection.Close();//Close the connection
             return job ;
+        }      
+
+        //
+        public int getBasicCrop()
+        {
+            //query of the value
+            var selCropId = "SELECT [CropID] FROM [dbo].[Crop] WHERE Crop_Name='" + GetID +"'";
+            SqlConnection sql = new SqlConnection(connectionStr);//set up the connection of it
+            SqlCommand myCommand = new SqlCommand(selCropId, sql);//the command to search for it
+            myCommand.Connection.Open();//open the connectionN [Crop]
+            int CropId = (int)myCommand.ExecuteScalar();//input the query result into the string through casting.
+            myCommand.Connection.Close();//Close the connection
+            return CropId;//return null error.
         }
         //
 
-        public DatabaseClass(string connectionStr)
-        {
-            this.connectionStr = connectionStr;
-        }
+        //public DatabaseClass(string connectionStr)
+        //{
+        //    this.connectionStr = connectionStr;
+        //}
     }
 }

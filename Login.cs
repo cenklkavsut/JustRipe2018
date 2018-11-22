@@ -34,10 +34,10 @@ namespace JustRipe2018
         {
             InitializeComponent();
         }
-         public int passwordCounter=0;//a counter for the password!
+        public int passwordCounter=0;//a counter for the password!
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            DatabaseClass dbLogin = new DatabaseClass(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\JustRipeDatabase.mdf;Integrated Security=True;Connect Timeout=30");
+            DatabaseClass dbLogin = new DatabaseClass();
 
             bool r=dbLogin.loginFul(txtUserName.Text.ToLower(),txtPassword.Text.ToLower());
             if (r==true)

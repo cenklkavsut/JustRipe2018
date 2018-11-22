@@ -15,7 +15,6 @@ namespace JustRipe2018
         {
             InitializeComponent();
         }
-        public string ConnectionStrDB = @"Data Source = (LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\JustRipeDatabase.mdf;Integrated Security = True; Connect Timeout = 30";
         private void Manager_Load(object sender, EventArgs e)
         {
             //Helps to keep the form maximized.
@@ -44,6 +43,7 @@ namespace JustRipe2018
             tabStoreOpt.Appearance = TabAppearance.FlatButtons;
             tabStoreOpt.ItemSize = new Size(0, 1);
             tabStoreOpt.SizeMode = TabSizeMode.Fixed;
+           
         }
 
         private void btnAddBuyers_Click(object sender, EventArgs e)
@@ -71,16 +71,16 @@ namespace JustRipe2018
                 tabStoreOpt.SelectTab(1);
                 //implementation
             }
-            DatabaseClass dbDropDown = new DatabaseClass(ConnectionStrDB);//takes info from the connection string
+            cbCropType.Items.Clear();//clears the items when starts.
+            DatabaseClass dbDropDown = new DatabaseClass();//takes info from the connection string
             var select = "SELECT DISTINCT [Crop_Name] FROM [dbo].[Crop]";//sql query to be executed
             var ds2 = dbDropDown.dataToCb(select);//the data to be selected
             cbCropType.DropDownStyle = ComboBoxStyle.DropDownList;//makes it a list
             cbCropType.Enabled = true;//enables the dropdown.
             cbCropType.SelectedIndex = -1;//allows to select the value from empty.   
-            for (int i = 0; i < ds2.Tables[0].Rows.Count; i++)//a loop that inputs values based on the ro
+            for (int i = 0; i < ds2.Tables[0].Rows.Count; i++)//a loop that inputs values based on the row.
             {
                 cbCropType.Items.Add(ds2.Tables[0].Rows[i][0]);
-
             }
         }
 
@@ -95,8 +95,8 @@ namespace JustRipe2018
             }
 
             //change the query based on the buyers
-            DatabaseClass dbCon = new DatabaseClass(ConnectionStrDB);
-            var select = "Select * From [dbo].[Orders]";
+            DatabaseClass dbCon = new DatabaseClass();
+            var select = "Select Amount From [dbo].[Orders]";//fix
             var ds = dbCon.getDataSet(select);
             dataGridAddStore.ReadOnly = true;
             dataGridAddStore.DataSource = ds.Tables[0];
@@ -114,8 +114,8 @@ namespace JustRipe2018
                 //implementation
             }
           
-            DatabaseClass dbCon = new DatabaseClass (ConnectionStrDB);
-            var select = "Select * From [dbo].[CropsStorage]";
+            DatabaseClass dbCon = new DatabaseClass ();
+            var select = "Select * From [dbo].[CropsStorage]";//Fix
             var ds = dbCon.getDataSet(select);
             dataGridAddStore.ReadOnly = true;
             dataGridAddStore.DataSource = ds.Tables[0];
@@ -131,7 +131,8 @@ namespace JustRipe2018
             }
             else
             {
-                DatabaseClass dataB = new DatabaseClass(ConnectionStrDB);//class and confirms the connection string.
+                DatabaseClass dataB = new DatabaseClass();//class and confirms the connection string.
+                dataB.GetID = cbCropType.SelectedItem.ToString();//this lets it add all values should limit the values.
                 dataB.AdderOfStore(txtName.Text, txtSurname.Text, txtContactNum.Text, txtUserEmail.Text,
                 double.Parse(cbCropAmount.Text), cbCropType.Text); //input that info to the database.
                 MessageBox.Show("Customer Saved!");//the result if no error.                                            
@@ -370,7 +371,6 @@ namespace JustRipe2018
 
         private void btnRep1_Click(object sender, EventArgs e)
         {
-
             //allows selecting tab
             int tabCount = tabReportOpt.TabCount;
             for (int i = 0; i < tabReportOpt.RowCount; i++)
@@ -378,8 +378,8 @@ namespace JustRipe2018
                 tabReportOpt.SelectTab(0);
                 //implementation
             }
-            DatabaseClass dbCon = new DatabaseClass(ConnectionStrDB);
-            var select = "Select * From [dbo].[Crop]";
+            DatabaseClass dbCon = new DatabaseClass();
+            var select = "Select Crop_Name AS ' Crop Name', FertaliserAmountNeeded As 'Fertaliser Amount', CropStorageTemperature As 'Storage Temperature' From [dbo].[Crop]";
             var ds = dbCon.getDataSet(select);
             dataGridView1.ReadOnly = true;
             dataGridView1.DataSource = ds.Tables[0];
@@ -395,8 +395,8 @@ namespace JustRipe2018
                 //implementation
 
             }
-            DatabaseClass dbCon = new DatabaseClass(ConnectionStrDB);
-            var select = "Select * From [dbo].[Fertiliser]";
+            DatabaseClass dbCon = new DatabaseClass();
+            var select = "Select FertilizerName AS 'Fertaliser Name' ,amount  From [dbo].[Fertiliser]";
             var ds = dbCon.getDataSet(select);
             dataGridView4.ReadOnly = true;
             dataGridView4.DataSource = ds.Tables[0];
@@ -412,12 +412,13 @@ namespace JustRipe2018
                 //implementation
 
             }
-            DatabaseClass dbCon = new DatabaseClass(ConnectionStrDB);
-            var select = "Select * From [dbo].[StorageType]";
-            //JOIN [dbo].[FertiliserStorage] ON [StorageType].[FertiliserStorageId] = [dbo].[FertiliserStorage].[FertiliserStorageId]
+
+            DatabaseClass dbCon = new DatabaseClass();
+            var select = "Select StorageName AS 'Storage Name',Capacity,Temperature AS 'Temperature (°C)' From [dbo].[StorageType]";
             var ds = dbCon.getDataSet(select);
             dataGridView5.ReadOnly = true;
             dataGridView5.DataSource = ds.Tables[0];
+         
         }
 
         private void btnRep4_Click(object sender, EventArgs e)
@@ -430,8 +431,9 @@ namespace JustRipe2018
                 //implementation
 
             }
-            DatabaseClass dbCon = new DatabaseClass(ConnectionStrDB);
-            var select = "Select * From [dbo].[Vehicle]";
+            DatabaseClass dbCon = new DatabaseClass();
+            var select = "Select VehicleModel AS 'Vehicle Model' ,VehicleType AS 'Vehicle Type',VehicleRegistation AS 'Vehicle Registation'"
+                +",VehicleAvailability AS 'Vehicle Available' From [dbo].[Vehicle]";
             var ds = dbCon.getDataSet(select);
             dataGridView6.ReadOnly = true;
             dataGridView6.DataSource = ds.Tables[0];
@@ -550,13 +552,10 @@ namespace JustRipe2018
             if (chkbxLaborEdit.Checked == true)
             {
                 chkbxManagerEdit.Enabled=false ;
-
             } else if (chkbxLaborEdit.Checked == false)
             {
                 chkbxManagerEdit.Enabled = true;
-
             } 
-
         }
 
         private void chkbxManagerEdit_CheckedChanged(object sender, EventArgs e)
@@ -570,7 +569,6 @@ namespace JustRipe2018
             {
                 chkbxLaborEdit.Enabled = true;
             }
-
         }
 
         private void dataGridAddStore_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -580,8 +578,7 @@ namespace JustRipe2018
 
         private void cbCropType_SelectedIndexChanged(object sender, EventArgs e)
         {
-            DatabaseClass dbase = new DatabaseClass(ConnectionStrDB);
-            dbase.GetID = cbCropType.Text;//this lets it add all values
+           
         }
     }
 }
