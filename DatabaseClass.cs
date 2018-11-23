@@ -14,10 +14,10 @@ namespace JustRipe2018
         public string GetID { get { return getID; } set { getID = value; } }
         //private string connectionStr= @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\JustRipeDatabase.mdf;Integrated Security=True;Connect Timeout=30";
         private string connectionStr = Properties.Settings.Default.connectionToDB;
-         //Connection string for connecting to the db
-         SqlConnection connectionToDB;//change to db name this is the string that connect the database.
+        //Connection string for connecting to the db
+        SqlConnection connectionToDB;//change to db name this is the string that connect the database.
         private SqlDataAdapter dataAdapter;
-       
+
         public void openConnection()
         {   //create the connection to the database as an instance of 
             SqlConnection connectionToDB = new SqlConnection(connectionStr);
@@ -145,8 +145,26 @@ namespace JustRipe2018
             myCommand.Connection.Close();//Close the connection
             return CropId;//return null error.
         }
-        //
 
+        // The attribute for replacing the calling part.
+        private static DatabaseClass instance;
+        //properties for calling the database class 
+        public static DatabaseClass Instance
+        {
+            get//allows for getting the information
+            {
+                if (instance == null)
+                {
+                    instance = new DatabaseClass();
+                }
+                return instance;
+            }
+        }   
+        //constructor for the patern
+        private DatabaseClass()
+        {
+           //empty constructor.
+        }
         //public DatabaseClass(string connectionStr)
         //{
         //    this.connectionStr = connectionStr;

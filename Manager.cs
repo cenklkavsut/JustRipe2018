@@ -72,7 +72,7 @@ namespace JustRipe2018
                 //implementation
             }
             cbCropType.Items.Clear();//clears the items when starts.
-            DatabaseClass dbDropDown = new DatabaseClass();//takes info from the connection string
+            DatabaseClass dbDropDown = DatabaseClass.Instance;//takes info from the connection string
             var select = "SELECT DISTINCT [Crop_Name] FROM [dbo].[Crop]";//sql query to be executed
             var ds2 = dbDropDown.dataToCb(select);//the data to be selected
             cbCropType.DropDownStyle = ComboBoxStyle.DropDownList;//makes it a list
@@ -95,7 +95,7 @@ namespace JustRipe2018
             }
 
             //change the query based on the buyers
-            DatabaseClass dbCon = new DatabaseClass();
+            DatabaseClass dbCon = DatabaseClass.Instance;
             var select = "Select Amount,Crop_Name AS 'Crop Name' From [dbo].[Orders] INNER JOIN Crop ON Orders.CropID=Crop.CropID;";
             var ds = dbCon.getDataSet(select);
             dataGridAddStore.ReadOnly = true;
@@ -114,7 +114,7 @@ namespace JustRipe2018
                 //implementation
             }
           
-            DatabaseClass dbCon = new DatabaseClass ();
+            DatabaseClass dbCon = DatabaseClass.Instance;
             var select = "Select Crop_Name AS 'Crop Name',StorageName AS 'Storage Name' ,Capacity ,Temperature AS 'Temperature (°C)' From [dbo].[CropsStorage] " +
                 " JOIN Crop ON CropsStorage.CropID=Crop.CropID JOIN StorageType ON CropsStorage.StorageTypeId=StorageType.StorageTypeId ";
             var ds = dbCon.getDataSet(select);
@@ -132,7 +132,7 @@ namespace JustRipe2018
             }
             else
             {
-                DatabaseClass dataB = new DatabaseClass();//class and confirms the connection string.
+                DatabaseClass dataB =DatabaseClass.Instance;//class and confirms the connection string.
                 dataB.GetID = cbCropType.SelectedItem.ToString();//this lets it add all values should limit the values.
                 dataB.AdderOfStore(txtName.Text, txtSurname.Text, txtContactNum.Text, txtUserEmail.Text,
                 double.Parse(cbCropAmount.Text), cbCropType.Text); //input that info to the database.
@@ -379,7 +379,7 @@ namespace JustRipe2018
                 tabReportOpt.SelectTab(0);
                 //implementation
             }
-            DatabaseClass dbCon = new DatabaseClass();
+            DatabaseClass dbCon = DatabaseClass.Instance;
             var select = "Select Crop_Name AS ' Crop Name', FertaliserAmountNeeded As 'Fertaliser Amount', CropStorageTemperature As 'Storage Temperature' From [dbo].[Crop]";
             var ds = dbCon.getDataSet(select);
             dataGridView1.ReadOnly = true;
@@ -396,7 +396,7 @@ namespace JustRipe2018
                 //implementation
 
             }
-            DatabaseClass dbCon = new DatabaseClass();
+            DatabaseClass dbCon = DatabaseClass.Instance;
             var select = "Select FertilizerName AS 'Fertaliser Name' ,amount  From [dbo].[Fertiliser]";
             var ds = dbCon.getDataSet(select);
             dataGridView4.ReadOnly = true;
@@ -414,7 +414,7 @@ namespace JustRipe2018
 
             }
 
-            DatabaseClass dbCon = new DatabaseClass();
+            DatabaseClass dbCon = DatabaseClass.Instance;
             var select = "Select StorageName AS 'Storage Name',Capacity,Temperature AS 'Temperature (°C)' From [dbo].[StorageType]";
             var ds = dbCon.getDataSet(select);
             dataGridView5.ReadOnly = true;
@@ -432,7 +432,7 @@ namespace JustRipe2018
                 //implementation
 
             }
-            DatabaseClass dbCon = new DatabaseClass();
+            DatabaseClass dbCon = DatabaseClass.Instance;
             var select = "Select VehicleModel AS 'Vehicle Model' ,VehicleType AS 'Vehicle Type',VehicleRegistation AS 'Vehicle Registation'"
                 +",VehicleAvailability AS 'Vehicle Available' From [dbo].[Vehicle]";
             var ds = dbCon.getDataSet(select);

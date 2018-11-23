@@ -37,7 +37,7 @@ namespace JustRipe2018
         public int passwordCounter=0;//a counter for the password!
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            DatabaseClass dbLogin = new DatabaseClass();
+            DatabaseClass dbLogin = DatabaseClass.Instance;
 
             bool r=dbLogin.loginFul(txtUserName.Text.ToLower(),txtPassword.Text.ToLower());
             if (r==true)
