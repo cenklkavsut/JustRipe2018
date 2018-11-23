@@ -101,8 +101,6 @@ namespace JustRipe2018
             dataGridAddStore.ReadOnly = true;
             dataGridAddStore.DataSource = ds.Tables[0];
         }
-        private int valForCCrop =0;
-        public int MyProperty { get { return valForCCrop; } set { valForCCrop = value; } }
 
         private void btnViewStock_Click_1(object sender, EventArgs e)
         {
@@ -113,22 +111,36 @@ namespace JustRipe2018
                 tabStoreOpt.SelectTab(0);
                 //implementation
             }
-          
+            try
+            {
             DatabaseClass dbCon = DatabaseClass.Instance;
             var select = "Select Crop_Name AS 'Crop Name',StorageName AS 'Storage Name' ,Capacity ,Temperature AS 'Temperature (°C)' From [dbo].[CropsStorage] " +
                 " JOIN Crop ON CropsStorage.CropID=Crop.CropID JOIN StorageType ON CropsStorage.StorageTypeId=StorageType.StorageTypeId ";
             var ds = dbCon.getDataSet(select);
             dataGridAddStore.ReadOnly = true;
             dataGridAddStore.DataSource = ds.Tables[0];
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Wrong input value try again!");
+            }
+           
         }
 
         private void btnBuyer_Click(object sender, EventArgs e)
         {
+           double CropAmountCheck = double.Parse(cbCropAmount.Text.ToString());//allows for checking the crop amount 
             if (txtName.Text == null || txtName.Text == "" || txtSurname.Text == null || txtSurname.Text == "" ||
                             txtContactNum.Text == null || txtContactNum.Text == "" || txtUserEmail.Text == null || txtUserEmail.Text == "" ||
                             cbCropAmount.Text == null || cbCropAmount.Text == "")
             {
                 MessageBox.Show("No value entered!");
+            }
+            else if (cbCropAmount.Text =="-"|| CropAmountCheck<0)//if the amount is negative give message.
+            {
+                MessageBox.Show("Wrong value entered!");
+                cbCropAmount.Text = "";
+
             }
             else
             {

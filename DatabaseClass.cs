@@ -43,9 +43,10 @@ namespace JustRipe2018
         {
             //This is the connection string that assigns to the database. 
             SqlConnection cnn = new SqlConnection(connectionStr);
-            //try
+           try            
+            { //This is command class which will handle the query and connection object.  
+
             cnn.Open();//open the database connection.
-            //{ //This is command class which will handle the query and connection object.  
             SqlCommand cmdInserOrderId = new SqlCommand();
 
             //allows for a nested query
@@ -65,12 +66,12 @@ namespace JustRipe2018
 
             cnn.Close();//close the database connection.
             
-            //}
-            /*catch (Exception ex) 
+            }
+            catch (Exception ex) 
              {
               //if error close application
-              //  Environment.Exit(1);
-            } */ // Create a SqlDataAdapter based on a SELECT query.
+              Environment.Exit(1);
+            }  // Create a SqlDataAdapter based on a SELECT query.
         }
 
         public DataSet dataToCb(string select)
