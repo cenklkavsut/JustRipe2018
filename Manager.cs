@@ -185,7 +185,47 @@ namespace JustRipe2018
 
         private void button1_Click_1(object sender, EventArgs e)
         {
+            string managerRole = "Manager";
+            string labourerRole = "Labourer";
 
+            if (chkbxLaborCreate.Checked)
+            {
+                chkbxLaborCreate.Text = labourerRole;
+            }
+
+            if (chkbxManagerCreate.Checked)
+            {
+                chkbxManagerCreate.Text = managerRole;
+            }
+
+            if (txtFNUsrCreate.Text == null || txtFNUsrCreate.Text == "" || txtLNUsrCreate.Text == null || txtLNUsrCreate.Text == "" ||
+                txtUsrnameCreate.Text == null || txtUsrnameCreate.Text == "" || txtPsswrdCreate.Text == null || txtPsswrdCreate.Text == "")
+            //chkbxLaborCreate.Checked|| cbCropAmount.Text == "" )
+            {
+                MessageBox.Show("Error! Empty Fields Detected!");
+            }
+            else
+            {
+                if (chkbxManagerCreate.Checked)
+                {
+                    DatabaseClass dataB = new DatabaseClass(ConnectionStrDB);//class and confirms the connection string.
+                    dataB.UserCreator(txtUsrnameCreate.Text, txtPsswrdCreate.Text, txtFNUsrCreate.Text, txtLNUsrCreate.Text, chkbxManagerCreate.Text); //input that info to the database.
+                    MessageBox.Show("User Created!");//the result if no error.                                            
+                }
+                else
+                {
+                    DatabaseClass dataB = new DatabaseClass(ConnectionStrDB);//class and confirms the connection string.
+                    dataB.UserCreator(txtUsrnameCreate.Text, txtPsswrdCreate.Text, txtFNUsrCreate.Text, txtLNUsrCreate.Text, chkbxLaborCreate.Text); //input that info to the database.
+                    MessageBox.Show("User Created!");//the result if no error.   
+                }
+            }
+            //Allows To Clean text in the text box and dropdowns after finished.
+            txtFNUsrCreate.Text = "";
+            txtLNUsrCreate.Text = "";
+            txtUsrnameCreate.Text = "";
+            txtPsswrdCreate.Text = "";
+            chkbxLaborCreate.Checked = false;
+            chkbxManagerCreate.Checked = false;
         }
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)

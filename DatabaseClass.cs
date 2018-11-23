@@ -139,6 +139,27 @@ namespace JustRipe2018
 
             return r;
         }
+        public void UserCreator(string valUsername, string valPassword, string valFirstName, string valLastName, string valRole)
+        {
+            //This is the connection string that assigns to the database. 
+            SqlConnection cnn = new SqlConnection(connectionStr);
+
+            //This is command class which will handle the query and connection object.  
+            SqlCommand MyCommand1 = new SqlCommand();
+            //SqlCommand MyCommand3 = new SqlCommand();
+
+            //This insert query 
+            //queries that input data and retive data based on the values from the store.
+            MyCommand1.CommandType = CommandType.Text;
+            MyCommand1.CommandText = "INSERT INTO dbo.users (Username, Password, First_Name, Last_Name, Role) " +
+                "VALUES ('" + valUsername + "', '" + valPassword + "', '" + valFirstName + "', '" + valLastName + "', '" + valRole + "')";
+            MyCommand1.Connection = cnn;
+
+            cnn.Open();
+            MyCommand1.ExecuteNonQuery();
+            cnn.Close();
+
+        }
 
         public DatabaseClass(string connectionStr)
         {
