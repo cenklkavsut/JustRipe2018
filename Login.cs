@@ -47,20 +47,21 @@ namespace JustRipe2018
                 this.Hide();//hides
                 loginForm.Close();//closes after hiding.
             }
-            else if (/*txtUserName.Text!="admin" && txtPassword.Text!= "admin"||*/r == false)//if password is wrong!
+            else if (r == false)//if password is wrong!
             {
-                if (passwordCounter == 3 || passwordCounter > 3)//if 3 times or more
+                if ( passwordCounter >= 3)//if 3 times or more
                 {
-                    if (passwordCounter == 3 || passwordCounter > 3)
-                    {
+
+                    lblLogin.Text = "3rd attempt failed: Forcing Shutdown";
                         MessageBox.Show("3rd attempt failed: Forcing Shutdown");
                         Application.Exit();
-                    }
+                    
                 }
                 else if (passwordCounter == 2)
                 {
-                    MessageBox.Show("Last Attempt: Please Contact a Manager");
                     lblLogin.Text = "2nd attempt failed: username or password is incorrect";
+                    MessageBox.Show("Last Attempt: Please Contact a Manager");
+
                 }
                 else if (passwordCounter == 1)
                 {
