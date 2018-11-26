@@ -129,19 +129,21 @@ namespace JustRipe2018
 
         private void btnBuyer_Click(object sender, EventArgs e)
         {
-           double CropAmountCheck = double.Parse(cbCropAmount.Text.ToString());//allows for checking the crop amount 
-            if (txtName.Text == null || txtName.Text == "" || txtSurname.Text == null || txtSurname.Text == "" ||
+            try
+            {
+                double CropAmountCheck = double.Parse(cbCropAmount.Text.ToString());//allows for checking the crop amount 
+                if (cbCropAmount.Text == "-" || CropAmountCheck < 0)//if the amount is negative give message.
+                {
+                    MessageBox.Show("Wrong value entered!");
+                    cbCropAmount.Text = "";
+
+                }
+                else if (txtName.Text == null || txtName.Text == "" || txtSurname.Text == null || txtSurname.Text == "" ||
                             txtContactNum.Text == null || txtContactNum.Text == "" || txtUserEmail.Text == null || txtUserEmail.Text == "" ||
                             cbCropAmount.Text == null || cbCropAmount.Text == "")
             {
                 MessageBox.Show("No value entered!");
-            }
-            else if (cbCropAmount.Text =="-"|| CropAmountCheck<0)//if the amount is negative give message.
-            {
-                MessageBox.Show("Wrong value entered!");
-                cbCropAmount.Text = "";
-
-            }
+            } 
             else
             {
                 DatabaseClass dataB =DatabaseClass.Instance;//class and confirms the connection string.
@@ -150,6 +152,11 @@ namespace JustRipe2018
                 double.Parse(cbCropAmount.Text), cbCropType.Text); //input that info to the database.
                 MessageBox.Show("Customer Saved!");//the result if no error.                                            
             } 
+            }
+            catch (Exception)
+            {
+                //MessageBox.Show("Wrong value entered!");
+            }           
             //Allows To Clean text in the text box and dropdowns after finished.
             txtName.Text = "";
             txtSurname.Text = "";
