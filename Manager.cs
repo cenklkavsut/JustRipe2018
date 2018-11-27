@@ -71,7 +71,7 @@ namespace JustRipe2018
                 tabStoreOpt.SelectTab(1);
                 //implementation
             }
-            DatabaseClass dbDropDown = new DatabaseClass(ConnectionStrDB);//takes info from the connection string
+            DatabaseClass dbDropDown = new DatabaseClass();//takes info from the connection string
             var select = "SELECT [Crop_Name] FROM [dbo].[Crop]";//sql query to be executed
             var ds2 = dbDropDown.dataToCb(select);//the data to be selected
             cbCropType.ValueMember = select;//member into the code
@@ -93,7 +93,7 @@ namespace JustRipe2018
             }
 
             //change the query based on the buyers
-            DatabaseClass dbCon = new DatabaseClass(ConnectionStrDB);
+            DatabaseClass dbCon = new DatabaseClass();
             var select = "Select * From [dbo].[Orders]";
             var ds = dbCon.getDataSet(select);
             dataGridAddStore.ReadOnly = true;
@@ -110,7 +110,7 @@ namespace JustRipe2018
                 //implementation
             }
           
-            DatabaseClass dbCon = new DatabaseClass (ConnectionStrDB);
+            DatabaseClass dbCon = new DatabaseClass ();
             var select = "Select * From [dbo].[CropsStorage]";
             var ds = dbCon.getDataSet(select);
             dataGridAddStore.ReadOnly = true;
@@ -127,7 +127,7 @@ namespace JustRipe2018
             }
             else
             {
-                DatabaseClass dataB = new DatabaseClass(ConnectionStrDB);//class and confirms the connection string.
+                DatabaseClass dataB = new DatabaseClass();//class and confirms the connection string.
                 dataB.AdderOfStore(txtName.Text, txtSurname.Text, txtContactNum.Text, txtUserEmail.Text,
                 double.Parse(cbCropAmount.Text), cbCropType.Text); //input that info to the database.
                 MessageBox.Show("Customer Saved!");//the result if no error.                                            
@@ -160,6 +160,20 @@ namespace JustRipe2018
             {
                 tabUserCntrl.SelectTab(1);
                 //implementation
+            }
+
+            //pulling the users names from the db to display in the drop down
+            drpdwnSelectUsr.Items.Clear();//clears the items when starts.
+            DatabaseClass dbDropDown = DatabaseClass.Instance;//takes info from the connection string
+            var select = "SELECT CONCAT ([First_Name], ' ', [Last__Name]) AS [FullName] FROM [dbo].[users]";//sql query to be executed
+            //var select = "SELECT FormattedName FROM [dbo].[users]";
+            var dataUser = dbDropDown.DataToCbUsrSelect(select);//the data to be selected
+            drpdwnSelectUsr.DropDownStyle = ComboBoxStyle.DropDownList;//makes it a list
+            drpdwnSelectUsr.Enabled = true;//enables the dropdown.
+            drpdwnSelectUsr.SelectedIndex = -1;//allows to select the value from empty.   
+            for (int i = 0; i < dataUser.Tables[0].Rows.Count; i++)//a loop that inputs values based on the row.
+            {
+                drpdwnSelectUsr.Items.Add(dataUser.Tables[0].Rows[i][0]);
             }
         }
 
@@ -200,7 +214,7 @@ namespace JustRipe2018
 
             if (txtFNUsrCreate.Text == null || txtFNUsrCreate.Text == "" || txtLNUsrCreate.Text == null || txtLNUsrCreate.Text == "" ||
                 txtUsrnameCreate.Text == null || txtUsrnameCreate.Text == "" || txtPsswrdCreate.Text == null || txtPsswrdCreate.Text == "")
-            //chkbxLaborCreate.Checked|| cbCropAmount.Text == "" )
+                //|| !chkbxLaborCreate.Checked || !chkbxManagerCreate.Checked)
             {
                 MessageBox.Show("Error! Empty Fields Detected!");
             }
@@ -208,13 +222,13 @@ namespace JustRipe2018
             {
                 if (chkbxManagerCreate.Checked)
                 {
-                    DatabaseClass dataB = new DatabaseClass(ConnectionStrDB);//class and confirms the connection string.
+                    DatabaseClass dataB = new DatabaseClass();//class and confirms the connection string.
                     dataB.UserCreator(txtUsrnameCreate.Text, txtPsswrdCreate.Text, txtFNUsrCreate.Text, txtLNUsrCreate.Text, chkbxManagerCreate.Text); //input that info to the database.
                     MessageBox.Show("User Created!");//the result if no error.                                            
                 }
                 else
                 {
-                    DatabaseClass dataB = new DatabaseClass(ConnectionStrDB);//class and confirms the connection string.
+                    DatabaseClass dataB = new DatabaseClass();//class and confirms the connection string.
                     dataB.UserCreator(txtUsrnameCreate.Text, txtPsswrdCreate.Text, txtFNUsrCreate.Text, txtLNUsrCreate.Text, chkbxLaborCreate.Text); //input that info to the database.
                     MessageBox.Show("User Created!");//the result if no error.   
                 }
@@ -414,7 +428,7 @@ namespace JustRipe2018
                 tabReportOpt.SelectTab(0);
                 //implementation
             }
-            DatabaseClass dbCon = new DatabaseClass(ConnectionStrDB);
+            DatabaseClass dbCon = new DatabaseClass();
             var select = "Select * From [dbo].[Crop]";
             var ds = dbCon.getDataSet(select);
             dataGridView1.ReadOnly = true;
@@ -431,7 +445,7 @@ namespace JustRipe2018
                 //implementation
 
             }
-            DatabaseClass dbCon = new DatabaseClass(ConnectionStrDB);
+            DatabaseClass dbCon = new DatabaseClass();
             var select = "Select * From [dbo].[Fertiliser]";
             var ds = dbCon.getDataSet(select);
             dataGridView4.ReadOnly = true;
@@ -448,7 +462,7 @@ namespace JustRipe2018
                 //implementation
 
             }
-            DatabaseClass dbCon = new DatabaseClass(ConnectionStrDB);
+            DatabaseClass dbCon = new DatabaseClass();
             var select = "Select * From [dbo].[StorageType]";
             //JOIN [dbo].[FertiliserStorage] ON [StorageType].[FertiliserStorageId] = [dbo].[FertiliserStorage].[FertiliserStorageId]
             var ds = dbCon.getDataSet(select);
@@ -466,7 +480,7 @@ namespace JustRipe2018
                 //implementation
 
             }
-            DatabaseClass dbCon = new DatabaseClass(ConnectionStrDB);
+            DatabaseClass dbCon = new DatabaseClass();
             var select = "Select * From [dbo].[Vehicle]";
             var ds = dbCon.getDataSet(select);
             dataGridView6.ReadOnly = true;

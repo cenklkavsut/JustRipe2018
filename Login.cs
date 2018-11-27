@@ -37,7 +37,7 @@ namespace JustRipe2018
          public int passwordCounter=0;//a counter for the password!
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            DatabaseClass con = new DatabaseClass(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\JustRipeDatabase.mdf;Integrated Security=True;Connect Timeout=30");
+            DatabaseClass con = new DatabaseClass();
 
             bool r = con.loginToSystem(txtUserName.Text, txtPassword.Text);
             //for loggin add database to the place where admin  is typed and connection

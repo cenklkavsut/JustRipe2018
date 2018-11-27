@@ -10,7 +10,10 @@ namespace JustRipe2018
 {
     class DatabaseClass
     {
-        private string connectionStr= @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\JustRipeDatabase.mdf;Integrated Security=True;Connect Timeout=30";
+        string getID;
+        public string GetID { get { return getID; } set { getID = value; } }
+        //private string connectionStr= @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\JustRipeDatabase.mdf;Integrated Security=True;Connect Timeout=30";
+        private string connectionStr = Properties.Settings.Default.connectionToDB;
         //Connection string for connecting to the db
         SqlConnection connectionToDB;//change to db name this is the string that connect the database.
         private SqlDataAdapter dataAdapter;
@@ -26,6 +29,7 @@ namespace JustRipe2018
         {//close the connection to the database
             connectionToDB.Close();//change to db name
         }
+
         //fill the data base with the sql statment.
         public DataSet getDataSet(string sqlStatement)
         {
@@ -90,7 +94,7 @@ namespace JustRipe2018
 
         public bool loginToSystem(string n, string pwd)
         {
-            DatabaseClass con = new DatabaseClass(connectionStr);
+            DatabaseClass con = new DatabaseClass();
             bool r;
 
             SqlCommand select0 = new SqlCommand("Select [Username] From [dbo].[users] WHERE ([Username] =" + n + ")");
@@ -145,25 +149,44 @@ namespace JustRipe2018
             SqlConnection cnn = new SqlConnection(connectionStr);
 
             //This is command class which will handle the query and connection object.  
-            SqlCommand MyCommand1 = new SqlCommand();
+            SqlCommand cmdAddUser = new SqlCommand();
             //SqlCommand MyCommand3 = new SqlCommand();
 
             //This insert query 
             //queries that input data and retive data based on the values from the store.
-            MyCommand1.CommandType = CommandType.Text;
-            MyCommand1.CommandText = "INSERT INTO dbo.users (Username, Password, First_Name, Last_Name, Role) " +
+            cmdAddUser.CommandType = CommandType.Text;
+            cmdAddUser.CommandText = "INSERT INTO dbo.users (Username, Password, First_Name, Last_Name, Role) " +
                 "VALUES ('" + valUsername + "', '" + valPassword + "', '" + valFirstName + "', '" + valLastName + "', '" + valRole + "')";
-            MyCommand1.Connection = cnn;
+            cmdAddUser.Connection = cnn;
 
             cnn.Open();
-            MyCommand1.ExecuteNonQuery();
+            cmdAddUser.ExecuteNonQuery();
             cnn.Close();
-
         }
 
-        public DatabaseClass(string connectionStr)
+        public DataSet DataToCbUsrSelect(string select)
         {
-            this.connectionStr = connectionStr;
+            SqlConnection conn = new SqlConnection();//call the connection.
+            conn.ConnectionString = connectionStr;//connection string to connect.
+            conn.Open();//open connection.
+            SqlDataAdapter daSearch = new SqlDataAdapter(select, conn);//execute the sql and confirm connection.
+            DataSet dataUser = new DataSet();//call the data set
+            daSearch.Fill(dataUser, select);//fill it with the dataset and sql value.
+            return dataUser;
+        }
+
+        private static DatabaseClass instance;
+
+        public static DatabaseClass Instance
+        {
+            get//allows for getting the information
+            {
+                if (instance == null)
+                {
+                    instance = new DatabaseClass();
+                }
+                return instance;
+            }
         }
     }
 }
