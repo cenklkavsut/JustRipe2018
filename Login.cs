@@ -40,12 +40,13 @@ namespace JustRipe2018
             DatabaseClass dbLogin = DatabaseClass.Instance;
 
             bool r=dbLogin.loginFul(txtUserName.Text.ToLower(),txtPassword.Text.ToLower());
+
             if (r==true)
             {
                 passwordCounter = 0;
-                Login loginForm = new Login();
+                //Login loginForm = new Login();
                 this.Hide();//hides
-                loginForm.Close();//closes after hiding.
+                //loginForm.Close();//closes after hiding.
             }
             else if (r == false)//if password is wrong!
             {
@@ -69,7 +70,8 @@ namespace JustRipe2018
                     lblLogin.Text = "1st attempt failed: username or password is incorrect";
                 }
                 passwordCounter += 1;//the counter for each time wrong
-            }
+
+            } 
         }
 
         private void Login_Load(object sender, EventArgs e)
