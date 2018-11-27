@@ -92,16 +92,13 @@ namespace JustRipe2018
             {
                 tabStoreOpt.SelectTab(0);
                 //implementation
-            }
-
-            //change the query based on the buyers
+            } //change the query based on the buyers
             DatabaseClass dbCon = DatabaseClass.Instance;
             var select = "Select Amount,Crop_Name AS 'Crop Name' From [dbo].[Orders] INNER JOIN Crop ON Orders.CropID=Crop.CropID;";
             var ds = dbCon.getDataSet(select);
             dataGridAddStore.ReadOnly = true;
             dataGridAddStore.DataSource = ds.Tables[0];
         }
-
         private void btnViewStock_Click_1(object sender, EventArgs e)
         {
             //allows selecting tab
@@ -109,23 +106,32 @@ namespace JustRipe2018
             for (int i = 0; i < tabStoreOpt.RowCount; i++)
             {
                 tabStoreOpt.SelectTab(0);
-                //implementation
             }
             try
             {
                 DatabaseClass dbCon = DatabaseClass.Instance;
-                dbCon.getVal();//
                 var select = "Select Crop_Name AS 'Crop Name',StorageName AS 'Storage Name' ,Capacity ,Temperature AS 'Temperature (°C)' From [dbo].[CropsStorage] " +
                 " JOIN Crop ON CropsStorage.CropID=Crop.CropID JOIN StorageType ON CropsStorage.StorageTypeId=StorageType.StorageTypeId ";
             var ds = dbCon.getDataSet(select);
             dataGridAddStore.ReadOnly = true;
-            dataGridAddStore.DataSource = ds.Tables[0];
+                dataGridAddStore.DataSource = ds.Tables[0];
+                //
+                try
+                {
+                dbCon.getVal();//it gives a error when their are no available dates
+
+                }
+                catch (Exception)
+                {
+
+                    MessageBox.Show(" No stocks currently available!");
+                }
+                //
             }
             catch (Exception)
             {
                 MessageBox.Show("Wrong input value try again!");
             }
-
         }
 
         private void btnBuyer_Click(object sender, EventArgs e)

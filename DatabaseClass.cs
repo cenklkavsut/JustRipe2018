@@ -179,8 +179,6 @@ namespace JustRipe2018
 
             if (DateTime.Now >= date)
             {
-                //var select = "Select Crop_Name AS 'Crop Name',StorageName AS 'Storage Name' ,Capacity ,Temperature AS 'Temperature (°C)' From [dbo].[CropsStorage] " +
-                //" JOIN Crop ON CropsStorage.CropID=Crop.CropID JOIN StorageType ON CropsStorage.StorageTypeId=StorageType.StorageTypeId ";
 
                 cmdInserOrderId.CommandType = CommandType.Text;//queries that input data and retive data based on the values from the store.
                 cmdInserOrderId.CommandText = "INSERT INTO [dbo].[CropsStorage] (CropID) Values (" + ReturnId + ")";//get the id from the class.
@@ -200,7 +198,7 @@ namespace JustRipe2018
             myCommand.Connection.Open();//open the connectionN 
             string dateResult = (string)myCommand.ExecuteScalar();//input the query result into the string through casting.
             myCommand.Connection.Close();//Close the connection
-            return dateResult;//return null error.
+            return dateResult;
         }
 
         public int getBasicCropStorage()
@@ -218,7 +216,7 @@ namespace JustRipe2018
         //public int getBasicStorageId()
         //{
         //    //query of the value
-        //    var selJobId = "Select StorageTypeId From [dbo].[StorageType] Where JobTypeID=1";
+        //    var selJobId = "Select StorageTypeId From [dbo].[Job] Where JobTypeID=1";
         //    SqlConnection sql = new SqlConnection(connectionStr);//set up the connection of it
         //    SqlCommand myCommand = new SqlCommand(selJobId, sql);//the command to search for it
         //    myCommand.Connection.Open();//open the connectionN [Crop]
