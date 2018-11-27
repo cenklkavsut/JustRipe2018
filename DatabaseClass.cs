@@ -170,5 +170,97 @@ namespace JustRipe2018
         //{
         //    this.connectionStr = connectionStr;
         //}
+
+        //public void getValE()
+        //{
+        //    var selId = "Select * From [dbo].[Job] Where JobTypeID=1";
+        //    SqlConnection sql = new SqlConnection(connectionStr);//set up the connection of it
+        //    SqlCommand myCommand = new SqlCommand(selId, sql);//the command to search for it
+        //    myCommand.Connection.Open();//open the connectionN [Crop]
+        //    var Storage = myCommand.ExecuteScalar();//input the query result into the string through casting.
+        //    myCommand.Connection.Close();//Close the connection
+        //    SqlDataAdapter daSearch = new SqlDataAdapter(selId, connectionStr);//execute the sql and confirm connection.
+        //    DataSet ds2 = new DataSet();//call the data set
+        //    daSearch.Fill(ds2, selId);//fill it with the dataset and sql value.
+
+        //    for (int i = 0; i < ds2.Tables[0].Rows.Count; i++)//a loop that inputs values based on the row.
+        //    {
+        //        if (DateTime.Now >= DateTime.Parse(ds2.Tables[0].Rows[i][2].ToString()))
+        //        {
+        //            var returned = ds2.Tables[0].Rows[i][2].ToString();
+        //            SqlConnection cnn = new SqlConnection(connectionStr);
+        //            cnn.Open();//open the database connection.
+        //            SqlCommand cmdInserOrderId = new SqlCommand();
+        //            //allows for a nested query
+        //            cmdInserOrderId.CommandType = CommandType.Text;//queries that input data and retive data based on the values from the store.
+        //            cmdInserOrderId.CommandText = "INSERT INTO [dbo].[CropsStorage] (CropID) Values (" + int.Parse(returned) + ")";//get the id from the class.
+        //            cmdInserOrderId.Connection = cnn;
+        //            cmdInserOrderId.ExecuteNonQuery();//execute query.
+        //        }
+
+        //    }
+        //}
+
+        public void getVal()
+        {
+            DateTime date = DateTime.Parse(getBasicDate());//it doesnt accept the date time
+            var ReturnId = getBasicCropStorage();//var selId = "Select [CropID] From [dbo].[Job] Where JobTypeID=1";
+            //set up the connection of it
+            SqlConnection cnn = new SqlConnection(connectionStr);
+            //This is command class which will handle the query and connection object.  
+            SqlCommand cmdInserOrderId = new SqlCommand();
+            cnn.Open();//open the database connection.
+
+            if (DateTime.Now >= date)
+            {
+                //var select = "Select Crop_Name AS 'Crop Name',StorageName AS 'Storage Name' ,Capacity ,Temperature AS 'Temperature (°C)' From [dbo].[CropsStorage] " +
+                //" JOIN Crop ON CropsStorage.CropID=Crop.CropID JOIN StorageType ON CropsStorage.StorageTypeId=StorageType.StorageTypeId ";
+
+                cmdInserOrderId.CommandType = CommandType.Text;//queries that input data and retive data based on the values from the store.
+                cmdInserOrderId.CommandText = "INSERT INTO [dbo].[CropsStorage] (CropID,StorageTypeID) Values (" + ReturnId + ")";//get the id from the class.
+                cmdInserOrderId.Connection = cnn;
+                cmdInserOrderId.ExecuteNonQuery();//execute query.
+            }
+            cnn.Close();
+        }
+
+        //get storage and crop id 
+        public string getBasicDate()
+        {
+            //query of the value
+            var selDate = "SELECT Date FROM [dbo].[Job] WHERE JobTypeID=1";//
+            SqlConnection sql = new SqlConnection(connectionStr);//set up the connection of it
+            SqlCommand myCommand = new SqlCommand(selDate, sql);//the command to search for it
+            myCommand.Connection.Open();//open the connectionN 
+            string dateResult = (string)myCommand.ExecuteScalar();//input the query result into the string through casting.
+            myCommand.Connection.Close();//Close the connection
+            return dateResult;//return null error.
+        }
+
+        public int getBasicCropStorage()
+        {
+            //query of the value
+            var selCropId = "Select CropID From [dbo].[Job] Where JobTypeID=1";
+            SqlConnection sql = new SqlConnection(connectionStr);//set up the connection of it
+            SqlCommand myCommand = new SqlCommand(selCropId, sql);//the command to search for it
+            myCommand.Connection.Open();//open the connectionN [Crop]
+            int CropId = (int)myCommand.ExecuteScalar();//input the query result into the string through casting.
+            myCommand.Connection.Close();//Close the connection
+            return CropId;//return null error.
+        }
+        ////
+        //public int getBasicStorageId()
+        //{
+        //    //query of the value
+        //    var selJobId = "Select StorageTypeId From [dbo].[StorageType] Where JobTypeID=1";
+        //    SqlConnection sql = new SqlConnection(connectionStr);//set up the connection of it
+        //    SqlCommand myCommand = new SqlCommand(selJobId, sql);//the command to search for it
+        //    myCommand.Connection.Open();//open the connectionN [Crop]
+        //    int selJob = (int)myCommand.ExecuteScalar();//input the query result into the string through casting.
+        //    myCommand.Connection.Close();//Close the connection
+        //    return selJob;//return null error.
+        //}
+        ////
+
     }
 }

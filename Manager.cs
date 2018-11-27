@@ -113,8 +113,9 @@ namespace JustRipe2018
             }
             try
             {
-            DatabaseClass dbCon = DatabaseClass.Instance;
-            var select = "Select Crop_Name AS 'Crop Name',StorageName AS 'Storage Name' ,Capacity ,Temperature AS 'Temperature (°C)' From [dbo].[CropsStorage] " +
+                DatabaseClass dbCon = DatabaseClass.Instance;
+                dbCon.getVal();//
+                var select = "Select Crop_Name AS 'Crop Name',StorageName AS 'Storage Name' ,Capacity ,Temperature AS 'Temperature (°C)' From [dbo].[CropsStorage] " +
                 " JOIN Crop ON CropsStorage.CropID=Crop.CropID JOIN StorageType ON CropsStorage.StorageTypeId=StorageType.StorageTypeId ";
             var ds = dbCon.getDataSet(select);
             dataGridAddStore.ReadOnly = true;
@@ -124,7 +125,7 @@ namespace JustRipe2018
             {
                 MessageBox.Show("Wrong input value try again!");
             }
-           
+
         }
 
         private void btnBuyer_Click(object sender, EventArgs e)
