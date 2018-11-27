@@ -43,7 +43,19 @@ namespace JustRipe2018
             tabStoreOpt.Appearance = TabAppearance.FlatButtons;
             tabStoreOpt.ItemSize = new Size(0, 1);
             tabStoreOpt.SizeMode = TabSizeMode.Fixed;
-           
+            //
+            try
+            {
+                DatabaseClass dbCon = DatabaseClass.Instance;
+                dbCon.getVal();//it gives a error when their are no available dates
+
+            }
+            catch (Exception)
+            {
+
+                MessageBox.Show(" No stocks currently available!");
+            }
+            //
         }
 
         private void btnAddBuyers_Click(object sender, EventArgs e)

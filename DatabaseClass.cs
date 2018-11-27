@@ -179,7 +179,6 @@ namespace JustRipe2018
 
             if (DateTime.Now >= date)
             {
-
                 cmdInserOrderId.CommandType = CommandType.Text;//queries that input data and retive data based on the values from the store.
                 cmdInserOrderId.CommandText = "INSERT INTO [dbo].[CropsStorage] (CropID) Values (" + ReturnId + ")";//get the id from the class.
                 cmdInserOrderId.Connection = cnn;
@@ -212,6 +211,7 @@ namespace JustRipe2018
             myCommand.Connection.Close();//Close the connection
             return CropId;//return null error.
         }
+        //the eror is inserting a value into the storage id when required.
         ////
         //public int getBasicStorageId()
         //{
