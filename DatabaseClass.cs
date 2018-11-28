@@ -166,40 +166,70 @@ namespace JustRipe2018
         {
            //empty constructor.
         }
-
+        private int dateCounter = 0;
+        //private int countToMach;//
+        //public int CountToMach { get { return countToMach; } set { countToMach = value; } }//
         public void getVal()
         {
-            DateTime date = DateTime.Parse(getBasicDate());//it doesnt accept the date time
-            var ReturnId = getBasicCropStorage();//var selId = "Select [CropID] From [dbo].[Job] Where JobTypeID=1"; 
+
+            DateTime date = DateTime.Parse(getBasicDate());//it doesnt accept the date time            
+            for (int i = 0; i < dateCounter; i++)
+            {
+            var returnId = getBasicCropStorage();//var selId = "Select [CropID] From [dbo].[Job] Where JobTypeID=1"; 
+
             //set up the connection of it
             SqlConnection cnn = new SqlConnection(connectionStr);
             //This is command class which will handle the query and connection object.  
             SqlCommand cmdInserOrderId = new SqlCommand();
             cnn.Open();//open the database connection.
-
+            
             if (DateTime.Now >= date)
             {
-                cmdInserOrderId.CommandType = CommandType.Text;//queries that input data and retive data based on the values from the store.
-                cmdInserOrderId.CommandText = "INSERT INTO [dbo].[CropsStorage] (CropID) Values (" + ReturnId + ")";//get the id from the class.
-                cmdInserOrderId.Connection = cnn;
-                cmdInserOrderId.ExecuteNonQuery();//execute query.
+                    var previousreturnId=0;//
+                    cmdInserOrderId.CommandType = CommandType.Text;//queries that input data and retive data based on the values from the store.
+                    cmdInserOrderId.CommandText = "INSERT INTO [dbo].[CropsStorage] (CropID) Values (" + returnId + ")";//get the id from the class.
+                    cmdInserOrderId.Connection = cnn;
+                    cmdInserOrderId.ExecuteNonQuery();//execute query.        
+
+                    if (previousreturnId==returnId)//
+                    {//
+                        dateCounter -= 1;//
+                    }
+                    else if (date==null)//this is added for increasing the speed of the application.
+                    {
+                        dateCounter = 0;
+                    }
+
+                    previousreturnId = returnId;//temporary storage for value to compare after                
+
             }
-            cnn.Close();
+          cnn.Close();
+
         }
 
-        //get storage and crop id 
+        }
+
+       //get storage and crop id add a date counter that encryment on each date
         public string getBasicDate()
         {
-            //query of the value
+           //query of the value
             var selDate = "SELECT Date FROM [dbo].[Job] WHERE JobTypeID=1";//
             SqlConnection sql = new SqlConnection(connectionStr);//set up the connection of it
             SqlCommand myCommand = new SqlCommand(selDate, sql);//the command to search for it
             myCommand.Connection.Open();//open the connectionN 
             string dateResult = (string)myCommand.ExecuteScalar();//input the query result into the string through casting.
             myCommand.Connection.Close();//Close the connection
-            return dateResult;
-        }
 
+           var ds2 = dataToCb(selDate);//the data to be selected//
+            for (int i = 0; i < ds2.Tables[0].Rows.Count; i++)//a loop that inputs values based on the row.//
+            {
+                dateCounter += 1;
+            }//
+
+            return dateResult;
+
+        }
+        //or put the values int loops to recieve multiple dates and crops.
         public int getBasicCropStorage()
         {
             //query of the value
@@ -211,12 +241,13 @@ namespace JustRipe2018
             myCommand.Connection.Close();//Close the connection
             return CropId;//return null error.
         }
-        //the eror is inserting a value into the storage id when required.
-        ////
+        
+        ////  //the error is inserting a value into the storage id when required.
+        ////if the storage is not empty or the capacity is biger than the amount then select the 1st index.make a property to recieve amount of storage.
         //public int getBasicStorageId()
         //{
         //    //query of the value
-        //    var selJobId = "Select StorageTypeId From [dbo].[Job] Where JobTypeID=1";
+        //    var selJobId = "Select StorageTypeId From [dbo].[StorageType] Where Capacity>1";//in place of one insert value of storage.
         //    SqlConnection sql = new SqlConnection(connectionStr);//set up the connection of it
         //    SqlCommand myCommand = new SqlCommand(selJobId, sql);//the command to search for it
         //    myCommand.Connection.Open();//open the connectionN [Crop]
@@ -224,7 +255,6 @@ namespace JustRipe2018
         //    myCommand.Connection.Close();//Close the connection
         //    return selJob;//return null error.
         //}
-        ////
-
+        ////add get basic storage to subtract the storage based on the id throug a property or use and subtract.act.
     }
 }
