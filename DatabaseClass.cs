@@ -166,12 +166,15 @@ namespace JustRipe2018
         {
            //empty constructor.
         }
-        private int dateCounter = 0;
+
+        private int dateCounter = 1;
         public void getVal()
         {
-            DateTime date = DateTime.Parse(getBasicDate());//it doesnt accept the date time            
+            var previousreturnId = 0;// 
             for (int i = 0; i < dateCounter; i++)
             {
+               
+            DateTime date = DateTime.Parse(getBasicDate());//it doesnt accept the date time   
             var returnId = getBasicCropStorage();//var selId = "Select [CropID] From [dbo].[Job] Where JobTypeID=1"; 
             //set up the connection of it
             SqlConnection cnn = new SqlConnection(connectionStr);
@@ -181,12 +184,6 @@ namespace JustRipe2018
             
             if (DateTime.Now >= date)//compares the dates
             {
-                    var previousreturnId=0;//
-                    cmdInserOrderId.CommandType = CommandType.Text;//queries that input data and retive data based on the values from the store.
-                    cmdInserOrderId.CommandText = "INSERT INTO [dbo].[CropsStorage] (CropID,StorageTypeID) Values (" + returnId + "," + getBasicStorageId() + ")";//get the id from the class.
-                    cmdInserOrderId.Connection = cnn;
-                    cmdInserOrderId.ExecuteNonQuery();//execute query.        
-
                     if (previousreturnId==returnId)//
                     {
                         dateCounter -= 1;//
@@ -196,30 +193,55 @@ namespace JustRipe2018
                     {
                         dateCounter = 0;
                     }
+                    else
+                    {
+                        cmdInserOrderId.CommandType = CommandType.Text;//queries that input data and retive data based on the values from the store.
+                        cmdInserOrderId.CommandText = "INSERT INTO [dbo].[CropsStorage] (CropID,StorageTypeID) Values (" + returnId + "," + getBasicStorageId() + ")";//get the id from the class.
+                        cmdInserOrderId.Connection = cnn;
+                        cmdInserOrderId.ExecuteNonQuery();//execute query.        
+
+
+                    }
                     previousreturnId = returnId;//temporary storage for value to compare after                
-            }
+            
                 cnn.Close();
             }
+            }             
         }
 
-       //get storage and crop id add a date counter that encryment on each date
+       //private int goalCounter = 0;
+       private int getNextDateCounter = 1;
+        //get storage and crop id add a date counter that encryment on each date
         public string getBasicDate()
         {
            //query of the value
-            var selDate = "SELECT Date FROM [dbo].[Job] WHERE JobTypeID=1";//
+            var selDate = "SELECT Date FROM [dbo].[Job] WHERE JobTypeID=1 AND JobID = "+getNextDateCounter;// increment through the query 
             SqlConnection sql = new SqlConnection(connectionStr);//set up the connection of it
             SqlCommand myCommand = new SqlCommand(selDate, sql);//the command to search for it
             myCommand.Connection.Open();//open the connectionN 
             string dateResult = (string)myCommand.ExecuteScalar();//input the query result into the string through casting.
             myCommand.Connection.Close();//Close the connection
+            dateCounter += 1;
 
-           var ds2 = dataToCb(selDate);//the data to be selected//
-            for (int i = 0; i < ds2.Tables[0].Rows.Count; i++)//a loop that inputs values based on the row.//
+            getNextDateCounter += 1;//this gives the error when it increment over a certain value.//
+
+            //var selDateCheck = "SELECT Date FROM [dbo].[Job] WHERE JobTypeID=1";// increment through the query 
+            //var ds2 = dataToCb(selDateCheck);//the data to be selected  
+            //goalCounter = ds2.Tables.Count;
+            ////if (goalCounter == getNextDateCounter)
+            ////{
+            ////    getNextDateCounter -= 1;
+            ////}
+
+            ////
+            if (dateCounter == 2)//limits the entries if it goes beyond the 3 loop breaks 
             {
-                dateCounter += 1;
-            }//
+                dateCounter = 0;//sets the datacounter to 0 to stop the table.
+            }
+            ////
             return dateResult;
         }
+
         //or put the values int loops to recieve multiple dates and crops.
         public int getBasicCropStorage()
         {
@@ -231,8 +253,7 @@ namespace JustRipe2018
             int CropId = (int)myCommand.ExecuteScalar();//input the query result into the string through casting.
             myCommand.Connection.Close();//Close the connection
             return CropId;//return null error.
-        }
-        
+        }    
 
         public int getBasicStorageId()//this one insert but the same multyple times
         {
@@ -245,8 +266,8 @@ namespace JustRipe2018
             myCommand.Connection.Close();//Close the connection
             return selJob;//return null error.
         }
-        
-        //      
+
+        // Add subtraction to the amount when added.     
         ////add get basic storage to subtract the storage based on the id throug a property or use and subtract.act. 
         //private double countToMatch;//ways to input this one get the amount if it fits it gets added or it get not added if not or it gets upadetd by the query and subtracted. 
         //public double CountToMatch { get { return countToMatch; } set { countToMatch = value; } }//
@@ -264,5 +285,18 @@ namespace JustRipe2018
         //    return selJob;//return null error.
         //}
         //
+
+        //public void getBasicStorageSubtraction(double countToMatch)
+        //{
+        //    double val = countToMatch;
+        //    SqlConnection cnn = new SqlConnection(connectionStr);
+        //    //query of the value//another fix is to inser one type of storage.
+        //    var SubTractStorage= "INSERT INTO [dbo].[StorageType]  (Capacity) Values (SUM(Capacity-" + countToMatch + "))  Where Capacity>" + val+"AND StorageTypeID=1";
+        //    SqlCommand cmdInserCustomer = new SqlCommand();
+        //    cmdInserCustomer.CommandType = CommandType.Text;
+        //    cmdInserCustomer.CommandText = SubTractStorage;
+        //    cmdInserCustomer.Connection = cnn;
+        //    cmdInserCustomer.ExecuteNonQuery();//execute query.
+        //}
     }
 }
