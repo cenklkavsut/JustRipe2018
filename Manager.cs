@@ -43,19 +43,19 @@ namespace JustRipe2018
             tabStoreOpt.Appearance = TabAppearance.FlatButtons;
             tabStoreOpt.ItemSize = new Size(0, 1);
             tabStoreOpt.SizeMode = TabSizeMode.Fixed;
-            //
-            try
-            {
-                DatabaseClass dbCon = DatabaseClass.Instance;
-                dbCon.getVal();//it gives a error when their are no available dates
+            ////
+            //try
+            //{
+            //    DatabaseClass dbCon = DatabaseClass.Instance;
+            //    dbCon.getVal();//it gives a error when their are no available dates
 
-            }
-            catch (Exception)
-            {
+            //}
+            //catch (Exception)
+            //{
 
-                MessageBox.Show(" No stocks currently available!");
-            }
-            //
+            //    MessageBox.Show(" No stocks currently available!");
+            //}
+            ////
         }
 
         private void btnAddBuyers_Click(object sender, EventArgs e)
@@ -124,13 +124,12 @@ namespace JustRipe2018
                 DatabaseClass dbCon = DatabaseClass.Instance;
                 var select = "Select Crop_Name AS 'Crop Name',StorageName AS 'Storage Name' ,Capacity ,Temperature AS 'Temperature (°C)' From [dbo].[CropsStorage] " +
                 " JOIN Crop ON CropsStorage.CropID=Crop.CropID JOIN StorageType ON CropsStorage.StorageTypeId=StorageType.StorageTypeId ";
-            var ds = dbCon.getDataSet(select);
-            dataGridAddStore.ReadOnly = true;
+                var ds = dbCon.getDataSet(select);
+                dataGridAddStore.ReadOnly = true;
                 dataGridAddStore.DataSource = ds.Tables[0];
-                //
                 try
                 {
-                dbCon.getVal();//it gives a error when their are no available dates
+                    dbCon.getVal();//it gives a error when their are no available dates
 
                 }
                 catch (Exception)
@@ -138,7 +137,7 @@ namespace JustRipe2018
 
                     MessageBox.Show(" No stocks currently available!");
                 }
-                //
+
             }
             catch (Exception)
             {

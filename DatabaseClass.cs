@@ -38,7 +38,7 @@ namespace JustRipe2018
             dataAdapter.Fill(dataSet);//return the dataSet
             return dataSet;
         }
-
+        
         public void AdderOfStore(string valFirstN, string valSurname, string valContact, string valEmail, double ValAmount, string ValCrop)
         {
             //This is the connection string that assigns to the database. 
@@ -167,46 +167,39 @@ namespace JustRipe2018
            //empty constructor.
         }
         private int dateCounter = 0;
-        //private int countToMach;//
-        //public int CountToMach { get { return countToMach; } set { countToMach = value; } }//
         public void getVal()
         {
-
             DateTime date = DateTime.Parse(getBasicDate());//it doesnt accept the date time            
             for (int i = 0; i < dateCounter; i++)
             {
             var returnId = getBasicCropStorage();//var selId = "Select [CropID] From [dbo].[Job] Where JobTypeID=1"; 
-
             //set up the connection of it
             SqlConnection cnn = new SqlConnection(connectionStr);
             //This is command class which will handle the query and connection object.  
             SqlCommand cmdInserOrderId = new SqlCommand();
             cnn.Open();//open the database connection.
             
-            if (DateTime.Now >= date)
+            if (DateTime.Now >= date)//compares the dates
             {
                     var previousreturnId=0;//
                     cmdInserOrderId.CommandType = CommandType.Text;//queries that input data and retive data based on the values from the store.
-                    cmdInserOrderId.CommandText = "INSERT INTO [dbo].[CropsStorage] (CropID) Values (" + returnId + ")";//get the id from the class.
+                    cmdInserOrderId.CommandText = "INSERT INTO [dbo].[CropsStorage] (CropID,StorageTypeID) Values (" + returnId + "," + getBasicStorageId() + ")";//get the id from the class.
                     cmdInserOrderId.Connection = cnn;
                     cmdInserOrderId.ExecuteNonQuery();//execute query.        
 
                     if (previousreturnId==returnId)//
-                    {//
+                    {
                         dateCounter -= 1;//
+
                     }
-                    else if (date==null)//this is added for increasing the speed of the application.
+                    else if (date==null)//this is added for increasing the speed of the application.Also it allows for the application not to check a null value.
                     {
                         dateCounter = 0;
                     }
-
                     previousreturnId = returnId;//temporary storage for value to compare after                
-
             }
-          cnn.Close();
-
-        }
-
+                cnn.Close();
+            }
         }
 
        //get storage and crop id add a date counter that encryment on each date
@@ -225,9 +218,7 @@ namespace JustRipe2018
             {
                 dateCounter += 1;
             }//
-
             return dateResult;
-
         }
         //or put the values int loops to recieve multiple dates and crops.
         public int getBasicCropStorage()
@@ -242,19 +233,36 @@ namespace JustRipe2018
             return CropId;//return null error.
         }
         
-        ////  //the error is inserting a value into the storage id when required.
+
+        public int getBasicStorageId()//this one insert but the same multyple times
+        {
+            //query of the value//another fix is to inser one type of storage.
+            var selJobId = "Select StorageTypeId From [dbo].[StorageType] Where StorageTypeId=1";//in place of one insert value of storage. two queries one that updates.
+            SqlConnection sql = new SqlConnection(connectionStr);//set up the connection of it
+            SqlCommand myCommand = new SqlCommand(selJobId, sql);//the command to search for it
+            myCommand.Connection.Open();//open the connectionN [//copy the  query and then add the query to loop and insert 
+            int selJob = (int)myCommand.ExecuteScalar();//input the query result into the string through casting.
+            myCommand.Connection.Close();//Close the connection
+            return selJob;//return null error.
+        }
+        
+        //      
+        ////add get basic storage to subtract the storage based on the id throug a property or use and subtract.act. 
+        //private double countToMatch;//ways to input this one get the amount if it fits it gets added or it get not added if not or it gets upadetd by the query and subtracted. 
+        //public double CountToMatch { get { return countToMatch; } set { countToMatch = value; } }//
+        ////the error is inserting a value into the storage id when required.
         ////if the storage is not empty or the capacity is biger than the amount then select the 1st index.make a property to recieve amount of storage.
         //public int getBasicStorageId()
         //{
-        //    //query of the value
-        //    var selJobId = "Select StorageTypeId From [dbo].[StorageType] Where Capacity>1";//in place of one insert value of storage.
+        //    //query of the value//another fix is to inser one type of storage.
+        //    var selJobId = "Select StorageTypeId,SUM(Capacity-"+ countToMatch+") From [dbo].[StorageType] Where Capacity>"+ countToMatch;//in place of one insert value of storage. two queries one that updates.
         //    SqlConnection sql = new SqlConnection(connectionStr);//set up the connection of it
         //    SqlCommand myCommand = new SqlCommand(selJobId, sql);//the command to search for it
-        //    myCommand.Connection.Open();//open the connectionN [Crop]
+        //    myCommand.Connection.Open();//open the connectionN [//copy the  query and then add the query to loop and insert 
         //    int selJob = (int)myCommand.ExecuteScalar();//input the query result into the string through casting.
         //    myCommand.Connection.Close();//Close the connection
         //    return selJob;//return null error.
         //}
-        ////add get basic storage to subtract the storage based on the id throug a property or use and subtract.act.
+        //
     }
 }
