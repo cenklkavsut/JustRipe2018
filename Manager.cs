@@ -20,53 +20,64 @@ namespace JustRipe2018
         private static string mdfPath = Path.Combine(Application.StartupPath, "JustRipeDatabase.mdf");
         //private string connectionStr= @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\JustRipeDatabase.mdf;Integrated Security=True;Connect Timeout=30";
 
-        private string connectionStr = string.Format(@"Data Source = (LocalDB)\MSSQLLocalDB;AttachDbFilename=" + mdfPath + ";Integrated Security = True; Connect Timeout = 30");
+        //private string connectionStr = Properties.Settings.Default.connectionToDB;
+
+        //var select = "SELECT DISTINCT [Crop_Name] FROM [dbo].[Crop]";//sql query to be executed
+        //var ds2 = dbDropDown.dataToCb(select);//the data to be selected
+        //cbCropType.DropDownStyle = ComboBoxStyle.DropDownList;//makes it a list
+        //    cbCropType.Enabled = true;//enables the dropdown.
+        //    cbCropType.SelectedIndex = -1;//allows to select the value from empty.
+        //    for (int i = 0; i<ds2.Tables[0].Rows.Count; i++)//a loop that inputs values based on the row.
+        //    {
+        //        cbCropType.Items.Add(ds2.Tables[0].Rows[i][0]); }
 
 
         void fillcomboCropType()
         {
-            DatabaseClass Connect = new DatabaseClass(connectionStr);
-            Connect.openConnection();
+            cbJCrop.Items.Clear();
+            DatabaseClass Connect = DatabaseClass.Instance;
             string queryCropsSelect = "Select * From [dbo].[Crop]";
-            SqlDataAdapter CropsSelect = new SqlDataAdapter(queryCropsSelect, connectionStr);
-            DataSet Crops = new DataSet();
-            CropsSelect.Fill(Crops);
-            for (int i = 0; i < Crops.Tables[0].Rows.Count; i++)
+            DataSet DropDownCrop = Connect.dataToCb(queryCropsSelect);
+            cbJCrop.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbJCrop.Enabled = true;
+            cbJCrop.SelectedIndex = -1;
+            for (int i = 0; i < DropDownCrop.Tables[0].Rows.Count; i++)
             {
-                cbJCrop.Items.Add(Crops.Tables[0].Rows[i][1].ToString());
+                cbJCrop.Items.Add(DropDownCrop.Tables[0].Rows[i][1].ToString());
             }
         }
         void fillcomboJobType()
         {
-             DatabaseClass Connect = new DatabaseClass(connectionStr);
-             Connect.openConnection();
-             string queryJobsTypeSelect = "Select * From [dbo].[JobType]";
-             SqlDataAdapter JobsSelect = new SqlDataAdapter(queryJobsTypeSelect, connectionStr);
-             DataSet JobTypes = new DataSet();
-             JobsSelect.Fill(JobTypes);
-             for (int i = 0; i < JobTypes.Tables[0].Rows.Count; i++)
-             {
-                 addJobType.Items.Add(JobTypes.Tables[0].Rows[i][1].ToString());
-             }
+            addJobType.Items.Clear();
+            DatabaseClass Connect = DatabaseClass.Instance;
+            string queryJobsTypeSelect = "Select * From [dbo].[JobType]";
+            DataSet DropDownJob = Connect.dataToCb(queryJobsTypeSelect);
+            addJobType.DropDownStyle = ComboBoxStyle.DropDownList;
+            addJobType.Enabled = true;
+            addJobType.SelectedIndex = -1;
+            for (int i = 0; i < DropDownJob.Tables[0].Rows.Count; i++)
+            {
+                addJobType.Items.Add(DropDownJob.Tables[0].Rows[i][1].ToString());
+            }
 
         }
         void fillcomboLabourer()
         {
-            DatabaseClass Connect = new DatabaseClass(connectionStr);
-            Connect.openConnection();
-            string Selection = "@Labourer";
+            cbJLabouer.Items.Clear();
+            DatabaseClass Connect = DatabaseClass.Instance;
             string queryLabourerSelect = "SELECT * From [dbo].[users] WHERE [Role] = 'Labourer' ";
-            SqlDataAdapter LabourerSelect = new SqlDataAdapter(queryLabourerSelect, connectionStr);
-            DataSet users = new DataSet();
-            LabourerSelect.Fill(users);
-            for (int i = 0; i < users.Tables[0].Rows.Count; i++)
+            DataSet DropDownLabourer = Connect.dataToCb(queryLabourerSelect);
+            cbJLabouer.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbJLabouer.Enabled = true;
+            cbJLabouer.SelectedIndex = -1;
+            for (int i = 0; i < DropDownLabourer.Tables[0].Rows.Count; i++)
             {
-                cbJLabouer.Items.Add(users.Tables[0].Rows[i][3].ToString());
+                cbJLabouer.Items.Add(DropDownLabourer.Tables[0].Rows[i][3].ToString());
             }
         }
 
 
-            private void Manager_Load(object sender, EventArgs e)
+        private void Manager_Load(object sender, EventArgs e)
         {
             //Helps to keep the form maximized.
             //WindowState = FormWindowState.Maximized;
@@ -98,7 +109,7 @@ namespace JustRipe2018
 
         private void btnAddBuyers_Click(object sender, EventArgs e)
         {
-           
+
         }
 
         private void btnCancelUser_Click(object sender, EventArgs e)
@@ -144,7 +155,7 @@ namespace JustRipe2018
             }
             //change the query based on the buyers
 
-            DatabaseClass dbCon = new DatabaseClass(connectionStr);
+            DatabaseClass dbCon = DatabaseClass.Instance;
             var select = "Select * From [dbo].[Orders]";
             var ds = dbCon.getDataSet(select);
             dataGridAddStore.ReadOnly = true;
@@ -160,8 +171,8 @@ namespace JustRipe2018
                 tabStoreOpt.SelectTab(0);
                 //implementation
             }
-          
-            DatabaseClass dbCon = new DatabaseClass (connectionStr);
+
+            DatabaseClass dbCon = DatabaseClass.Instance;
             var select = "Select * From [dbo].[CropsStorage]";
             var ds = dbCon.getDataSet(select);
             dataGridAddStore.ReadOnly = true;
@@ -178,11 +189,11 @@ namespace JustRipe2018
             }
             else
             {
-                DatabaseClass dataB = new DatabaseClass(connectionStr);//class and confirms the connection string.
+                DatabaseClass dataB = DatabaseClass.Instance;//class and confirms the connection string.
                 dataB.AdderOfStore(txtName.Text, txtSurname.Text, txtContactNum.Text, txtUserEmail.Text,
                 double.Parse(cbCropAmount.Text)/*, cbCropType.Text*/); //input that info to the database.
                 MessageBox.Show("Customer Saved!");//the result if no error.                                            
-            } 
+            }
             //Allows To Clean text in the text box and dropdowns after finished.
             txtName.Text = "";
             txtSurname.Text = "";
@@ -214,7 +225,7 @@ namespace JustRipe2018
             }
         }
 
-      
+
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
@@ -230,7 +241,7 @@ namespace JustRipe2018
 
         }
 
-       
+
 
         private void btnCreateUsr_Click(object sender, EventArgs e)
         {
@@ -335,7 +346,7 @@ namespace JustRipe2018
             if (cbJCrop.Text == "" || cbJCrop.Text == null)
             {
                 MessageBox.Show("Please Select a Crop Type");
-            } 
+            }
             else if (cbJLabouer.Text == "" || cbJLabouer.Text == null)
             {
                 MessageBox.Show("Please Select a Labourer");
@@ -355,16 +366,21 @@ namespace JustRipe2018
             else
             {
                 // Saving User Input In Variables
-                cropContainer = cbJCrop.Text;
-                labourerContainer = cbJLabouer.Text;
+                cropContainer = cbJCrop.SelectedText;
+                labourerContainer = cbJLabouer.SelectedText;
                 dateContainer = cbJDate.Text;
-                jobTypeContainer = addJobType.Text;
-                amountContainer = Cbjamount.Text;
+                jobTypeContainer = addJobType.SelectedText;
+                amountContainer = Cbjamount.SelectedText;
                 // Date Validation + Conversion to Date
                 //Checks that Date is of valid format 
+                DateTime dateContainerTest;
+                string date;
+                DateTime.TryParse(dateContainer, out dateContainerTest);
+
                 if (DateTime.TryParse(dateContainer, out validDateContainer))
                 {
-                    String.Format("{0:d/MM/yyyy}", validDateContainer);
+                    //String.Format("{0:d/MM/yyyy}", validDateContainer);
+
                 }
                 else
                 {
@@ -374,7 +390,7 @@ namespace JustRipe2018
                     return;
                 }
                 //Checks date is greater than todays date
-                if (validDateContainer < DateTime.Now)
+                if (dateContainerTest < DateTime.Now.Date)
                 {
                     MessageBox.Show("Date entered is less than the current date");
                     cbJDate.Text = "";
@@ -382,8 +398,13 @@ namespace JustRipe2018
                     validDateContainer = DateTime.Now;
                     return;
                 }
-                // Amount Valdation + Conversion to Int 
-                if (Int32.TryParse(amountContainer, out validAmountContainer))
+                else
+                {
+
+                    date = dateContainerTest.ToShortDateString();
+                }
+                // Amount Valdation +Conversion to Int
+                if (int.TryParse(Cbjamount.Text, out validAmountContainer))
                 {
                     // Int is Valid
                 }
@@ -394,6 +415,17 @@ namespace JustRipe2018
                     amountContainer = "";
                     return;
                 }
+
+                DatabaseClass Data = DatabaseClass.Instance;
+                Data.GetDate = date;
+                Data.GetIDCrop = cbJCrop.SelectedItem.ToString();
+                Data.GetIDJobType = addJobType.SelectedItem.ToString();
+                Data.GetIDUser = cbJLabouer.SelectedItem.ToString();
+                Data.Addjob(cbJLabouer.Text, cbJCrop.Text, date, validAmountContainer, addJobType.Text, 1);
+                MessageBox.Show("Saved Job");
+
+
+
                 //DatabaseClass DatabaseConnect = new DatabaseClass(connectionStr);
                 ////var dataCrop = DatabaseConnect.getDataSet(selectCrop);
                 //string selectUsers = "Select * From [dbo].[users]";
@@ -401,14 +433,14 @@ namespace JustRipe2018
                 //string selectJobType = "Select * From [dbo].[JobType]";
                 //var dataJobType = DatabaseConnect.getDataSet(selectJobType);
                 // Colums Search
-             
+
                 // data send 
 
-//                    { ddwadawd = data.colum 1 }
+                //                    { ddwadawd = data.colum 1 }
 
                 //class and confirms the connection string.
-              //  DatabaseConnect.Addjob(1,1,,1,1,1)
-                    
+                //  DatabaseConnect.Addjob(1,1,,1,1,1)
+
                 //    (txtName.Text, txtSurname.Text, txtContactNum.Text, txtUserEmail.Text,
                 //double.Parse(cbCropAmount.Text)/*, cbCropType.Text*/); //input that info to the database.
                 //MessageBox.Show("Customer Saved!");//the result if no error. 
@@ -421,7 +453,7 @@ namespace JustRipe2018
 
             }
 
-      
+
         }
 
         private void btnAddJobCancel_Click_1(object sender, EventArgs e)
@@ -431,7 +463,7 @@ namespace JustRipe2018
             cbJLabouer.Text = "";
             Cbjamount.Text = "";
             addJobType.Text = "";
-            
+
         }
 
         private void btnEditJobSave_Click(object sender, EventArgs e)
@@ -456,7 +488,7 @@ namespace JustRipe2018
 
         private void tabReport_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         private void btnRep1_Click(object sender, EventArgs e)
@@ -563,7 +595,7 @@ namespace JustRipe2018
         private void btnLogout_Click(object sender, EventArgs e)
         {
             Application.Restart();
-       
+
         }
 
         private void btnLogoutTime_Click(object sender, EventArgs e)
@@ -621,13 +653,14 @@ namespace JustRipe2018
             //prevents Labourer check box from being selected if Manager is checked
             if (chkbxLaborEdit.Checked == true)
             {
-                chkbxManagerEdit.Enabled=false ;
+                chkbxManagerEdit.Enabled = false;
 
-            } else if (chkbxLaborEdit.Checked == false)
+            }
+            else if (chkbxLaborEdit.Checked == false)
             {
                 chkbxManagerEdit.Enabled = true;
 
-            } 
+            }
 
         }
 
@@ -638,7 +671,8 @@ namespace JustRipe2018
             {
                 chkbxLaborEdit.Enabled = false;
 
-            } else if (chkbxManagerEdit.Checked == false)
+            }
+            else if (chkbxManagerEdit.Checked == false)
             {
                 chkbxLaborEdit.Enabled = true;
             }
@@ -649,5 +683,74 @@ namespace JustRipe2018
         {
 
         }
-    }
+
+        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
+        {
+            //www.dreamincode.net/forums/topic/235102-restricting-datetimepickermonthcalendar-to-specific-days/
+            var DateSeleciton = sender as DateTimePicker;
+            var SelectedDate = DateSeleciton.Value;
+
+            if (SelectedDate.DayOfWeek != DayOfWeek.Monday)
+            {
+                var set = (int)DayOfWeek.Monday - (int)SelectedDate.DayOfWeek;
+                var Monday = SelectedDate + TimeSpan.FromDays(set);
+                DateSeleciton.Value = Monday;
+               
+            }
+            var Selectedval = SelectedDate;
+        }           
+            
+        
+
+        private void dataGridView7_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void tabTimeTable_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnRefreshTimetable_Click(object sender, EventArgs e)
+        {
+            string Datestring = dateTimePicker1.Text;
+            DateTime Date = DateTime.Parse(Datestring);
+            //Sets dates values
+            DateTime Monday = Date;
+            DateTime Tuesday =Date.AddDays(1);
+            DateTime Wednesday = Date.AddDays(2);
+            DateTime Thursday = Date.AddDays(3);
+            DateTime Friday = Date.AddDays(4);
+
+            //GetDataset
+            DatabaseClass Connect = DatabaseClass.Instance;
+            String GetMonday = "SELECT [Crop_Name],[JobName],[FirstName],[Last Name] FROM [dbo].[Job]" + " JOIN Crop ON Job.CropID=Crop.CropID JOIN JobType ON Job.JobTypeId=JobType.JobtypeID JOIN users ON Job.UserID = users.UserID WHERE Date ='" + Monday.ToShortDateString() + "'";
+            DataSet Mondaydata = Connect.getDataSet(GetMonday);
+            DataViewMonday.ReadOnly = true;
+            DataViewMonday.DataSource = Mondaydata.Tables[0];
+            //Tuesday
+            String GetTuesday = "SELECT [Crop_Name],[JobName],[FirstName],[Last Name] FROM [dbo].[Job]" + " JOIN Crop ON Job.CropID=Crop.CropID JOIN JobType ON Job.JobTypeId=JobType.JobtypeID JOIN users ON Job.UserID = users.UserID WHERE Date ='" + Tuesday.ToShortDateString() + "'";
+            DataSet Tuesdaydata = Connect.getDataSet(GetTuesday);
+            DataViewTuesday.ReadOnly = true;
+            DataViewTuesday.DataSource = Tuesdaydata.Tables[0];
+            //Wednesday
+            String GetWednesday = "SELECT [Crop_Name],[JobName],[FirstName],[Last Name] FROM [dbo].[Job]" + " JOIN Crop ON Job.CropID=Crop.CropID JOIN JobType ON Job.JobTypeId=JobType.JobtypeID JOIN users ON Job.UserID = users.UserID WHERE Date ='" + Wednesday.ToShortDateString() + "'";
+            DataSet Wednesdaydata = Connect.getDataSet(GetWednesday);
+            DataViewWednesday.ReadOnly = true;
+            DataViewWednesday.DataSource = Wednesdaydata.Tables[0];
+            //Thursday
+            String GetThursday = "SELECT [Crop_Name],[JobName],[FirstName],[Last Name] FROM [dbo].[Job]" + " JOIN Crop ON Job.CropID=Crop.CropID JOIN JobType ON Job.JobTypeId=JobType.JobtypeID JOIN users ON Job.UserID = users.UserID WHERE Date ='" + Thursday.ToShortDateString() + "'";
+            DataSet Thursdaydata = Connect.getDataSet(GetThursday);
+            DataViewThursday.ReadOnly = true;
+            DataViewThursday.DataSource = Thursdaydata.Tables[0];
+            //Friday
+            String GetFriday = "SELECT [Crop_Name],[JobName],[FirstName],[Last Name] FROM [dbo].[Job]" + " JOIN Crop ON Job.CropID=Crop.CropID JOIN JobType ON Job.JobTypeId=JobType.JobtypeID JOIN users ON Job.UserID = users.UserID WHERE Date ='" + Friday.ToShortDateString() + "'";
+            DataSet Fridaydata = Connect.getDataSet(GetFriday);
+            DataViewFriday.ReadOnly = true;
+            DataViewFriday.DataSource = Fridaydata.Tables[0];
+        }
+    }           // "Select Crop_Name AS 'Crop Name',StorageName AS 'Storage Name' ,Capacity ,Temperature AS 'Temperature (°C)' From [dbo].[CropsStorage] " +
+                //" JOIN Crop ON CropsStorage.CropID=Crop.CropID JOIN StorageType ON CropsStorage.StorageTypeId=StorageType.StorageTypeId "
 }
+
