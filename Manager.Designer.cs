@@ -46,10 +46,13 @@
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.tabTimeTable = new System.Windows.Forms.TabPage();
-            this.btnRefreshTimetable = new System.Windows.Forms.Button();
-            this.DataViewMonday = new System.Windows.Forms.DataGridView();
+            this.btnMFriday = new System.Windows.Forms.Button();
+            this.btnMThursday = new System.Windows.Forms.Button();
+            this.btnMWednesday = new System.Windows.Forms.Button();
+            this.btnMTuesday = new System.Windows.Forms.Button();
+            this.btnMMonday = new System.Windows.Forms.Button();
+            this.DataViewDaily = new System.Windows.Forms.DataGridView();
             this.btnLogoutTime = new System.Windows.Forms.Button();
-            this.textBox7 = new System.Windows.Forms.TextBox();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.tabJob = new System.Windows.Forms.TabPage();
             this.btnLogoutMJ = new System.Windows.Forms.Button();
@@ -147,16 +150,6 @@
             this.btnAddBuyers = new System.Windows.Forms.Button();
             this.btnViewBuyers = new System.Windows.Forms.Button();
             this.btnViewStock = new System.Windows.Forms.Button();
-            this.textBox15 = new System.Windows.Forms.TextBox();
-            this.textBox9 = new System.Windows.Forms.TextBox();
-            this.textBox8 = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox6 = new System.Windows.Forms.TextBox();
-            this.DataViewTuesday = new System.Windows.Forms.DataGridView();
-            this.DataViewWednesday = new System.Windows.Forms.DataGridView();
-            this.DataViewThursday = new System.Windows.Forms.DataGridView();
-            this.DataViewFriday = new System.Windows.Forms.DataGridView();
-            this.DataViewDaily = new System.Windows.Forms.DataGridView();
             this.tabManager.SuspendLayout();
             this.tabReport.SuspendLayout();
             this.tabReportOpt.SuspendLayout();
@@ -169,7 +162,7 @@
             this.tabPage6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView6)).BeginInit();
             this.tabTimeTable.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.DataViewMonday)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DataViewDaily)).BeginInit();
             this.tabJob.SuspendLayout();
             this.formManageJob.SuspendLayout();
             this.Tabaddjob.SuspendLayout();
@@ -185,11 +178,6 @@
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridAddStore)).BeginInit();
             this.tabPage2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.DataViewTuesday)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.DataViewWednesday)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.DataViewThursday)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.DataViewFriday)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.DataViewDaily)).BeginInit();
             this.SuspendLayout();
             // 
             // tabManager
@@ -395,20 +383,13 @@
             // 
             this.tabTimeTable.BackColor = System.Drawing.Color.Tan;
             this.tabTimeTable.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("tabTimeTable.BackgroundImage")));
-            this.tabTimeTable.Controls.Add(this.btnRefreshTimetable);
+            this.tabTimeTable.Controls.Add(this.btnMFriday);
+            this.tabTimeTable.Controls.Add(this.btnMThursday);
+            this.tabTimeTable.Controls.Add(this.btnMWednesday);
+            this.tabTimeTable.Controls.Add(this.btnMTuesday);
+            this.tabTimeTable.Controls.Add(this.btnMMonday);
             this.tabTimeTable.Controls.Add(this.DataViewDaily);
-            this.tabTimeTable.Controls.Add(this.DataViewFriday);
-            this.tabTimeTable.Controls.Add(this.DataViewThursday);
-            this.tabTimeTable.Controls.Add(this.DataViewWednesday);
-            this.tabTimeTable.Controls.Add(this.DataViewTuesday);
-            this.tabTimeTable.Controls.Add(this.DataViewMonday);
             this.tabTimeTable.Controls.Add(this.btnLogoutTime);
-            this.tabTimeTable.Controls.Add(this.textBox7);
-            this.tabTimeTable.Controls.Add(this.textBox6);
-            this.tabTimeTable.Controls.Add(this.textBox1);
-            this.tabTimeTable.Controls.Add(this.textBox8);
-            this.tabTimeTable.Controls.Add(this.textBox9);
-            this.tabTimeTable.Controls.Add(this.textBox15);
             this.tabTimeTable.Controls.Add(this.dateTimePicker1);
             this.tabTimeTable.Location = new System.Drawing.Point(4, 34);
             this.tabTimeTable.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -419,26 +400,64 @@
             this.tabTimeTable.Text = "Time table";
             this.tabTimeTable.Click += new System.EventHandler(this.tabTimeTable_Click);
             // 
-            // btnRefreshTimetable
+            // btnMFriday
             // 
-            this.btnRefreshTimetable.Location = new System.Drawing.Point(547, 5);
-            this.btnRefreshTimetable.Name = "btnRefreshTimetable";
-            this.btnRefreshTimetable.Size = new System.Drawing.Size(94, 33);
-            this.btnRefreshTimetable.TabIndex = 32;
-            this.btnRefreshTimetable.Text = "Go";
-            this.btnRefreshTimetable.UseVisualStyleBackColor = true;
-            this.btnRefreshTimetable.Click += new System.EventHandler(this.btnRefreshTimetable_Click);
+            this.btnMFriday.Location = new System.Drawing.Point(139, 293);
+            this.btnMFriday.Name = "btnMFriday";
+            this.btnMFriday.Size = new System.Drawing.Size(131, 46);
+            this.btnMFriday.TabIndex = 39;
+            this.btnMFriday.Text = "Friday";
+            this.btnMFriday.UseVisualStyleBackColor = true;
+            this.btnMFriday.Click += new System.EventHandler(this.btnMFriday_Click);
             // 
-            // DataViewMonday
+            // btnMThursday
             // 
-            this.DataViewMonday.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
-            this.DataViewMonday.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.DataViewMonday.Location = new System.Drawing.Point(8, 161);
-            this.DataViewMonday.Name = "DataViewMonday";
-            this.DataViewMonday.ReadOnly = true;
-            this.DataViewMonday.RowTemplate.Height = 24;
-            this.DataViewMonday.Size = new System.Drawing.Size(237, 452);
-            this.DataViewMonday.TabIndex = 26;
+            this.btnMThursday.Location = new System.Drawing.Point(139, 241);
+            this.btnMThursday.Name = "btnMThursday";
+            this.btnMThursday.Size = new System.Drawing.Size(131, 46);
+            this.btnMThursday.TabIndex = 38;
+            this.btnMThursday.Text = "Thursday";
+            this.btnMThursday.UseVisualStyleBackColor = true;
+            this.btnMThursday.Click += new System.EventHandler(this.btnMThursday_Click);
+            // 
+            // btnMWednesday
+            // 
+            this.btnMWednesday.Location = new System.Drawing.Point(139, 189);
+            this.btnMWednesday.Name = "btnMWednesday";
+            this.btnMWednesday.Size = new System.Drawing.Size(131, 46);
+            this.btnMWednesday.TabIndex = 37;
+            this.btnMWednesday.Text = "Wednesday";
+            this.btnMWednesday.UseVisualStyleBackColor = true;
+            this.btnMWednesday.Click += new System.EventHandler(this.btnMWednesday_Click);
+            // 
+            // btnMTuesday
+            // 
+            this.btnMTuesday.Location = new System.Drawing.Point(139, 137);
+            this.btnMTuesday.Name = "btnMTuesday";
+            this.btnMTuesday.Size = new System.Drawing.Size(131, 46);
+            this.btnMTuesday.TabIndex = 35;
+            this.btnMTuesday.Text = "Tuesday";
+            this.btnMTuesday.UseVisualStyleBackColor = true;
+            this.btnMTuesday.Click += new System.EventHandler(this.btnMTuesday_Click);
+            // 
+            // btnMMonday
+            // 
+            this.btnMMonday.Location = new System.Drawing.Point(139, 85);
+            this.btnMMonday.Name = "btnMMonday";
+            this.btnMMonday.Size = new System.Drawing.Size(131, 46);
+            this.btnMMonday.TabIndex = 34;
+            this.btnMMonday.Text = "Monday";
+            this.btnMMonday.UseVisualStyleBackColor = true;
+            this.btnMMonday.Click += new System.EventHandler(this.btnMMonday_Click);
+            // 
+            // DataViewDaily
+            // 
+            this.DataViewDaily.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DataViewDaily.Location = new System.Drawing.Point(273, 83);
+            this.DataViewDaily.Name = "DataViewDaily";
+            this.DataViewDaily.RowTemplate.Height = 24;
+            this.DataViewDaily.Size = new System.Drawing.Size(906, 548);
+            this.DataViewDaily.TabIndex = 31;
             // 
             // btnLogoutTime
             // 
@@ -453,18 +472,9 @@
             this.btnLogoutTime.UseVisualStyleBackColor = false;
             this.btnLogoutTime.Click += new System.EventHandler(this.btnLogoutTime_Click);
             // 
-            // textBox7
-            // 
-            this.textBox7.Location = new System.Drawing.Point(770, 8);
-            this.textBox7.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(219, 30);
-            this.textBox7.TabIndex = 19;
-            this.textBox7.Text = "Daily Tasks";
-            // 
             // dateTimePicker1
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(273, 7);
+            this.dateTimePicker1.Location = new System.Drawing.Point(273, 46);
             this.dateTimePicker1.Margin = new System.Windows.Forms.Padding(4);
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(265, 30);
@@ -1623,96 +1633,6 @@
             this.btnViewStock.UseVisualStyleBackColor = false;
             this.btnViewStock.Click += new System.EventHandler(this.btnViewStock_Click_1);
             // 
-            // textBox15
-            // 
-            this.textBox15.Location = new System.Drawing.Point(273, 124);
-            this.textBox15.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox15.Name = "textBox15";
-            this.textBox15.Size = new System.Drawing.Size(132, 30);
-            this.textBox15.TabIndex = 13;
-            this.textBox15.Text = "Monday";
-            // 
-            // textBox9
-            // 
-            this.textBox9.Location = new System.Drawing.Point(415, 124);
-            this.textBox9.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox9.Name = "textBox9";
-            this.textBox9.Size = new System.Drawing.Size(132, 30);
-            this.textBox9.TabIndex = 14;
-            this.textBox9.Text = "Tuesday";
-            // 
-            // textBox8
-            // 
-            this.textBox8.Location = new System.Drawing.Point(556, 124);
-            this.textBox8.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox8.Name = "textBox8";
-            this.textBox8.Size = new System.Drawing.Size(132, 30);
-            this.textBox8.TabIndex = 15;
-            this.textBox8.Text = "Wednesday";
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(697, 124);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(132, 30);
-            this.textBox1.TabIndex = 16;
-            this.textBox1.Text = "Thursday";
-            // 
-            // textBox6
-            // 
-            this.textBox6.Location = new System.Drawing.Point(839, 124);
-            this.textBox6.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(132, 30);
-            this.textBox6.TabIndex = 17;
-            this.textBox6.Text = "Friday";
-            // 
-            // DataViewTuesday
-            // 
-            this.DataViewTuesday.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.DataViewTuesday.Location = new System.Drawing.Point(416, 161);
-            this.DataViewTuesday.Name = "DataViewTuesday";
-            this.DataViewTuesday.RowTemplate.Height = 24;
-            this.DataViewTuesday.Size = new System.Drawing.Size(132, 452);
-            this.DataViewTuesday.TabIndex = 27;
-            // 
-            // DataViewWednesday
-            // 
-            this.DataViewWednesday.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.DataViewWednesday.Location = new System.Drawing.Point(556, 161);
-            this.DataViewWednesday.Name = "DataViewWednesday";
-            this.DataViewWednesday.RowTemplate.Height = 24;
-            this.DataViewWednesday.Size = new System.Drawing.Size(132, 452);
-            this.DataViewWednesday.TabIndex = 28;
-            // 
-            // DataViewThursday
-            // 
-            this.DataViewThursday.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.DataViewThursday.Location = new System.Drawing.Point(698, 161);
-            this.DataViewThursday.Name = "DataViewThursday";
-            this.DataViewThursday.RowTemplate.Height = 24;
-            this.DataViewThursday.Size = new System.Drawing.Size(132, 452);
-            this.DataViewThursday.TabIndex = 29;
-            // 
-            // DataViewFriday
-            // 
-            this.DataViewFriday.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.DataViewFriday.Location = new System.Drawing.Point(839, 161);
-            this.DataViewFriday.Name = "DataViewFriday";
-            this.DataViewFriday.RowTemplate.Height = 24;
-            this.DataViewFriday.Size = new System.Drawing.Size(132, 452);
-            this.DataViewFriday.TabIndex = 30;
-            // 
-            // DataViewDaily
-            // 
-            this.DataViewDaily.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.DataViewDaily.Location = new System.Drawing.Point(273, 161);
-            this.DataViewDaily.Name = "DataViewDaily";
-            this.DataViewDaily.RowTemplate.Height = 24;
-            this.DataViewDaily.Size = new System.Drawing.Size(219, 494);
-            this.DataViewDaily.TabIndex = 31;
-            // 
             // Manager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -1740,8 +1660,7 @@
             this.tabPage6.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView6)).EndInit();
             this.tabTimeTable.ResumeLayout(false);
-            this.tabTimeTable.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.DataViewMonday)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DataViewDaily)).EndInit();
             this.tabJob.ResumeLayout(false);
             this.formManageJob.ResumeLayout(false);
             this.Tabaddjob.ResumeLayout(false);
@@ -1762,11 +1681,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridAddStore)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.DataViewTuesday)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.DataViewWednesday)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.DataViewThursday)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.DataViewFriday)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.DataViewDaily)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1855,7 +1769,6 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Button btnEditJob;
         private System.Windows.Forms.Button btnAddJob;
-        private System.Windows.Forms.TextBox textBox7;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button3;
@@ -1889,17 +1802,11 @@
         private System.Windows.Forms.DataGridView dataGridView5;
         private System.Windows.Forms.TabPage tabPage6;
         private System.Windows.Forms.DataGridView dataGridView6;
-        private System.Windows.Forms.Button btnRefreshTimetable;
-        private System.Windows.Forms.DataGridView DataViewMonday;
         private System.Windows.Forms.DataGridView DataViewDaily;
-        private System.Windows.Forms.DataGridView DataViewFriday;
-        private System.Windows.Forms.DataGridView DataViewThursday;
-        private System.Windows.Forms.DataGridView DataViewWednesday;
-        private System.Windows.Forms.DataGridView DataViewTuesday;
-        private System.Windows.Forms.TextBox textBox6;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox8;
-        private System.Windows.Forms.TextBox textBox9;
-        private System.Windows.Forms.TextBox textBox15;
+        private System.Windows.Forms.Button btnMWednesday;
+        private System.Windows.Forms.Button btnMTuesday;
+        private System.Windows.Forms.Button btnMMonday;
+        private System.Windows.Forms.Button btnMFriday;
+        private System.Windows.Forms.Button btnMThursday;
     }
 }
