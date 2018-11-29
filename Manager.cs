@@ -50,7 +50,7 @@ namespace JustRipe2018
         {
             addJobType.Items.Clear();
             DatabaseClass Connect = DatabaseClass.Instance;
-            string queryJobsTypeSelect = "Select * From [dbo].[JobType]";
+            string queryJobsTypeSelect = "Select * From [dbo].[JobType] WHERE [JobName] = 'Sowing' OR [JobName] = 'Special' ";
             DataSet DropDownJob = Connect.dataToCb(queryJobsTypeSelect);
             addJobType.DropDownStyle = ComboBoxStyle.DropDownList;
             addJobType.Enabled = true;
@@ -340,8 +340,6 @@ namespace JustRipe2018
             string amountContainer;
             // Valid Data Container for uncontrolled Variables
             DateTime validDateContainer;
-            int validAmountContainer;
-
             // Ifnest to Check for blank/null Entry
             if (cbJCrop.Text == "" || cbJCrop.Text == null)
             {
@@ -371,10 +369,12 @@ namespace JustRipe2018
                 dateContainer = cbJDate.Text;
                 jobTypeContainer = addJobType.SelectedText;
                 amountContainer = Cbjamount.SelectedText;
-                // Date Validation + Conversion to Date
-                //Checks that Date is of valid format 
+ 
                 DateTime dateContainerTest;
+                DateTime dateContainerHarvest;
+                
                 string date;
+                string dateHarvest;
                 DateTime.TryParse(dateContainer, out dateContainerTest);
 
                 if (dateContainerTest.DayOfWeek.ToString() == DayOfWeek.Saturday.ToString() ||
@@ -385,7 +385,7 @@ namespace JustRipe2018
 
                 }
                 //Checks date is greater than todays date
-                if (dateContainerTest < DateTime.Now.Date)
+                else if (dateContainerTest < DateTime.Now.Date)
                 {
                     MessageBox.Show("Date entered is less than the current date");
                     cbJDate.Text = "";
@@ -397,9 +397,12 @@ namespace JustRipe2018
                 {
 
                     date = dateContainerTest.ToShortDateString();
+                    dateContainerHarvest = dateContainerTest.AddDays(30);
+                    dateHarvest = dateContainerHarvest.ToShortDateString();
+                    
                 }
                 // Amount Valdation +Conversion to Int
-                if (int.TryParse(Cbjamount.Text, out validAmountContainer))
+                if (int.TryParse(Cbjamount.Text, out int validAmountContainer))
                 {
                     // Int is Valid
                 }
@@ -410,15 +413,19 @@ namespace JustRipe2018
                     amountContainer = "";
                     return;
                 }
+                if (addJobType.Text == "Sowing")
+                {
+                    DatabaseClass Data = DatabaseClass.Instance;
+                    Data.GetDate = date;
+                    Data.GetIDCrop = cbJCrop.SelectedItem.ToString();
+                    Data.GetIDJobType = addJobType.SelectedItem.ToString();
+                    Data.GetIDUser = cbJLabouer.SelectedItem.ToString();
+                    Data.Addjob(cbJLabouer.Text, cbJCrop.Text, date, validAmountContainer, addJobType.Text, 1);
+                    Data.Addjob(cbJLabouer.Text, cbJCrop.Text, dateHarvest, validAmountContainer, "Harvest", 1);
+                    MessageBox.Show("Saved Job");
+                }
+                
 
-                DatabaseClass Data = DatabaseClass.Instance;
-                Data.GetDate = date;
-                Data.GetIDCrop = cbJCrop.SelectedItem.ToString();
-                Data.GetIDJobType = addJobType.SelectedItem.ToString();
-                Data.GetIDUser = cbJLabouer.SelectedItem.ToString();
-                Data.Addjob(cbJLabouer.Text, cbJCrop.Text, date, validAmountContainer, addJobType.Text, 1);
-                MessageBox.Show("Saved Job");
-              
                 // Harvest Date Autoset (30Days) from Sowing! 
                 // Harvest Amount = Sowing Amount 
                 // Amount set to NULL if Fertlise or Special 
