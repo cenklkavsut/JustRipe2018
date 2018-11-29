@@ -142,3 +142,17 @@ C:\Users\Charlie Bryant\Documents\GitHub\JustRipe2018\bin\Debug\JustRipeDatabase
 C:\Users\Charlie Bryant\Documents\GitHub\JustRipe2018\bin\Debug\JustRipeDatabase_log.ldf
 H:\My Documents\Development\JustRipe2018\bin\Debug\JustRipeDatabase.mdf
 H:\My Documents\Development\JustRipe2018\bin\Debug\JustRipeDatabase_log.ldf
+D:\Documents\Visual Studio\JustRipe\bin\Debug\JustRipeDatabase.mdf
+D:\Documents\Visual Studio\JustRipe\bin\Debug\JustRipeDatabase_log.ldf
+D:\Documents\Visual Studio\JustRipe\bin\Debug\JustRipe2018.exe.config
+D:\Documents\Visual Studio\JustRipe\bin\Debug\JustRipe2018.exe
+D:\Documents\Visual Studio\JustRipe\bin\Debug\JustRipe2018.pdb
+D:\Documents\Visual Studio\JustRipe\obj\Debug\JustRipe2018.csprojResolveAssemblyReference.cache
+D:\Documents\Visual Studio\JustRipe\obj\Debug\JustRipe2018.Labourer.resources
+D:\Documents\Visual Studio\JustRipe\obj\Debug\JustRipe2018.Login.resources
+D:\Documents\Visual Studio\JustRipe\obj\Debug\JustRipe2018.Manager.resources
+D:\Documents\Visual Studio\JustRipe\obj\Debug\JustRipe2018.Properties.Resources.resources
+D:\Documents\Visual Studio\JustRipe\obj\Debug\JustRipe2018.csproj.GenerateResource.Cache
+D:\Documents\Visual Studio\JustRipe\obj\Debug\JustRipe2018.csproj.CoreCompileInputs.cache
+D:\Documents\Visual Studio\JustRipe\obj\Debug\JustRipe2018.exe
+D:\Documents\Visual Studio\JustRipe\obj\Debug\JustRipe2018.pdb

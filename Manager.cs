@@ -15,7 +15,6 @@ namespace JustRipe2018
         {
             InitializeComponent();
         }
-        public string ConnectionStrDB = @"Data Source = (LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\JustRipeDatabase.mdf;Integrated Security = True; Connect Timeout = 30";
         private void Manager_Load(object sender, EventArgs e)
         {
             //Helps to keep the form maximized.
@@ -44,6 +43,19 @@ namespace JustRipe2018
             tabStoreOpt.Appearance = TabAppearance.FlatButtons;
             tabStoreOpt.ItemSize = new Size(0, 1);
             tabStoreOpt.SizeMode = TabSizeMode.Fixed;
+            ////
+            //try
+            //{
+            //    DatabaseClass dbCon = DatabaseClass.Instance;
+            //    dbCon.getVal();//it gives a error when their are no available dates
+
+            //}
+            //catch (Exception)
+            //{
+
+            //    MessageBox.Show(" No stocks currently available!");
+            //}
+            ////
         }
 
         private void btnAddBuyers_Click(object sender, EventArgs e)
@@ -70,7 +82,17 @@ namespace JustRipe2018
             {
                 tabStoreOpt.SelectTab(1);
                 //implementation
-
+            }
+            cbCropType.Items.Clear();//clears the items when starts.
+            DatabaseClass dbDropDown = DatabaseClass.Instance;//takes info from the connection string
+            var select = "SELECT DISTINCT [Crop_Name] FROM [dbo].[Crop]";//sql query to be executed
+            var ds2 = dbDropDown.dataToCb(select);//the data to be selected
+            cbCropType.DropDownStyle = ComboBoxStyle.DropDownList;//makes it a list
+            cbCropType.Enabled = true;//enables the dropdown.
+            cbCropType.SelectedIndex = -1;//allows to select the value from empty.   
+            for (int i = 0; i < ds2.Tables[0].Rows.Count; i++)//a loop that inputs values based on the row.
+            {
+                cbCropType.Items.Add(ds2.Tables[0].Rows[i][0]);
             }
         }
 
@@ -82,21 +104,13 @@ namespace JustRipe2018
             {
                 tabStoreOpt.SelectTab(0);
                 //implementation
-
-            }
-            //change the query based on the buyers
-            DatabaseClass dbCon = new DatabaseClass(ConnectionStrDB);
-            var select = "Select * From [dbo].[CropsStorage]";
-            var c = new SqlConnection(ConnectionStrDB);
-            // Your Connection String here
-            var dataAdapter = new SqlDataAdapter(select, c);
-            var commandBuilder = new SqlCommandBuilder(dataAdapter);
-            var ds = new DataSet();
-            dataAdapter.Fill(ds);
+            } //change the query based on the buyers
+            DatabaseClass dbCon = DatabaseClass.Instance;
+            var select = "Select Amount,Crop_Name AS 'Crop Name' From [dbo].[Orders] INNER JOIN Crop ON Orders.CropID=Crop.CropID;";
+            var ds = dbCon.getDataSet(select);
             dataGridAddStore.ReadOnly = true;
             dataGridAddStore.DataSource = ds.Tables[0];
         }
-
         private void btnViewStock_Click_1(object sender, EventArgs e)
         {
             //allows selecting tab
@@ -104,23 +118,70 @@ namespace JustRipe2018
             for (int i = 0; i < tabStoreOpt.RowCount; i++)
             {
                 tabStoreOpt.SelectTab(0);
-                //implementation
             }
-          
-            DatabaseClass dbCon = new DatabaseClass (ConnectionStrDB);
-            var select = "Select * From [dbo].[Orders]";
-            var c = new SqlConnection(ConnectionStrDB);
-            var dataAdapter = new SqlDataAdapter(select, c);
-            var commandBuilder = new SqlCommandBuilder(dataAdapter);
-            var ds = new DataSet();
-            dataAdapter.Fill(ds);
-            dataGridAddStore.ReadOnly = true;
-            dataGridAddStore.DataSource = ds.Tables[0];
+            try
+            {
+                DatabaseClass dbCon = DatabaseClass.Instance;
+                var select = "Select Crop_Name AS 'Crop Name',StorageName AS 'Storage Name' ,Capacity ,Temperature AS 'Temperature (°C)' From [dbo].[CropsStorage] " +
+                " JOIN Crop ON CropsStorage.CropID=Crop.CropID JOIN StorageType ON CropsStorage.StorageTypeId=StorageType.StorageTypeId ";
+                var ds = dbCon.getDataSet(select);
+                dataGridAddStore.ReadOnly = true;
+                dataGridAddStore.DataSource = ds.Tables[0];
+                try
+                {
+                    dbCon.getVal();//it gives a error when their are no available dates
+
+                }
+                catch (Exception)
+                {
+
+                    MessageBox.Show(" No stocks currently available!");
+                }
+
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Wrong input value try again!");
+            }
         }
 
         private void btnBuyer_Click(object sender, EventArgs e)
         {
+            try
+            {
+                double CropAmountCheck = double.Parse(cbCropAmount.Text.ToString());//allows for checking the crop amount 
+                if (cbCropAmount.Text == "-" || CropAmountCheck < 0)//if the amount is negative give message.
+                {
+                    MessageBox.Show("Wrong value entered!");
+                    cbCropAmount.Text = "";
 
+                }
+                else if (txtName.Text == null || txtName.Text == "" || txtSurname.Text == null || txtSurname.Text == "" ||
+                            txtContactNum.Text == null || txtContactNum.Text == "" || txtUserEmail.Text == null || txtUserEmail.Text == "" ||
+                            cbCropAmount.Text == null || cbCropAmount.Text == "")
+            {
+                MessageBox.Show("No value entered!");
+            } 
+            else
+            {
+                DatabaseClass dataB =DatabaseClass.Instance;//class and confirms the connection string.
+                dataB.GetID = cbCropType.SelectedItem.ToString();//this lets it add all values should limit the values.
+                dataB.AdderOfStore(txtName.Text, txtSurname.Text, txtContactNum.Text, txtUserEmail.Text,
+                double.Parse(cbCropAmount.Text), cbCropType.Text); //input that info to the database.
+                MessageBox.Show("Customer Saved!");//the result if no error.                                            
+            } 
+            }
+            catch (Exception)
+            {
+                //MessageBox.Show("Wrong value entered!");
+            }           
+            //Allows To Clean text in the text box and dropdowns after finished.
+            txtName.Text = "";
+            txtSurname.Text = "";
+            txtContactNum.Text = "";
+            txtUserEmail.Text = "";
+            cbCropAmount.Text = "";
+            cbCropType.Text = "";
         }
 
         private void btnCancelUser_Click_1(object sender, EventArgs e)
@@ -348,15 +409,18 @@ namespace JustRipe2018
 
         private void btnRep1_Click(object sender, EventArgs e)
         {
-
             //allows selecting tab
             int tabCount = tabReportOpt.TabCount;
             for (int i = 0; i < tabReportOpt.RowCount; i++)
             {
                 tabReportOpt.SelectTab(0);
                 //implementation
-
             }
+            DatabaseClass dbCon = DatabaseClass.Instance;
+            var select = "Select Crop_Name AS ' Crop Name', FertaliserAmountNeeded As 'Fertaliser Amount', CropStorageTemperature As 'Storage Temperature' From [dbo].[Crop]";
+            var ds = dbCon.getDataSet(select);
+            dataGridView1.ReadOnly = true;
+            dataGridView1.DataSource = ds.Tables[0];
         }
 
         private void btnRep2_Click(object sender, EventArgs e)
@@ -369,6 +433,11 @@ namespace JustRipe2018
                 //implementation
 
             }
+            DatabaseClass dbCon = DatabaseClass.Instance;
+            var select = "Select FertilizerName AS 'Fertaliser Name' ,amount  From [dbo].[Fertiliser]";
+            var ds = dbCon.getDataSet(select);
+            dataGridView4.ReadOnly = true;
+            dataGridView4.DataSource = ds.Tables[0];
         }
 
         private void btnRep3_Click(object sender, EventArgs e)
@@ -381,6 +450,13 @@ namespace JustRipe2018
                 //implementation
 
             }
+
+            DatabaseClass dbCon = DatabaseClass.Instance;
+            var select = "Select StorageName AS 'Storage Name',Capacity,Temperature AS 'Temperature (°C)' From [dbo].[StorageType]";
+            var ds = dbCon.getDataSet(select);
+            dataGridView5.ReadOnly = true;
+            dataGridView5.DataSource = ds.Tables[0];
+         
         }
 
         private void btnRep4_Click(object sender, EventArgs e)
@@ -393,6 +469,12 @@ namespace JustRipe2018
                 //implementation
 
             }
+            DatabaseClass dbCon = DatabaseClass.Instance;
+            var select = "Select VehicleModel AS 'Vehicle Model' ,VehicleType AS 'Vehicle Type',VehicleRegistation AS 'Vehicle Registation'"
+                +",VehicleAvailability AS 'Vehicle Available' From [dbo].[Vehicle]";
+            var ds = dbCon.getDataSet(select);
+            dataGridView6.ReadOnly = true;
+            dataGridView6.DataSource = ds.Tables[0];
         }
 
         private void btnRep5_Click(object sender, EventArgs e)
@@ -403,7 +485,6 @@ namespace JustRipe2018
             {
                 tabReportOpt.SelectTab(4);
                 //implementation
-
             }
         }
 
@@ -509,13 +590,10 @@ namespace JustRipe2018
             if (chkbxLaborEdit.Checked == true)
             {
                 chkbxManagerEdit.Enabled=false ;
-
             } else if (chkbxLaborEdit.Checked == false)
             {
                 chkbxManagerEdit.Enabled = true;
-
             } 
-
         }
 
         private void chkbxManagerEdit_CheckedChanged(object sender, EventArgs e)
@@ -529,7 +607,16 @@ namespace JustRipe2018
             {
                 chkbxLaborEdit.Enabled = true;
             }
+        }
 
+        private void dataGridAddStore_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void cbCropType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+           
         }
     }
 }

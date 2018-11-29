@@ -31,7 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Labourer));
             this.tabLabourer = new System.Windows.Forms.TabControl();
             this.tabTimetableLabourer = new System.Windows.Forms.TabPage();
-            this.btnLogoutLabourer = new System.Windows.Forms.Button();
+            this.LabUNameTest = new System.Windows.Forms.RichTextBox();
             this.friTextTt = new System.Windows.Forms.RichTextBox();
             this.wedTextTt = new System.Windows.Forms.RichTextBox();
             this.thurTextTt = new System.Windows.Forms.RichTextBox();
@@ -45,6 +45,7 @@
             this.tueLabTt = new System.Windows.Forms.TextBox();
             this.monLabTt = new System.Windows.Forms.TextBox();
             this.dateTimePickerLab = new System.Windows.Forms.DateTimePicker();
+            this.btnLogoutLabourer = new System.Windows.Forms.Button();
             this.tabLabourer.SuspendLayout();
             this.tabTimetableLabourer.SuspendLayout();
             this.SuspendLayout();
@@ -62,6 +63,7 @@
             // tabTimetableLabourer
             // 
             this.tabTimetableLabourer.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("tabTimetableLabourer.BackgroundImage")));
+            this.tabTimetableLabourer.Controls.Add(this.LabUNameTest);
             this.tabTimetableLabourer.Controls.Add(this.friTextTt);
             this.tabTimetableLabourer.Controls.Add(this.wedTextTt);
             this.tabTimetableLabourer.Controls.Add(this.thurTextTt);
@@ -78,23 +80,20 @@
             this.tabTimetableLabourer.Controls.Add(this.btnLogoutLabourer);
             this.tabTimetableLabourer.Location = new System.Drawing.Point(4, 29);
             this.tabTimetableLabourer.Name = "tabTimetableLabourer";
-            this.tabTimetableLabourer.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabTimetableLabourer.Padding = new System.Windows.Forms.Padding(3);
             this.tabTimetableLabourer.Size = new System.Drawing.Size(902, 687);
             this.tabTimetableLabourer.TabIndex = 0;
             this.tabTimetableLabourer.Text = "Timetable";
             this.tabTimetableLabourer.UseVisualStyleBackColor = true;
             // 
-            // btnLogoutLabourer
+            // LabUNameTest
             // 
-            this.btnLogoutLabourer.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.btnLogoutLabourer.Location = new System.Drawing.Point(782, 16);
-            this.btnLogoutLabourer.Name = "btnLogoutLabourer";
-            this.btnLogoutLabourer.Size = new System.Drawing.Size(89, 29);
-            this.btnLogoutLabourer.TabIndex = 7;
-            this.btnLogoutLabourer.TabStop = false;
-            this.btnLogoutLabourer.Text = "LOGOUT";
-            this.btnLogoutLabourer.UseVisualStyleBackColor = false;
-            this.btnLogoutLabourer.Click += new System.EventHandler(this.btnLogoutLabourer_Click);
+            this.LabUNameTest.Location = new System.Drawing.Point(539, 443);
+            this.LabUNameTest.Name = "LabUNameTest";
+            this.LabUNameTest.Size = new System.Drawing.Size(90, 51);
+            this.LabUNameTest.TabIndex = 39;
+            this.LabUNameTest.Text = "";
+            this.LabUNameTest.TextChanged += new System.EventHandler(this.LabUNameTest_TextChanged_1);
             // 
             // friTextTt
             // 
@@ -151,6 +150,7 @@
             this.DailyTasksRtb.Size = new System.Drawing.Size(165, 409);
             this.DailyTasksRtb.TabIndex = 32;
             this.DailyTasksRtb.Text = "";
+            this.DailyTasksRtb.TextChanged += new System.EventHandler(this.DailyTasksRtb_TextChanged);
             // 
             // friLabTt
             // 
@@ -199,6 +199,18 @@
             this.dateTimePickerLab.Size = new System.Drawing.Size(200, 26);
             this.dateTimePickerLab.TabIndex = 26;
             // 
+            // btnLogoutLabourer
+            // 
+            this.btnLogoutLabourer.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.btnLogoutLabourer.Location = new System.Drawing.Point(782, 16);
+            this.btnLogoutLabourer.Name = "btnLogoutLabourer";
+            this.btnLogoutLabourer.Size = new System.Drawing.Size(89, 29);
+            this.btnLogoutLabourer.TabIndex = 7;
+            this.btnLogoutLabourer.TabStop = false;
+            this.btnLogoutLabourer.Text = "LOGOUT";
+            this.btnLogoutLabourer.UseVisualStyleBackColor = false;
+            this.btnLogoutLabourer.Click += new System.EventHandler(this.btnLogoutLabourer_Click);
+            // 
             // Labourer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -238,5 +250,6 @@
         private System.Windows.Forms.TextBox tueLabTt;
         private System.Windows.Forms.TextBox monLabTt;
         private System.Windows.Forms.DateTimePicker dateTimePickerLab;
+        private System.Windows.Forms.RichTextBox LabUNameTest;
     }
 }

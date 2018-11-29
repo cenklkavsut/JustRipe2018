@@ -30,71 +30,41 @@ namespace JustRipe2018
 {
     public partial class Login : Form
     {
+        string UsernameCurrent;
         public Login()
         {
             InitializeComponent();
+            
         }
-         public int passwordCounter=0;//a counter for the password!
+        public int passwordCounter=0;//a counter for the password!
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            //DatabaseClass con = new DatabaseClass(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\JustRipeDatabase.mdf;Integrated Security=True;Connect Timeout=30");
+            DatabaseClass dbLogin = DatabaseClass.Instance;
 
-            //string dummyun = txtUserName.Text;
-            //string dummypw = txtPassword.Text;
-            //con.openConnection();
+            bool r=dbLogin.loginFul(txtUserName.Text.ToLower(),txtPassword.Text.ToLower());
 
-            //SqlCommand StrQuer = new SqlCommand("Select * From[dbo].[Orders] WHERE Username=@userid AND Password =@password");
-            
-            //    StrQuer.Parameters.AddWithValue("@userid", dummyun);
-            //    StrQuer.Parameters.AddWithValue("@password", dummypw);
-            //    SqlDataReader user = StrQuer.ExecuteReader();
-            //    if(use.HasRows)
-            //      {
-            //        MessageBox.Show("loginSuccess");
-            //    }
-            //  else
-            //    {
-            //        //invalid login
-            //    }
-
-
-                //for loggin add database to the place where admin  is typed and connection
-                //in place of admin it need to be changed to the place from the database.
-                if (txtUserName.Text.ToLower()=="admin" && txtPassword.Text.ToLower()=="admin")//this is gonne be the name inputed in from the database
-            {    
-            //closes the login Page
-            Login loginForm = new Login();
-            this.Hide();
-            loginForm.Close();
-            MessageBox.Show("Welcome");
-            // Create a new instance of the Form2 class
-            Manager settingsForm = new Manager();
-            //displays the labourer form
-            //Labourer labrer = new Labourer();
-            //labrer.show();
-            // Show the settings form
-            settingsForm.Show();
-            passwordCounter = 0;
-            }//this part in place of password counter it need to be txt user or password!= database value to activvate this code!
-            else if (txtUserName.Text!="admin" && txtPassword.Text!= "admin")//if password is wrong!
+            if (r==true)
             {
-                if (passwordCounter == 3 || passwordCounter>3)//if 3 times or more
-                { 
-                    /* (passwordCounter > 3)//if more than 3
-                    {
-                        MessageBox.Show("Exited the maximun limit of tries!");
-                        Application.Exit();
-                    }*/
-                    if (passwordCounter == 3)
-                    {
+                passwordCounter = 0;
+                //Login loginForm = new Login();
+                this.Hide();//hides
+                //loginForm.Close();//closes after hiding.
+            }
+            else if (r == false)//if password is wrong!
+            {
+                if ( passwordCounter >= 3)//if 3 times or more
+                {
+
+                    lblLogin.Text = "3rd attempt failed: Forcing Shutdown";
                         MessageBox.Show("3rd attempt failed: Forcing Shutdown");
-                        Application.Exit(); 
-                    }
+                        Application.Exit();
+                    
                 }
                 else if (passwordCounter == 2)
                 {
-                    MessageBox.Show("Last Attempt: Please Contact a Manager");
                     lblLogin.Text = "2nd attempt failed: username or password is incorrect";
+                    MessageBox.Show("Last Attempt: Please Contact a Manager");
+
                 }
                 else if (passwordCounter == 1)
                 {
@@ -102,8 +72,15 @@ namespace JustRipe2018
                     lblLogin.Text = "1st attempt failed: username or password is incorrect";
                 }
                 passwordCounter += 1;//the counter for each time wrong
+
             }
-    }
+
+            UsernameCurrent = txtUserName.Text.ToLower();
+            Labourer Username = new Labourer();
+            Username.LabUName = UsernameCurrent;
+
+            
+        }
 
         private void Login_Load(object sender, EventArgs e)
         {
