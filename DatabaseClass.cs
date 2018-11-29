@@ -213,8 +213,7 @@ namespace JustRipe2018
                 cnn.Close();
             }
         }
-
-        //get storage and crop id add a date counter that encryment on each date
+        //counter to choose a different id
         public string getBasicDate()// also add incremention  based on the id. if it only takes one id.
         {
             //query of the value
@@ -226,7 +225,7 @@ namespace JustRipe2018
             myCommand.Connection.Close();//Close the connection           
             return dateResult;
         }
-
+        
         public int getBasicAmount()
         {
             //query of the value
