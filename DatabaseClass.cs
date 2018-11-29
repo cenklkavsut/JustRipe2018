@@ -168,135 +168,75 @@ namespace JustRipe2018
         }
 
         private int dateCounter = 1;
+        private int previousreturnId = 0;// 
         public void getVal()
         {
-            var previousreturnId = 0;// 
+            int idCounter = 1;
             for (int i = 0; i < dateCounter; i++)
             {
-               
-            DateTime date = DateTime.Parse(getBasicDate());//it doesnt accept the date time   
-            var returnId = getBasicCropStorage();//var selId = "Select [CropID] From [dbo].[Job] Where JobTypeID=1"; 
-            //set up the connection of it
-            SqlConnection cnn = new SqlConnection(connectionStr);
-            //This is command class which will handle the query and connection object.  
-            SqlCommand cmdInserOrderId = new SqlCommand();
-            cnn.Open();//open the database connection.
-            
-            if (DateTime.Now >= date)//compares the dates
-            {
-                    if (previousreturnId==returnId)//
-                    {
-                        dateCounter -= 1;//
+                if (dateCounter == 0 || idCounter == 5)//it does not set to zero.
+                {
+                    break;
+                }
+                DateTime date = DateTime.Parse(getBasicDate());
+                SqlConnection cnn = new SqlConnection(connectionStr);
+                //This is command class which will handle the query and connection object.  
+                SqlCommand cmdUpdateDate = new SqlCommand();
+                SqlCommand cmdUpdateStorage = new SqlCommand();//
 
-                    }
-                    else if (date==null)//this is added for increasing the speed of the application.Also it allows for the application not to check a null value.
+                cnn.Open();//open the database connection.               
+                if (DateTime.Now.ToShortDateString() != date.ToShortDateString() && DateTime.Now > date)//compares the dates
+                {
+                    if (date == null || dateCounter == 0 || idCounter == 0)//
                     {
                         dateCounter = 0;
                     }
                     else
                     {
-                        cmdInserOrderId.CommandType = CommandType.Text;//queries that input data and retive data based on the values from the store.
-                        cmdInserOrderId.CommandText = "INSERT INTO [dbo].[CropsStorage] (CropID,StorageTypeID) Values (" + returnId + "," + getBasicStorageId() + ")";//get the id from the class.
-                        cmdInserOrderId.Connection = cnn;
-                        cmdInserOrderId.ExecuteNonQuery();//execute query.        
+                        cmdUpdateDate.CommandType = CommandType.Text;//change the counter.
+                        cmdUpdateDate.CommandText = "UPDATE [dbo].[CropsStorage] SET UpdateDate ='" + date + "' Where StorageID=" + idCounter;//get the id from the class.
+                        cmdUpdateDate.Connection = cnn;
+                        cmdUpdateDate.ExecuteNonQuery();//execute query. 
 
-
+                        cmdUpdateStorage.CommandType = CommandType.Text;//change the counter.
+                        cmdUpdateStorage.CommandText = "UPDATE [dbo].[CropsStorage] SET Amount=Amount +" + getBasicAmount() + " Where StorageID = " + idCounter;
+                        cmdUpdateStorage.Connection = cnn; //set c3SUM = coalesce(c1, 0) + coalesce(c2, 0),
+                        cmdUpdateStorage.ExecuteNonQuery();//execute query. 
+                        dateCounter += 1;
+                        idCounter += 1;//add one to the id counter
                     }
-                    previousreturnId = returnId;//temporary storage for value to compare after                
-            
+                }
+                else if (DateTime.Now.ToShortDateString() == date.ToShortDateString())
+                {
+                    dateCounter = 0;//
+                }
                 cnn.Close();
             }
-            }             
         }
 
-       //private int goalCounter = 0;
-       private int getNextDateCounter = 1;
         //get storage and crop id add a date counter that encryment on each date
-        public string getBasicDate()
+        public string getBasicDate()// also add incremention  based on the id. if it only takes one id.
         {
-           //query of the value
-            var selDate = "SELECT Date FROM [dbo].[Job] WHERE JobTypeID=1 AND JobID = "+getNextDateCounter;// increment through the query 
+            //query of the value
+            var selDate = "SELECT Date FROM [dbo].[Job] WHERE JobTypeID=1";// increment through the query or change to a counter.
             SqlConnection sql = new SqlConnection(connectionStr);//set up the connection of it
             SqlCommand myCommand = new SqlCommand(selDate, sql);//the command to search for it
             myCommand.Connection.Open();//open the connectionN 
             string dateResult = (string)myCommand.ExecuteScalar();//input the query result into the string through casting.
-            myCommand.Connection.Close();//Close the connection
-            dateCounter += 1;
-
-            getNextDateCounter += 1;//this gives the error when it increment over a certain value.//
-
-            //var selDateCheck = "SELECT Date FROM [dbo].[Job] WHERE JobTypeID=1";// increment through the query 
-            //var ds2 = dataToCb(selDateCheck);//the data to be selected  
-            //goalCounter = ds2.Tables.Count;
-            ////if (goalCounter == getNextDateCounter)
-            ////{
-            ////    getNextDateCounter -= 1;
-            ////}
-
-            ////
-            if (dateCounter == 2)//limits the entries if it goes beyond the 3 loop breaks 
-            {
-                dateCounter = 0;//sets the datacounter to 0 to stop the table.
-            }
-            ////
+            myCommand.Connection.Close();//Close the connection           
             return dateResult;
         }
 
-        //or put the values int loops to recieve multiple dates and crops.
-        public int getBasicCropStorage()
+        public int getBasicAmount()
         {
             //query of the value
-            var selCropId = "Select CropID From [dbo].[Job] Where JobTypeID=1";
+            var selAmount = "SELECT Amount FROM [dbo].[Job] WHERE JobTypeID=1";// increment through the query 
             SqlConnection sql = new SqlConnection(connectionStr);//set up the connection of it
-            SqlCommand myCommand = new SqlCommand(selCropId, sql);//the command to search for it
-            myCommand.Connection.Open();//open the connectionN [Crop]
-            int CropId = (int)myCommand.ExecuteScalar();//input the query result into the string through casting.
-            myCommand.Connection.Close();//Close the connection
-            return CropId;//return null error.
-        }    
-
-        public int getBasicStorageId()//this one insert but the same multyple times
-        {
-            //query of the value//another fix is to inser one type of storage.
-            var selJobId = "Select StorageTypeId From [dbo].[StorageType] Where StorageTypeId=1";//in place of one insert value of storage. two queries one that updates.
-            SqlConnection sql = new SqlConnection(connectionStr);//set up the connection of it
-            SqlCommand myCommand = new SqlCommand(selJobId, sql);//the command to search for it
-            myCommand.Connection.Open();//open the connectionN [//copy the  query and then add the query to loop and insert 
-            int selJob = (int)myCommand.ExecuteScalar();//input the query result into the string through casting.
-            myCommand.Connection.Close();//Close the connection
-            return selJob;//return null error.
+            SqlCommand myCommand = new SqlCommand(selAmount, sql);//the command to search for it
+            myCommand.Connection.Open();//open the connectionN 
+            int AmountResult = (int)myCommand.ExecuteScalar();//input the query result into the string through casting.
+            myCommand.Connection.Close();//Close the connection           
+            return AmountResult;
         }
-
-        // Add subtraction to the amount when added.     
-        ////add get basic storage to subtract the storage based on the id throug a property or use and subtract.act. 
-        //private double countToMatch;//ways to input this one get the amount if it fits it gets added or it get not added if not or it gets upadetd by the query and subtracted. 
-        //public double CountToMatch { get { return countToMatch; } set { countToMatch = value; } }//
-        ////the error is inserting a value into the storage id when required.
-        ////if the storage is not empty or the capacity is biger than the amount then select the 1st index.make a property to recieve amount of storage.
-        //public int getBasicStorageId()
-        //{
-        //    //query of the value//another fix is to inser one type of storage.
-        //    var selJobId = "Select StorageTypeId,SUM(Capacity-"+ countToMatch+") From [dbo].[StorageType] Where Capacity>"+ countToMatch;//in place of one insert value of storage. two queries one that updates.
-        //    SqlConnection sql = new SqlConnection(connectionStr);//set up the connection of it
-        //    SqlCommand myCommand = new SqlCommand(selJobId, sql);//the command to search for it
-        //    myCommand.Connection.Open();//open the connectionN [//copy the  query and then add the query to loop and insert 
-        //    int selJob = (int)myCommand.ExecuteScalar();//input the query result into the string through casting.
-        //    myCommand.Connection.Close();//Close the connection
-        //    return selJob;//return null error.
-        //}
-        //
-
-        //public void getBasicStorageSubtraction(double countToMatch)
-        //{
-        //    double val = countToMatch;
-        //    SqlConnection cnn = new SqlConnection(connectionStr);
-        //    //query of the value//another fix is to inser one type of storage.
-        //    var SubTractStorage= "INSERT INTO [dbo].[StorageType]  (Capacity) Values (SUM(Capacity-" + countToMatch + "))  Where Capacity>" + val+"AND StorageTypeID=1";
-        //    SqlCommand cmdInserCustomer = new SqlCommand();
-        //    cmdInserCustomer.CommandType = CommandType.Text;
-        //    cmdInserCustomer.CommandText = SubTractStorage;
-        //    cmdInserCustomer.Connection = cnn;
-        //    cmdInserCustomer.ExecuteNonQuery();//execute query.
-        //}
     }
 }

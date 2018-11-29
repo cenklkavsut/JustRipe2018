@@ -43,19 +43,6 @@ namespace JustRipe2018
             tabStoreOpt.Appearance = TabAppearance.FlatButtons;
             tabStoreOpt.ItemSize = new Size(0, 1);
             tabStoreOpt.SizeMode = TabSizeMode.Fixed;
-            ////
-            //try
-            //{
-                //DatabaseClass dbCon = DatabaseClass.Instance;
-                //dbCon.getVal();//it gives a error when their are no available dates
-
-            //}
-            //catch (Exception)
-            //{
-
-            //    MessageBox.Show(" No stocks currently available!");
-            //}
-            ////
         }
 
         private void btnAddBuyers_Click(object sender, EventArgs e)
@@ -119,30 +106,30 @@ namespace JustRipe2018
             {
                 tabStoreOpt.SelectTab(0);
             }
-            //try
-            //{
+            try
+            {
                 DatabaseClass dbCon = DatabaseClass.Instance;
-                var select = "Select Crop_Name AS 'Crop Name',StorageName AS 'Storage Name' ,Capacity ,Temperature AS 'Temperature (°C)' From [dbo].[CropsStorage] " +
+                var select = "Select Crop_Name AS 'Crop Name',StorageName AS 'Storage Name' ,Capacity ,Amount,Temperature AS 'Temperature (°C)' From [dbo].[CropsStorage] " +
                 " JOIN Crop ON CropsStorage.CropID=Crop.CropID JOIN StorageType ON CropsStorage.StorageTypeId=StorageType.StorageTypeId ";
                 var ds = dbCon.getDataSet(select);
                 dataGridAddStore.ReadOnly = true;
                 dataGridAddStore.DataSource = ds.Tables[0];
-                //try
-                //{
+                try
+                {
                     dbCon.getVal();//it gives a error when their are no available dates
 
-            //    }
-            //    catch (Exception)
-            //    {
+                }
+                catch (Exception)
+                {
 
-            //        MessageBox.Show(" No stocks currently available!");
-            //    }
+                    MessageBox.Show(" No stocks currently available!");
+                }
 
-            //}
-            //catch (Exception)
-            //{
-            //    MessageBox.Show("Wrong input value try again!");
-            //}
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Wrong input value try again!");
+            }
         }
 
         private void btnBuyer_Click(object sender, EventArgs e)
