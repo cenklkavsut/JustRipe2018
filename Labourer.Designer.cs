@@ -191,6 +191,7 @@
             this.monLabTt.Size = new System.Drawing.Size(100, 26);
             this.monLabTt.TabIndex = 27;
             this.monLabTt.Text = "Monday";
+            this.monLabTt.TextChanged += new System.EventHandler(this.monLabTt_TextChanged);
             // 
             // dateTimePickerLab
             // 

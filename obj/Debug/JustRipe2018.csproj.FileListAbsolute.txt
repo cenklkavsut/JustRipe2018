@@ -156,3 +156,31 @@ D:\Documents\Visual Studio\JustRipe\obj\Debug\JustRipe2018.csproj.GenerateResour
 D:\Documents\Visual Studio\JustRipe\obj\Debug\JustRipe2018.csproj.CoreCompileInputs.cache
 D:\Documents\Visual Studio\JustRipe\obj\Debug\JustRipe2018.exe
 D:\Documents\Visual Studio\JustRipe\obj\Debug\JustRipe2018.pdb
+H:\JustRipe\bin\Debug\JustRipeDatabase.mdf
+H:\JustRipe\bin\Debug\JustRipeDatabase_log.ldf
+H:\JustRipe\bin\Debug\JustRipe2018.exe.config
+H:\JustRipe\bin\Debug\JustRipe2018.exe
+H:\JustRipe\bin\Debug\JustRipe2018.pdb
+H:\JustRipe\obj\Debug\JustRipe2018.csprojResolveAssemblyReference.cache
+H:\JustRipe\obj\Debug\JustRipe2018.Labourer.resources
+H:\JustRipe\obj\Debug\JustRipe2018.Login.resources
+H:\JustRipe\obj\Debug\JustRipe2018.Manager.resources
+H:\JustRipe\obj\Debug\JustRipe2018.Properties.Resources.resources
+H:\JustRipe\obj\Debug\JustRipe2018.csproj.GenerateResource.cache
+H:\JustRipe\obj\Debug\JustRipe2018.csproj.CoreCompileInputs.cache
+H:\JustRipe\obj\Debug\JustRipe2018.exe
+H:\JustRipe\obj\Debug\JustRipe2018.pdb
+H:\My Documents\Development\JustRipe\bin\Debug\JustRipeDatabase.mdf
+H:\My Documents\Development\JustRipe\bin\Debug\JustRipeDatabase_log.ldf
+H:\My Documents\Development\JustRipe\bin\Debug\JustRipe2018.exe.config
+H:\My Documents\Development\JustRipe\bin\Debug\JustRipe2018.exe
+H:\My Documents\Development\JustRipe\bin\Debug\JustRipe2018.pdb
+H:\My Documents\Development\JustRipe\obj\Debug\JustRipe2018.Labourer.resources
+H:\My Documents\Development\JustRipe\obj\Debug\JustRipe2018.Login.resources
+H:\My Documents\Development\JustRipe\obj\Debug\JustRipe2018.Manager.resources
+H:\My Documents\Development\JustRipe\obj\Debug\JustRipe2018.Properties.Resources.resources
+H:\My Documents\Development\JustRipe\obj\Debug\JustRipe2018.csproj.GenerateResource.cache
+H:\My Documents\Development\JustRipe\obj\Debug\JustRipe2018.csproj.CoreCompileInputs.cache
+H:\My Documents\Development\JustRipe\obj\Debug\JustRipe2018.exe
+H:\My Documents\Development\JustRipe\obj\Debug\JustRipe2018.pdb
+H:\My Documents\Development\JustRipe\obj\Debug\JustRipe2018.csprojAssemblyReference.cache

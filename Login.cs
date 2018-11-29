@@ -30,7 +30,9 @@ namespace JustRipe2018
 {
     public partial class Login : Form
     {
-        string UsernameCurrent;
+        string getuser;
+        public string GetUser{ get { return getuser; } set {  } }
+        
         public Login()
         {
             InitializeComponent();
@@ -39,6 +41,8 @@ namespace JustRipe2018
         public int passwordCounter=0;//a counter for the password!
         private void btnLogin_Click(object sender, EventArgs e)
         {
+            getuser = txtUserName.Text.ToLower();
+
             DatabaseClass dbLogin = DatabaseClass.Instance;
 
             bool r=dbLogin.loginFul(txtUserName.Text.ToLower(),txtPassword.Text.ToLower());
@@ -75,9 +79,9 @@ namespace JustRipe2018
 
             }
 
-            UsernameCurrent = txtUserName.Text.ToLower();
-            Labourer Username = new Labourer();
-            Username.LabUName = UsernameCurrent;
+           
+
+           
 
             
         }
@@ -96,6 +100,19 @@ namespace JustRipe2018
         private void txtPassword_TextChanged(object sender, EventArgs e)
         {
 
+        }
+        private static Login instance;
+        //properties for calling the database class 
+        public static Login Instance
+        {
+            get//allows for getting the information
+            {
+                if (instance == null)
+                {
+                    instance = new Login();
+                }
+                return instance;
+            }
         }
     }
 }

@@ -14,9 +14,13 @@ namespace JustRipe2018
 {
     public partial class Labourer : Form
     {
+        string username;
         public Labourer()
         {
+            MessageBox.Show(Login.Instance.GetUser);
+
             InitializeComponent();
+            getusername();
             
         }
 
@@ -46,24 +50,16 @@ namespace JustRipe2018
 
         }
 
-        private string labUName = "";
-        public string LabUName
+        public void getusername()
         {
-
-            
-            get
-            {
-                return labUName;
-            }
-            set
-            {
-
-                LabUNameTest.Text = labUName;
-            }
+          
+            username = Login.Instance.GetUser;
         }
 
+        private void monLabTt_TextChanged(object sender, EventArgs e)
+        {
 
-
+        }
     }
 
 }
