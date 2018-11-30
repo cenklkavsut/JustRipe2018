@@ -44,9 +44,9 @@ namespace JustRipe2018
             if (r==true)
             {
                 passwordCounter = 0;
-                //Login loginForm = new Login();
+                Login loginForm = new Login();
                 this.Hide();//hides
-                //loginForm.Close();//closes after hiding.
+                loginForm.Close();//closes after hiding.
             }
             else if (r == false)//if password is wrong!
             {

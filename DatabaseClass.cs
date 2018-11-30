@@ -170,8 +170,7 @@ namespace JustRipe2018
         private int dateCounter = 1;
         private int ChooserData = 1;
         public void getVal()
-        {
-            int idCounter = 1;
+        {  int idCounter = 1;
             for (int i = 0; i < dateCounter; i++)
             {
                 if (dateCounter == 0 || idCounter == 5)//it does not set to zero.
@@ -184,7 +183,7 @@ namespace JustRipe2018
                 SqlCommand cmdUpdateDate = new SqlCommand();
                 SqlCommand cmdUpdateStorage = new SqlCommand();//
                 cnn.Open();//open the database connection.               
-                if (DateTime.Now.ToShortDateString() != date.ToShortDateString() && DateTime.Now > date||date==null||getBasicAmount()==0)//compares the dates//
+                if (DateTime.Now.ToShortDateString() != date.ToShortDateString() && DateTime.Now > date||date==null||getBasicAmount()==0&&getBasicAmount()>getBasicAmount())//compares the dates//
                 {
                     if (date == null || dateCounter == 0 || idCounter == 0)//||basic date 0 then break or null
                     {
@@ -208,8 +207,7 @@ namespace JustRipe2018
                 else if (DateTime.Now.ToShortDateString() == date.ToShortDateString())
                 {
                     dateCounter = 0;//
-                }
-                cnn.Close();
+                }  cnn.Close();
             }
         }
         //counter to choose a different id //error only gets one id.
@@ -222,6 +220,7 @@ namespace JustRipe2018
             myCommand.Connection.Open();//open the connectionN 
             string dateResult = (string)myCommand.ExecuteScalar();//input the query result into the string through casting.
             myCommand.Connection.Close();//Close the connection    
+          
             return dateResult;
         }
 
@@ -234,6 +233,7 @@ namespace JustRipe2018
             SqlCommand myCommand = new SqlCommand(selAmount, sql);//the command to search for it
             myCommand.Connection.Open();//open the connectionN 
             int AmountResult=0;
+
             try
             {
              AmountResult = (int)myCommand.ExecuteScalar();//input the query result into the string through casting.
@@ -254,6 +254,38 @@ namespace JustRipe2018
             }
             //
             return AmountResult;
+        }
+
+        int capacityCounter =1;
+        public int getBasicCapacity()// also add incremention  based on the id. if it only takes one id.
+        {
+            //query of the value
+            var selStorageType= "SELECT Capacity FROM [dbo].[StorageType] WHERE StorageTypeId="+capacityCounter;// increment through the query or change to a counter.
+            SqlConnection sql = new SqlConnection(connectionStr);//set up the connection of it
+            SqlCommand myCommand = new SqlCommand(selStorageType, sql);//the command to search for it
+            myCommand.Connection.Open();//open the connectionN             
+            int AmountResult = 0;
+            int dateResult;
+
+            try
+            {
+             dateResult = (int)myCommand.ExecuteScalar();//input the query result into the string through casting.
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            myCommand.Connection.Close();//Close the connection
+            
+            //
+            if (AmountResult == 0)
+            {
+                AmountResult = 0;
+            }
+            //
+
+            return dateResult;
         }
     }
 }
