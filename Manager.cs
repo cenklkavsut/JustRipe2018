@@ -109,26 +109,26 @@ namespace JustRipe2018
             try
             {
                 DatabaseClass dbCon = DatabaseClass.Instance;
-                var select = "Select Crop_Name AS 'Crop Name',StorageName AS 'Storage Name',UpdateDate AS 'Recent Crop' ,Capacity ,Amount,Temperature AS 'Temperature (°C)' From [dbo].[CropsStorage] " +
+                var select = "Select Crop_Name AS 'Crop Name',StorageName AS 'Storage Name' ,Capacity ,Amount,Temperature AS 'Temperature (°C)' From [dbo].[CropsStorage] " +
                 " JOIN Crop ON CropsStorage.CropID=Crop.CropID JOIN StorageType ON CropsStorage.StorageTypeId=StorageType.StorageTypeId ";
                 var ds = dbCon.getDataSet(select);
                 dataGridAddStore.ReadOnly = true;
                 dataGridAddStore.DataSource = ds.Tables[0];
-                try
-                {
-                    dbCon.getVal();//it gives a error when their are no available dates
+            try
+            {
+                dbCon.getVal();//it gives a error when their are no available dates
 
-                }
-                catch (Exception)
-                {
-                    MessageBox.Show(" No stocks currently available!");
-                }
             }
+            catch (Exception)
+            {
+                MessageBox.Show(" No stocks currently available!");
+            }
+        }
             catch (Exception)
             {
                 MessageBox.Show("Wrong input value try again!");
             }
-        }
+}
 
         private void btnBuyer_Click(object sender, EventArgs e)
         {

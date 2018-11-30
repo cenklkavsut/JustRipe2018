@@ -168,7 +168,7 @@ namespace JustRipe2018
         }
 
         private int dateCounter = 1;
-        private int previousreturnId = 0;// 
+        private int ChooserData = 1;
         public void getVal()
         {
             int idCounter = 1;
@@ -183,18 +183,17 @@ namespace JustRipe2018
                 //This is command class which will handle the query and connection object.  
                 SqlCommand cmdUpdateDate = new SqlCommand();
                 SqlCommand cmdUpdateStorage = new SqlCommand();//
-
                 cnn.Open();//open the database connection.               
-                if (DateTime.Now.ToShortDateString() != date.ToShortDateString() && DateTime.Now > date)//compares the dates
+                if (DateTime.Now.ToShortDateString() != date.ToShortDateString() && DateTime.Now > date||date==null||getBasicAmount()==0)//compares the dates//
                 {
-                    if (date == null || dateCounter == 0 || idCounter == 0)//
+                    if (date == null || dateCounter == 0 || idCounter == 0)//||basic date 0 then break or null
                     {
                         dateCounter = 0;
                     }
                     else
                     {
                         cmdUpdateDate.CommandType = CommandType.Text;//change the counter.
-                        cmdUpdateDate.CommandText = "UPDATE [dbo].[CropsStorage] SET UpdateDate ='" + date + "' Where StorageID=" + idCounter;//get the id from the class.
+                        cmdUpdateDate.CommandText = "UPDATE [dbo].[CropsStorage] SET UpdateDate ='" + DateTime.Now.ToShortDateString() + "' Where StorageID=" + idCounter;//get the id from the class.
                         cmdUpdateDate.Connection = cnn;
                         cmdUpdateDate.ExecuteNonQuery();//execute query. 
 
@@ -213,7 +212,7 @@ namespace JustRipe2018
                 cnn.Close();
             }
         }
-        //counter to choose a different id
+        //counter to choose a different id //error only gets one id.
         public string getBasicDate()// also add incremention  based on the id. if it only takes one id.
         {
             //query of the value
@@ -222,19 +221,38 @@ namespace JustRipe2018
             SqlCommand myCommand = new SqlCommand(selDate, sql);//the command to search for it
             myCommand.Connection.Open();//open the connectionN 
             string dateResult = (string)myCommand.ExecuteScalar();//input the query result into the string through casting.
-            myCommand.Connection.Close();//Close the connection           
+            myCommand.Connection.Close();//Close the connection    
             return dateResult;
         }
-        
+
+        //error only gets one id.
         public int getBasicAmount()
         {
             //query of the value
-            var selAmount = "SELECT Amount FROM [dbo].[Job] WHERE JobTypeID=1";// increment through the query 
+            var selAmount = "SELECT Amount FROM [dbo].[Job] WHERE JobTypeID=1 AND JobID="+ChooserData;// increment through the query 
             SqlConnection sql = new SqlConnection(connectionStr);//set up the connection of it
             SqlCommand myCommand = new SqlCommand(selAmount, sql);//the command to search for it
             myCommand.Connection.Open();//open the connectionN 
-            int AmountResult = (int)myCommand.ExecuteScalar();//input the query result into the string through casting.
-            myCommand.Connection.Close();//Close the connection           
+            int AmountResult=0;
+            try
+            {
+             AmountResult = (int)myCommand.ExecuteScalar();//input the query result into the string through casting.
+
+
+            }
+            catch (Exception)
+            {
+
+            }
+            myCommand.Connection.Close();//Close the connection                 
+           //if null return =0             
+            ChooserData += 1;
+
+            if (AmountResult==0)
+            {
+                AmountResult = 0;
+            }
+            //
             return AmountResult;
         }
     }
