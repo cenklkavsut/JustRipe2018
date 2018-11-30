@@ -98,22 +98,25 @@ namespace JustRipe2018
         //    FetchUserID.ExecuteNonQuery();
         //    Connect.Close();
         //}
-        public void Addjob(string valUser, string valCrop, string valDate, int valAmount, string valJobID, int ValVehicleID)
+        public void Addjob(string valUser, string valCrop, string valDate, int valAmount, string valJobID, int ValVehicleID, string valJname)
         {
             SqlConnection Connect = new SqlConnection(connectionStr);
-         
-                Connect.Open();
-            
-                int valFromCrop = getBasicCrop();
-                int valFromUser = getBasicUser();
-                int valFromType = getBasicJobType();
-            using (SqlCommand sendJob = new SqlCommand("INSERT INTO[dbo].[Job]([UserID], [CropID],[Date],[amount],[JobTypeID],[VehicleID]) VALUES" +
-             "('" + valFromUser + "','" + valFromCrop + "','"+ valDate  +  "','" + valAmount + "','" + valFromType + "','" + ValVehicleID + "')"))
-                {
+
+            Connect.Open();
+
+            int valFromCrop = getBasicCrop();
+            int valFromUser = getBasicUser();
+            int valFromType = getBasicJobType();
+            using (SqlCommand sendJob = new SqlCommand("INSERT INTO[dbo].[Job]([UserID], [CropID],[Date],[amount],[JobTypeID],[VehicleID] [JobName]) VALUES" +
+            "('" + valFromUser + "','" + valFromCrop + "','" + valDate + "','" + valAmount + "','" + valFromType + "','" + ValVehicleID + "','" + valJname + "')"))
+            {
                 sendJob.Connection = Connect;
                 sendJob.ExecuteNonQuery();
                 Connect.Close();
-                }
+
+            }
+        }
+
                 //sendJob.CommandType = CommandType.Text;
                 //sendJob.CommandText = "INSERT INTO [dbo].[Job] ([UserID], [CropID],[Date],[amount],[JobTypeID],[VehicleID]) VALUES" +
                 //  "('" + valFromUser + "','" + valFromCrop + "','  @Date  ','" + valAmount + "','" + valFromType + "','" + ValVehicleID + "')";
@@ -121,22 +124,22 @@ namespace JustRipe2018
                 //sendJob.ExecuteNonQuery();
                 //Connect.Close();
 
-            //"SELECT [CropID] FROM [dbo].[Crop] WHERE Crop_Name='" + GetID +"'";
-            //"INSERT INTO [dbo].[Orders] ([CropID],[Amount]) Values (" + valFromCrop +","+ ValAmount + ")"
-
-
-        }
-        public void ShowTimetable (string SelectDate)
-        {
-            SqlConnection Connect = new SqlConnection(connectionStr);
-            Connect.Open();
-            SqlCommand sendDate = new SqlCommand();
-            sendDate.CommandType = CommandType.Text;
-            sendDate.CommandText = "SELECT [CropID],[JobTypeID],[UserID] FROM [dbo].[Job] WHERE Date ='" + SelectDate +"'";
+                //"SELECT [CropID] FROM [dbo].[Crop] WHERE Crop_Name='" + GetID +"'";
+                //"INSERT INTO [dbo].[Orders] ([CropID],[Amount]) Values (" + valFromCrop +","+ ValAmount + ")"
 
 
 
-        }
+                public void ShowTimetable(string SelectDate)
+                {
+                    SqlConnection Connect = new SqlConnection(connectionStr);
+                    Connect.Open();
+                    SqlCommand sendDate = new SqlCommand();
+                    sendDate.CommandType = CommandType.Text;
+                    sendDate.CommandText = "SELECT [CropID],[JobTypeID],[UserID] FROM [dbo].[Job] WHERE Date ='" + SelectDate + "'";
+
+
+
+                }
         DataSet ds2;
         public DataSet dataToCb(string select)
         {

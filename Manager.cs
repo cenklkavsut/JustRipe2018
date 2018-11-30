@@ -79,7 +79,7 @@ namespace JustRipe2018
 
         private void Manager_Load(object sender, EventArgs e)
         {
-            //Helps to keep the form maximized.
+             //Helps to keep the form maximized.
             //WindowState = FormWindowState.Maximized;
             Login page = new Login();
             page.Close();
@@ -333,6 +333,7 @@ namespace JustRipe2018
         private void btnAddJobSave_Click(object sender, EventArgs e)
         {
             // Data Containers
+            string JobName;
             string cropContainer;
             string labourerContainer;
             string dateContainer;
@@ -417,19 +418,31 @@ namespace JustRipe2018
                 {
                     DatabaseClass Data = DatabaseClass.Instance;
                     Data.GetDate = date;
+                    JobName = addJobType.Text + " " + cbJCrop.Text.ToString() + " " + date;
                     Data.GetIDCrop = cbJCrop.SelectedItem.ToString();
                     Data.GetIDJobType = addJobType.SelectedItem.ToString();
                     Data.GetIDUser = cbJLabouer.SelectedItem.ToString();
-                    Data.Addjob(cbJLabouer.Text, cbJCrop.Text, date, validAmountContainer, addJobType.Text, 1);
-                    Data.Addjob(cbJLabouer.Text, cbJCrop.Text, dateHarvest, validAmountContainer, "Harvest", 1);
+                    Data.Addjob(cbJLabouer.Text, cbJCrop.Text, date, validAmountContainer, addJobType.Text, 1, JobName);
+                    Data.Addjob(cbJLabouer.Text, cbJCrop.Text, dateHarvest, validAmountContainer, "Harvest", 1, JobName);
                     MessageBox.Show("Saved Job");
+                }
+                if (addJobType.Text == "Special")
+                {
+                    DatabaseClass Data = DatabaseClass.Instance;
+                    Data.GetDate = date;
+                    JobName = addJobType.Text  + " " +cbJCrop.Text.ToString() + " " + date;
+                    Data.GetIDCrop = cbJCrop.SelectedItem.ToString();
+                    Data.GetIDJobType = addJobType.SelectedItem.ToString();
+                    Data.GetIDUser = cbJLabouer.SelectedItem.ToString(); 
+                    Data.Addjob(cbJLabouer.Text, cbJCrop.Text, date, 0 , addJobType.Text, 1, JobName);
                 }
                 
 
-                // Harvest Date Autoset (30Days) from Sowing! 
-                // Harvest Amount = Sowing Amount 
+                // Harvest Date Autoset (30Days) from Sowing! DONE
+                // Harvest Amount = Sowing Amount DONE 
                 // Amount set to NULL if Fertlise or Special 
-                // Fertalizer Tab 
+                // Fertalizer Tab + Fertalizer amount to database ! 
+                // 
                 // Pulls Job List
                 //Add Job name Autoset Crop+DatetoString() 
 
