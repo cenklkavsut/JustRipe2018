@@ -16,6 +16,7 @@ namespace JustRipe2018
             fillcomboCropType();
             fillcomboJobType();
             fillcomboLabourer();
+            fillcomboFertalJobSelect();
         }
         private static string mdfPath = Path.Combine(Application.StartupPath, "JustRipeDatabase.mdf");
         //private string connectionStr= @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\JustRipeDatabase.mdf;Integrated Security=True;Connect Timeout=30";
@@ -73,6 +74,20 @@ namespace JustRipe2018
             for (int i = 0; i < DropDownLabourer.Tables[0].Rows.Count; i++)
             {
                 cbJLabouer.Items.Add(DropDownLabourer.Tables[0].Rows[i][3].ToString());
+            }
+        }
+        void fillcomboFertalJobSelect()
+        {
+            SelectJobFert.Items.Clear();
+            DatabaseClass Connect = DatabaseClass.Instance;
+            string querySelectJobs = "SELECT [Job] FROM [dbo].[Job] WHERE [JobTypeID] = '1' ";
+            DataSet DropdownFert = Connect.dataToCb(querySelectJobs);
+            SelectJobFert.DropDownStyle = ComboBoxStyle.DropDownList;
+            SelectJobFert.Enabled = true;
+            SelectJobFert.SelectedIndex = -1;
+            for (int i = 0; i < DropdownFert.Tables[0].Rows.Count; i++)
+            {
+                SelectJobFert.Items.Add(DropdownFert.Tables[0].Rows[i][0].ToString());
             }
         }
 
@@ -339,6 +354,7 @@ namespace JustRipe2018
             string dateContainer;
             string jobTypeContainer;
             string amountContainer;
+            string jobnameHarvest;
             // Valid Data Container for uncontrolled Variables
             DateTime validDateContainer;
             // Ifnest to Check for blank/null Entry
@@ -419,6 +435,7 @@ namespace JustRipe2018
                     DatabaseClass Data = DatabaseClass.Instance;
                     Data.GetDate = date;
                     JobName = addJobType.Text + " " + cbJCrop.Text.ToString() + " " + date;
+                    jobnameHarvest = "Harvest" + " " + cbJCrop.Text.ToString() + " " + dateHarvest;
                     Data.GetIDCrop = cbJCrop.SelectedItem.ToString();
                     Data.GetIDJobType = addJobType.SelectedItem.ToString();
                     Data.GetIDUser = cbJLabouer.SelectedItem.ToString();
@@ -435,12 +452,13 @@ namespace JustRipe2018
                     Data.GetIDJobType = addJobType.SelectedItem.ToString();
                     Data.GetIDUser = cbJLabouer.SelectedItem.ToString(); 
                     Data.Addjob(cbJLabouer.Text, cbJCrop.Text, date, 0 , addJobType.Text, 1, JobName);
+                    MessageBox.Show("Saved Job");
                 }
                 
 
                 // Harvest Date Autoset (30Days) from Sowing! DONE
                 // Harvest Amount = Sowing Amount DONE 
-                // Amount set to NULL if Fertlise or Special 
+                // Amount set to NULL if Fertlise or Special n/a
                 // Fertalizer Tab + Fertalizer amount to database ! 
                 // 
                 // Pulls Job List
@@ -779,6 +797,26 @@ namespace JustRipe2018
             DataSet Fridaydata = Connect.getDataSet(GetFriday);
             DataViewDaily.ReadOnly = true;
             DataViewDaily.DataSource = Fridaydata.Tables[0];
+        }
+
+        private void BtnaddFertaliserJob_Click(object sender, EventArgs e)
+        {
+            int Tabcount = formManageJob.TabCount;
+            for (int count = 0; count < formManageJob.RowCount; count++)
+            {
+                //Changes the Tab
+                formManageJob.SelectTab(2);
+            }
+        }
+
+        private void SelectJobFert_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void BtnAddFertaliserConfirm_Click(object sender, EventArgs e)
+        {
+
         }
     }           // "Select Crop_Name AS 'Crop Name',StorageName AS 'Storage Name' ,Capacity ,Temperature AS 'Temperature (°C)' From [dbo].[CropsStorage] " +
                 //" JOIN Crop ON CropsStorage.CropID=Crop.CropID JOIN StorageType ON CropsStorage.StorageTypeId=StorageType.StorageTypeId "

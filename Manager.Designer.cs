@@ -55,6 +55,7 @@
             this.btnLogoutTime = new System.Windows.Forms.Button();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.tabJob = new System.Windows.Forms.TabPage();
+            this.BtnaddFertaliserJob = new System.Windows.Forms.Button();
             this.btnLogoutMJ = new System.Windows.Forms.Button();
             this.formManageJob = new System.Windows.Forms.TabControl();
             this.Tabaddjob = new System.Windows.Forms.TabPage();
@@ -83,6 +84,12 @@
             this.label10 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
+            this.AddFertaliserJob = new System.Windows.Forms.TabPage();
+            this.SelectJobFert = new System.Windows.Forms.ComboBox();
+            this.BtnAddFertaliserConfirm = new System.Windows.Forms.Button();
+            this.label18 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
             this.btnEditJob = new System.Windows.Forms.Button();
             this.btnAddJob = new System.Windows.Forms.Button();
             this.tabUser = new System.Windows.Forms.TabPage();
@@ -167,6 +174,7 @@
             this.formManageJob.SuspendLayout();
             this.Tabaddjob.SuspendLayout();
             this.tabDeleteJob.SuspendLayout();
+            this.AddFertaliserJob.SuspendLayout();
             this.tabUser.SuspendLayout();
             this.tabUserCntrl.SuspendLayout();
             this.tabCreateUsr.SuspendLayout();
@@ -456,7 +464,7 @@
             this.DataViewDaily.Location = new System.Drawing.Point(273, 83);
             this.DataViewDaily.Name = "DataViewDaily";
             this.DataViewDaily.RowTemplate.Height = 24;
-            this.DataViewDaily.Size = new System.Drawing.Size(906, 548);
+            this.DataViewDaily.Size = new System.Drawing.Size(766, 548);
             this.DataViewDaily.TabIndex = 31;
             // 
             // btnLogoutTime
@@ -485,6 +493,7 @@
             // 
             this.tabJob.BackColor = System.Drawing.Color.Tan;
             this.tabJob.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("tabJob.BackgroundImage")));
+            this.tabJob.Controls.Add(this.BtnaddFertaliserJob);
             this.tabJob.Controls.Add(this.btnLogoutMJ);
             this.tabJob.Controls.Add(this.formManageJob);
             this.tabJob.Controls.Add(this.btnEditJob);
@@ -496,6 +505,18 @@
             this.tabJob.Size = new System.Drawing.Size(1205, 848);
             this.tabJob.TabIndex = 2;
             this.tabJob.Text = "Manage Job";
+            // 
+            // BtnaddFertaliserJob
+            // 
+            this.BtnaddFertaliserJob.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.BtnaddFertaliserJob.Location = new System.Drawing.Point(68, 443);
+            this.BtnaddFertaliserJob.Margin = new System.Windows.Forms.Padding(4);
+            this.BtnaddFertaliserJob.Name = "BtnaddFertaliserJob";
+            this.BtnaddFertaliserJob.Size = new System.Drawing.Size(139, 64);
+            this.BtnaddFertaliserJob.TabIndex = 8;
+            this.BtnaddFertaliserJob.Text = "Add Fertaliser Job";
+            this.BtnaddFertaliserJob.UseVisualStyleBackColor = false;
+            this.BtnaddFertaliserJob.Click += new System.EventHandler(this.BtnaddFertaliserJob_Click);
             // 
             // btnLogoutMJ
             // 
@@ -514,6 +535,7 @@
             // 
             this.formManageJob.Controls.Add(this.Tabaddjob);
             this.formManageJob.Controls.Add(this.tabDeleteJob);
+            this.formManageJob.Controls.Add(this.AddFertaliserJob);
             this.formManageJob.Location = new System.Drawing.Point(240, 23);
             this.formManageJob.Margin = new System.Windows.Forms.Padding(4);
             this.formManageJob.Name = "formManageJob";
@@ -809,6 +831,67 @@
             this.label12.TabIndex = 7;
             this.label12.Text = "Crop ";
             // 
+            // AddFertaliserJob
+            // 
+            this.AddFertaliserJob.BackColor = System.Drawing.Color.Tan;
+            this.AddFertaliserJob.Controls.Add(this.SelectJobFert);
+            this.AddFertaliserJob.Controls.Add(this.BtnAddFertaliserConfirm);
+            this.AddFertaliserJob.Controls.Add(this.label18);
+            this.AddFertaliserJob.Controls.Add(this.label17);
+            this.AddFertaliserJob.Controls.Add(this.dateTimePicker2);
+            this.AddFertaliserJob.Location = new System.Drawing.Point(4, 34);
+            this.AddFertaliserJob.Name = "AddFertaliserJob";
+            this.AddFertaliserJob.Padding = new System.Windows.Forms.Padding(3);
+            this.AddFertaliserJob.Size = new System.Drawing.Size(683, 568);
+            this.AddFertaliserJob.TabIndex = 2;
+            this.AddFertaliserJob.Text = "Add Fertiliser Job ";
+            // 
+            // SelectJobFert
+            // 
+            this.SelectJobFert.FormattingEnabled = true;
+            this.SelectJobFert.Location = new System.Drawing.Point(302, 167);
+            this.SelectJobFert.Name = "SelectJobFert";
+            this.SelectJobFert.Size = new System.Drawing.Size(262, 33);
+            this.SelectJobFert.TabIndex = 10;
+            this.SelectJobFert.SelectedIndexChanged += new System.EventHandler(this.SelectJobFert_SelectedIndexChanged);
+            // 
+            // BtnAddFertaliserConfirm
+            // 
+            this.BtnAddFertaliserConfirm.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.BtnAddFertaliserConfirm.Location = new System.Drawing.Point(270, 395);
+            this.BtnAddFertaliserConfirm.Margin = new System.Windows.Forms.Padding(4);
+            this.BtnAddFertaliserConfirm.Name = "BtnAddFertaliserConfirm";
+            this.BtnAddFertaliserConfirm.Size = new System.Drawing.Size(139, 64);
+            this.BtnAddFertaliserConfirm.TabIndex = 9;
+            this.BtnAddFertaliserConfirm.Text = "Add Fertaliser Job";
+            this.BtnAddFertaliserConfirm.UseVisualStyleBackColor = false;
+            this.BtnAddFertaliserConfirm.Click += new System.EventHandler(this.BtnAddFertaliserConfirm_Click);
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(182, 246);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(113, 25);
+            this.label18.TabIndex = 3;
+            this.label18.Text = "Select Date";
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(190, 168);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(105, 25);
+            this.label17.TabIndex = 2;
+            this.label17.Text = "Select Job";
+            // 
+            // dateTimePicker2
+            // 
+            this.dateTimePicker2.Location = new System.Drawing.Point(301, 244);
+            this.dateTimePicker2.Name = "dateTimePicker2";
+            this.dateTimePicker2.Size = new System.Drawing.Size(263, 30);
+            this.dateTimePicker2.TabIndex = 1;
+            // 
             // btnEditJob
             // 
             this.btnEditJob.BackColor = System.Drawing.SystemColors.ActiveCaption;
@@ -817,7 +900,7 @@
             this.btnEditJob.Name = "btnEditJob";
             this.btnEditJob.Size = new System.Drawing.Size(139, 64);
             this.btnEditJob.TabIndex = 4;
-            this.btnEditJob.Text = "Edit/Delete Job";
+            this.btnEditJob.Text = "Delete Job";
             this.btnEditJob.UseVisualStyleBackColor = false;
             this.btnEditJob.Click += new System.EventHandler(this.btnEditJob_Click);
             // 
@@ -1667,6 +1750,8 @@
             this.Tabaddjob.PerformLayout();
             this.tabDeleteJob.ResumeLayout(false);
             this.tabDeleteJob.PerformLayout();
+            this.AddFertaliserJob.ResumeLayout(false);
+            this.AddFertaliserJob.PerformLayout();
             this.tabUser.ResumeLayout(false);
             this.tabUserCntrl.ResumeLayout(false);
             this.tabCreateUsr.ResumeLayout(false);
@@ -1808,5 +1893,12 @@
         private System.Windows.Forms.Button btnMMonday;
         private System.Windows.Forms.Button btnMFriday;
         private System.Windows.Forms.Button btnMThursday;
+        private System.Windows.Forms.Button BtnaddFertaliserJob;
+        private System.Windows.Forms.TabPage AddFertaliserJob;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.DateTimePicker dateTimePicker2;
+        private System.Windows.Forms.Button BtnAddFertaliserConfirm;
+        private System.Windows.Forms.ComboBox SelectJobFert;
     }
 }

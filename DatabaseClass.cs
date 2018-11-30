@@ -107,7 +107,7 @@ namespace JustRipe2018
             int valFromCrop = getBasicCrop();
             int valFromUser = getBasicUser();
             int valFromType = getBasicJobType();
-            using (SqlCommand sendJob = new SqlCommand("INSERT INTO[dbo].[Job]([UserID], [CropID],[Date],[amount],[JobTypeID],[VehicleID] [JobName]) VALUES" +
+            using (SqlCommand sendJob = new SqlCommand("INSERT INTO[dbo].[Job]([UserID], [CropID],[Date],[amount],[JobTypeID],[VehicleID] ,[Job]) VALUES" +
             "('" + valFromUser + "','" + valFromCrop + "','" + valDate + "','" + valAmount + "','" + valFromType + "','" + ValVehicleID + "','" + valJname + "')"))
             {
                 sendJob.Connection = Connect;
