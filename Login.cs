@@ -8,9 +8,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-//using System.Data.SqlClient;
-//using System.Data;
-
 
 //[Name]:Brett leary
 //[SID]:1553265
@@ -70,7 +67,6 @@ namespace JustRipe2018
                     lblLogin.Text = "1st attempt failed: username or password is incorrect";
                 }
                 passwordCounter += 1;//the counter for each time wrong
-
             } 
         }
 

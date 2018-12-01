@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.Data;
+using System.Security.Cryptography;//
+
 
 namespace JustRipe2018
 {
@@ -83,10 +85,33 @@ namespace JustRipe2018
             DataSet ds2 = new DataSet();//call the data set
             daSearch.Fill(ds2, select);//fill it with the dataset and sql value.
             return ds2;
-        } 
+        }
+
+        ////
+        //public string ComputeSha256HashConverter(string rawData)
+        //{
+        //    // Create a SHA256 
+        //    SHA256 sha256Hash = SHA256.Create();  //create a sha 256    after it works change sha to md5
+
+        //    // ComputeHash - returns byte array  
+        //        byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(rawData));//store sha256 data in a bytes
+        //        // Convert byte array to a string   
+        //        StringBuilder builder = new StringBuilder();//use the string builder to store a bytes.
+        //        for (int i = 0; i < bytes.Length; i++)
+        //        {
+        //            builder.Append(bytes[i].ToString(rawData));//loop through the data and convert it to sha256.
+        //        }
+        //        return builder.ToString();//return the builder as a sha256 string.Also store as nvarchar in database to store.
+        //}
+        ////
 
         public bool loginFul(string name,string password)
         {
+            ////hash
+            //string plainData = password.ToLower();//
+            //string hashedData = ComputeSha256HashConverter(plainData);//after hash is finished then add hashedData in place of passwort to lower in query.
+            //hash and add in place of password
+
             //variables for implementation.
             bool x = false;//confirms login
             SqlDataAdapter sda = new SqlDataAdapter("SELECT COUNT(*) FROM [dbo].[users] WHERE username='" + name.ToLower() + "' AND password='" + password.ToLower()  

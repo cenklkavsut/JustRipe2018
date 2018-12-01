@@ -92,7 +92,7 @@ namespace JustRipe2018
                 tabStoreOpt.SelectTab(0);
                 //implementation
             } //change the query based on the buyers
-            DatabaseClass dbCon = DatabaseClass.Instance;
+            DatabaseClass dbCon = DatabaseClass.Instance;//id to fix the not name display issue due to logic.
             var select = "Select Amount,Crop_Name AS 'Crop Name' From [dbo].[Orders] INNER JOIN Crop ON Orders.CropID=Crop.CropID;";
             var ds = dbCon.getDataSet(select);
             dataGridAddStore.ReadOnly = true;
@@ -106,9 +106,10 @@ namespace JustRipe2018
             {
                 tabStoreOpt.SelectTab(0);
             }
-            try
-            {
-                DatabaseClass dbCon = DatabaseClass.Instance;
+        try
+        {
+                //requirment anylis error need to display name near that customer only fix displaying id.
+                DatabaseClass dbCon = DatabaseClass.Instance;//3rth error not displaying customer name.
                 var select = "Select Crop_Name AS 'Crop Name',StorageName AS 'Storage Name' ,Capacity ,Amount,Temperature AS 'Temperature (°C)' From [dbo].[CropsStorage] " +
                 " JOIN Crop ON CropsStorage.CropID=Crop.CropID JOIN StorageType ON CropsStorage.StorageTypeId=StorageType.StorageTypeId ";
                 var ds = dbCon.getDataSet(select);
@@ -124,10 +125,10 @@ namespace JustRipe2018
                 MessageBox.Show(" No stocks currently available!");
             }
         }
-            catch (Exception)
-            {
+        catch (Exception)
+        {
                 MessageBox.Show("Wrong input value try again!");
-            }
+        }
 }
 
         private void btnBuyer_Click(object sender, EventArgs e)
