@@ -10,8 +10,19 @@ namespace JustRipe2018
 {
     class DatabaseClass
     {
-        string getID;
-        public string GetID { get { return getID; } set { getID = value; } }
+        string getIDCrop;
+        string getIDUser;
+        string getDate;
+        string getIDJobType;
+        string getUsrNameID;
+        string getUserName;
+        public string GetDate { get { return getDate; } set { getDate = value; } }
+        public string GetIDCrop { get { return getIDCrop; } set { getIDCrop = value; } }
+        public string GetIDUser { get { return getIDUser; } set { getIDUser = value; } }
+        public string GetIDJobType { get { return getIDJobType; } set { getIDJobType = value; } }
+        public string GetUsrNameID { get { return getUsrNameID; } set { getUsrNameID = value; } }
+        public string GetUserName { get { return getUserName; } set { getUserName = value; } }
+
         //private string connectionStr= @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\JustRipeDatabase.mdf;Integrated Security=True;Connect Timeout=30";
         private string connectionStr = Properties.Settings.Default.connectionToDB;
         //Connection string for connecting to the db
@@ -164,15 +175,28 @@ namespace JustRipe2018
             cnn.Close();
         }
 
-        public DataSet DataToCbUsrSelect(string select)
+        public int getUserID()
         {
-            SqlConnection conn = new SqlConnection();//call the connection.
-            conn.ConnectionString = connectionStr;//connection string to connect.
-            conn.Open();//open connection.
-            SqlDataAdapter daSearch = new SqlDataAdapter(select, conn);//execute the sql and confirm connection.
-            DataSet dataUser = new DataSet();//call the data set
-            daSearch.Fill(dataUser, select);//fill it with the dataset and sql value.
-            return dataUser;
+            //query to return the userID from the selected username
+            var usrID = "SELECT [UserID] FROM [dbo].[users] WHERE Username='" + GetUsrNameID + "'";
+            SqlConnection sql = new SqlConnection(connectionStr);//set up the connection of it
+            SqlCommand myCommand = new SqlCommand(usrID, sql);//the command tos search for it
+            myCommand.Connection.Open();//open the connection
+            int UserId = (int)myCommand.ExecuteScalar();//input the query result into the string through casting.
+            myCommand.Connection.Close();//Close the connection
+            return UserId;//return null error.
+        }
+
+        public string getUsrName()
+        {
+            //query to pull username and match with created username if possible
+            var username = "SELECT [Username] FROM [dbo].[users] WHERE Username='" + GetUserName + "'";
+            SqlConnection sql = new SqlConnection(connectionStr);//set up the connection of it
+            SqlCommand myCommand = new SqlCommand(username, sql);//the command tos search for it
+            myCommand.Connection.Open();//open the connection
+            string Username = (string)myCommand.ExecuteScalar();//input the query result into the string through casting.
+            myCommand.Connection.Close();//Close the connection
+            return Username;//return null error.
         }
 
         private static DatabaseClass instance;

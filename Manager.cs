@@ -165,9 +165,8 @@ namespace JustRipe2018
             //pulling the users names from the db to display in the drop down
             drpdwnSelectUsr.Items.Clear();//clears the items when starts.
             DatabaseClass dbDropDown = DatabaseClass.Instance;//takes info from the connection string
-            var select = "SELECT CONCAT ([First_Name], ' ', [Last__Name]) AS [FullName] FROM [dbo].[users]";//sql query to be executed
-            //var select = "SELECT FormattedName FROM [dbo].[users]";
-            var dataUser = dbDropDown.DataToCbUsrSelect(select);//the data to be selected
+            var usrname = "SELECT [Username] FROM [dbo].[users]";//sql query to be executed
+            var dataUser = dbDropDown.dataToCb(usrname);//the data to be selected
             drpdwnSelectUsr.DropDownStyle = ComboBoxStyle.DropDownList;//makes it a list
             drpdwnSelectUsr.Enabled = true;//enables the dropdown.
             drpdwnSelectUsr.SelectedIndex = -1;//allows to select the value from empty.   
@@ -199,9 +198,12 @@ namespace JustRipe2018
 
         private void button1_Click_1(object sender, EventArgs e)
         {
+
+            //declaring variables to be inputed
             string managerRole = "Manager";
             string labourerRole = "Labourer";
 
+            //assinging values to checkboxes depending on which role they are
             if (chkbxLaborCreate.Checked)
             {
                 chkbxLaborCreate.Text = labourerRole;
@@ -212,12 +214,28 @@ namespace JustRipe2018
                 chkbxManagerCreate.Text = managerRole;
             }
 
+            //determines if any fields are null and sends an error to the user
             if (txtFNUsrCreate.Text == null || txtFNUsrCreate.Text == "" || txtLNUsrCreate.Text == null || txtLNUsrCreate.Text == "" ||
                 txtUsrnameCreate.Text == null || txtUsrnameCreate.Text == "" || txtPsswrdCreate.Text == null || txtPsswrdCreate.Text == "")
                 //|| !chkbxLaborCreate.Checked || !chkbxManagerCreate.Checked)
             {
                 MessageBox.Show("Error! Empty Fields Detected!");
             }
+
+            //calls the database and checks to see if the created username matches any of the
+            //existing usernames in the database
+            DatabaseClass Connect = DatabaseClass.Instance;
+            Connect.GetUserName = txtUsrnameCreate.Text;
+            Connect.getUsrName();
+            string newUsername = Connect.getUsrName();
+        
+            //checks the current username to see if there are any matches in the database
+            if (txtUsrnameCreate.Text == newUsername)
+            {
+                MessageBox.Show("Username already in use! Please enter a new username.");
+            }
+
+            //if all boxes are filled, create user with different parameters based on which role is selected
             else
             {
                 if (chkbxManagerCreate.Checked)
@@ -233,7 +251,7 @@ namespace JustRipe2018
                     MessageBox.Show("User Created!");//the result if no error.   
                 }
             }
-            //Allows To Clean text in the text box and dropdowns after finished.
+            //Allows To Clean text in the text box and dropdowns after user is created.
             txtFNUsrCreate.Text = "";
             txtLNUsrCreate.Text = "";
             txtUsrnameCreate.Text = "";
@@ -269,6 +287,43 @@ namespace JustRipe2018
         private void button4_Click(object sender, EventArgs e)
         {
 
+            DatabaseClass Connect = DatabaseClass.Instance;
+            Connect.getUserID();
+
+            int valFromUsername = Connect.getUserID();
+
+            DatabaseClass dbCon = new DatabaseClass();
+            var select = "Delete From [dbo].[users] Where UserID='" + valFromUsername + "'";
+            var ds = dbCon.getDataSet(select);
+
+            //updating dropdown box with current users
+            //pulling the users names from the db to display in the drop down
+            drpdwnSelectUsr.Items.Clear();//clears the items when starts.
+            DatabaseClass dbDropDown = DatabaseClass.Instance;//takes info from the connection string
+            var usrname = "SELECT [Username] FROM [dbo].[users]";//sql query to be executed
+            var dataUser = dbDropDown.dataToCb(usrname);//the data to be selected
+            drpdwnSelectUsr.DropDownStyle = ComboBoxStyle.DropDownList;//makes it a list
+            drpdwnSelectUsr.Enabled = true;//enables the dropdown.
+            drpdwnSelectUsr.SelectedIndex = -1;//allows to select the value from empty.   
+            for (int i = 0; i < dataUser.Tables[0].Rows.Count; i++)//a loop that inputs values based on the row.
+            {
+                drpdwnSelectUsr.Items.Add(dataUser.Tables[0].Rows[i][0]);
+            }
+
+            //clearing fields of data
+            txtFNUsrEdit.Text = "";
+            txtLNUsrEdit.Text = "";
+            txtUsrnameEdit.Text = "";
+            txtPsswrdEdit.Text = "";
+            drpdwnSelectUsr.Text = "";
+            chkbxLaborEdit.Checked = false;
+            chkbxManagerEdit.Checked = false;
+
+            //shows user that they are successful in removing another user
+            MessageBox.Show("User Successfully Deleted!");
+
+
+
         }
 
         private void textBox12_TextChanged(object sender, EventArgs e)
@@ -283,6 +338,53 @@ namespace JustRipe2018
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
+            //pulls userID from the selected user in the database
+            DatabaseClass Connect = DatabaseClass.Instance;
+            Connect.GetUsrNameID = drpdwnSelectUsr.Text;
+
+            Connect.getUserID();
+
+            int valFromUsername = Connect.getUserID();
+
+            //display first name of selected user in text box
+            DatabaseClass dbCon = new DatabaseClass();
+            var select = "Select [First_Name] From [dbo].[users] Where UserID='" + valFromUsername + "'";
+            var ds = dbCon.getDataSet(select);
+
+            for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+                txtFNUsrEdit.Text = ds.Tables[0].Rows[i]["First_Name"].ToString();
+
+            //display last name of selected user in text box
+            DatabaseClass dbCon1 = new DatabaseClass();
+            var select1 = "Select [Last_Name] From [dbo].[users] Where UserID='" + valFromUsername + "'";
+            var ds1 = dbCon.getDataSet(select1);
+
+            for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+                txtLNUsrEdit.Text = ds1.Tables[0].Rows[i]["Last_Name"].ToString();
+
+            //display username of selected user in text box
+            DatabaseClass dbCon2 = new DatabaseClass();
+            var select2 = "Select [Username] From [dbo].[users] Where UserID='" + valFromUsername + "'";
+            var ds2 = dbCon.getDataSet(select2);
+
+            for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+                txtUsrnameEdit.Text = ds2.Tables[0].Rows[i]["Username"].ToString();
+
+            DatabaseClass dbCon3 = new DatabaseClass();
+            var select3 = "Select [Role] From [dbo].[users] Where UserID='" + valFromUsername + "'";
+            var ds3 = dbCon.getDataSet(select2);
+
+
+            //if (ds3.Text = "Manager")
+            //{
+
+            //}
+
+
+            //TEST MESSAGE BOX
+            //int valFromUsername = Connect.getUserID();
+            //string txtFromUsername = valFromUsername.ToString();
+            //MessageBox.Show(txtFromUsername);
 
         }
 
@@ -624,6 +726,16 @@ namespace JustRipe2018
         }
 
         private void dataGridAddStore_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void txtFNUsrEdit_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox18_TextChanged(object sender, EventArgs e)
         {
 
         }
