@@ -142,3 +142,17 @@ C:\Users\Charlie Bryant\Documents\GitHub\JustRipe2018\bin\Debug\JustRipeDatabase
 C:\Users\Charlie Bryant\Documents\GitHub\JustRipe2018\bin\Debug\JustRipeDatabase_log.ldf
 H:\My Documents\Development\JustRipe2018\bin\Debug\JustRipeDatabase.mdf
 H:\My Documents\Development\JustRipe2018\bin\Debug\JustRipeDatabase_log.ldf
+H:\My Documents\Development\JustRipe2018_Master\JustRipe2018\bin\Debug\JustRipeDatabase.mdf
+H:\My Documents\Development\JustRipe2018_Master\JustRipe2018\bin\Debug\JustRipeDatabase_log.ldf
+H:\My Documents\Development\JustRipe2018_Master\JustRipe2018\bin\Debug\JustRipe2018.exe.config
+H:\My Documents\Development\JustRipe2018_Master\JustRipe2018\bin\Debug\JustRipe2018.exe
+H:\My Documents\Development\JustRipe2018_Master\JustRipe2018\bin\Debug\JustRipe2018.pdb
+H:\My Documents\Development\JustRipe2018_Master\JustRipe2018\obj\Debug\JustRipe2018.csprojResolveAssemblyReference.cache
+H:\My Documents\Development\JustRipe2018_Master\JustRipe2018\obj\Debug\JustRipe2018.Labourer.resources
+H:\My Documents\Development\JustRipe2018_Master\JustRipe2018\obj\Debug\JustRipe2018.Login.resources
+H:\My Documents\Development\JustRipe2018_Master\JustRipe2018\obj\Debug\JustRipe2018.Manager.resources
+H:\My Documents\Development\JustRipe2018_Master\JustRipe2018\obj\Debug\JustRipe2018.Properties.Resources.resources
+H:\My Documents\Development\JustRipe2018_Master\JustRipe2018\obj\Debug\JustRipe2018.csproj.GenerateResource.cache
+H:\My Documents\Development\JustRipe2018_Master\JustRipe2018\obj\Debug\JustRipe2018.csproj.CoreCompileInputs.cache
+H:\My Documents\Development\JustRipe2018_Master\JustRipe2018\obj\Debug\JustRipe2018.exe
+H:\My Documents\Development\JustRipe2018_Master\JustRipe2018\obj\Debug\JustRipe2018.pdb

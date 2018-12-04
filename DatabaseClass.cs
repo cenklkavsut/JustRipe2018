@@ -12,8 +12,12 @@ namespace JustRipe2018
 {
     class DatabaseClass
     {
+        string getUsrNameID;
+        string getUserName;
         string getID;
         public string GetID { get { return getID; } set { getID = value; } }
+        public string GetUsrNameID { get { return getUsrNameID; } set { getUsrNameID = value; } }
+        public string GetUserName { get { return getUserName; } set { getUserName = value; } }
         //private string connectionStr= @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\JustRipeDatabase.mdf;Integrated Security=True;Connect Timeout=30";
         private string connectionStr = Properties.Settings.Default.connectionToDB;
         //Connection string for connecting to the db
@@ -329,5 +333,83 @@ namespace JustRipe2018
 
             return dateResult;
         }
+
+        public void UserCreator(string valUsername, string valPassword, string valFirstName, string valLastName, string valRole)
+        {
+            //This is the connection string that assigns to the database. 
+            SqlConnection cnn = new SqlConnection(connectionStr);
+
+            //This is command class which will handle the query and connection object.  
+            SqlCommand cmdAddUser = new SqlCommand();
+            //SqlCommand MyCommand3 = new SqlCommand();
+
+            //This insert query 
+            //queries that input data and retive data based on the values from the store.
+            cmdAddUser.CommandType = CommandType.Text;
+            cmdAddUser.CommandText = "INSERT INTO dbo.users (Username, Password, [First Name], [Last Name], Role)" +
+                "VALUES ('" + valUsername + "', '" + valPassword + "', '" + valFirstName + "', '" + valLastName + "', '" + valRole + "')";
+            cmdAddUser.Connection = cnn;
+
+            cnn.Open();
+            cmdAddUser.ExecuteNonQuery();
+            cnn.Close();
+        }
+
+        public void UserEditor(string valUsername, string valPassword, string valFirstName, string valLastName, string valRole, int userID)
+        {
+            //This is the connection string that assigns to the database. 
+            SqlConnection cnn = new SqlConnection(connectionStr);
+
+            //This is command class which will handle the query and connection object.  
+            SqlCommand cmdUpdateUser = new SqlCommand();
+            //SqlCommand MyCommand3 = new SqlCommand();
+
+
+            //This insert query 
+            //queries that input data and retive data based on the values from the store.
+            cmdUpdateUser.CommandType = CommandType.Text;
+            cmdUpdateUser.CommandText = "UPDATE dbo.users SET Username='" + valUsername + "', Password='" + valPassword + "', [First Name]='" + valFirstName + "', [Last Name]='" + valLastName + "', Role='" + valRole + "' Where UserID='" + userID + "'";
+            cmdUpdateUser.Connection = cnn;
+
+            cnn.Open();
+            cmdUpdateUser.ExecuteNonQuery();
+            cnn.Close();
+        }
+
+        public int getUserID()
+        {
+            //query to return the userID from the selected username
+            var usrID = "SELECT [UserID] FROM [dbo].[users] WHERE Username='" + GetUsrNameID + "'";
+            SqlConnection sql = new SqlConnection(connectionStr);//set up the connection of it
+            SqlCommand myCommand = new SqlCommand(usrID, sql);//the command tos search for it
+            myCommand.Connection.Open();//open the connection
+            try
+            {
+
+                int UserId = (int)myCommand.ExecuteScalar();//input the query result into the string through casting.//
+
+                myCommand.Connection.Close();//Close the connection
+                return UserId;//return null error.
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
+
+        public string getUsrName()
+        {
+            //query to pull username and match with created username if possible
+            var username = "SELECT [Username] FROM [dbo].[users] WHERE Username='" + GetUserName + "'";
+            SqlConnection sql = new SqlConnection(connectionStr);//set up the connection of it
+            SqlCommand myCommand = new SqlCommand(username, sql);//the command tos search for it
+            myCommand.Connection.Open();//open the connection
+            string Username = (string)myCommand.ExecuteScalar();//input the query result into the string through casting.
+            myCommand.Connection.Close();//Close the connection
+            return Username;//return null error.
+        }
+
     }
 }
