@@ -213,7 +213,7 @@ namespace JustRipe2018
         }
         public string Getvehicle(string Jobtype, string Date)// GET DATE
         {
-            var getvehicle = "SELECT [VehicleID] FROM [dbo].[vehicle] INNER JOIN JobType ON vehicle.JobTypeID = JobType.JobTypeID WHERE JobName = '" + Jobtype + "'";
+            var getvehicle = "SELECT [VehicleID] FROM [dbo].[vehicle] JOIN JobType ON vehicle.JobTypeID = JobType.JobTypeID WHERE JobName = '" + Jobtype + "'";
             var getJobs = "SELECT [VehicleID] FROM [dbo].[Job] WHERE Date = '" + Date + "'";
             SqlConnection conn = new SqlConnection(connectionStr);
             conn.ConnectionString = connectionStr;
@@ -224,10 +224,10 @@ namespace JustRipe2018
             DataSet JobList = new DataSet();
             myvehicle.Fill(VehicleList, getvehicle);
             myjob.Fill(JobList, getJobs);
-            string AvailableVehicle="";
-            for (int i = 0; i < VehicleList.Tables[0].Rows.Count; i++)
+            string AvailableVehicle= "";
+            for (int j = 0; j < JobList.Tables[getvehicle].Rows.Count; j++)
             {
-                for (int j = 0; j < JobList.Tables[getvehicle].Rows.Count; j++)
+                for (int i = 0; i < VehicleList.Tables[0].Rows.Count; i++)
                     if (VehicleList.Tables[0].Rows[i][0].ToString() == JobList.Tables[0].Rows[i][0].ToString())
                     {
                         AvailableVehicle = "No available vehicle";
