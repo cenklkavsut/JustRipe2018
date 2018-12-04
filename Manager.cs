@@ -93,7 +93,9 @@ namespace JustRipe2018
                 //implementation
             } //change the query based on the buyers
             DatabaseClass dbCon = DatabaseClass.Instance;//id to fix the not name display issue due to logic.
-            var select = "Select Amount,Crop_Name AS 'Crop Name' From [dbo].[Orders] INNER JOIN Crop ON Orders.CropID=Crop.CropID;";
+            var select = "Select Amount,Crop_Name AS 'Crop Name',Customer.FirstName AS 'Customer Name',Customer.Surname AS 'Customer Surname' From [dbo].[Orders] "
+                +"INNER JOIN Crop ON Orders.CropID=Crop.CropID"
+                + " INNER JOIN Customer ON Orders.CustomerID=Customer.CustomerID;";
             var ds = dbCon.getDataSet(select);
             dataGridAddStore.ReadOnly = true;
             dataGridAddStore.DataSource = ds.Tables[0];

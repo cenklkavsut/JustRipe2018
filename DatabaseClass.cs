@@ -54,25 +54,28 @@ namespace JustRipe2018
             //allows for a nested query
             int valFromCrop= getBasicCrop();//
 
-            cmdInserOrderId.CommandType = CommandType.Text;//queries that input data and retive data based on the values from the store.
-            cmdInserOrderId.CommandText = "INSERT INTO [dbo].[Orders] ([CropID],[Amount]) Values (" + valFromCrop +","+ ValAmount + ")";//get the id from the class.
-            cmdInserOrderId.Connection = cnn;
-            cmdInserOrderId.ExecuteNonQuery();//execute query.
-
-            SqlCommand cmdInserCustomer = new SqlCommand();
-            cmdInserCustomer.CommandType = CommandType.Text;
-            cmdInserCustomer.CommandText = "INSERT INTO [dbo].[Customer] ([First Name],[Surname],[Contact Number],[Email]) VALUES" +
-              "('" + valFirstN + "','" + valSurname + "'," + valContact + ",'" + valEmail + "')";
+                SqlCommand cmdInserCustomer = new SqlCommand();
+                cmdInserCustomer.CommandType = CommandType.Text;
+                cmdInserCustomer.CommandText = "INSERT INTO [dbo].[Customer] ([FirstName],[Surname],[Contact Number],[Email]) VALUES" +
+                  "('" + valFirstN + "','" + valSurname + "'," + valContact + ",'" + valEmail + "')";
                 cmdInserCustomer.Connection = cnn;
-            cmdInserCustomer.ExecuteNonQuery();//execute query.
+                cmdInserCustomer.ExecuteNonQuery();//execute query.           
+               
+                int returnCustomerId = getBasicCustomer(valFirstN, valSurname);//
+                
+                cmdInserOrderId.CommandType = CommandType.Text;//queries that input data and retive data based on the values from the store.
+                cmdInserOrderId.CommandText = "INSERT INTO [dbo].[Orders] ([CropID],[CustomerID],[Amount]) Values (" + valFromCrop + "," + returnCustomerId + "," + ValAmount + ")";//get the id from the class.
+                cmdInserOrderId.Connection = cnn;
+                cmdInserOrderId.ExecuteNonQuery();//execute query.
 
-            cnn.Close();//close the database connection.
-            
+                cnn.Close();//close the database connection.
+
+
             }
             catch (Exception ex) 
              {
               //if error close application
-              Environment.Exit(1);
+              //Environment.Exit(1);
             }  // Create a SqlDataAdapter based on a SELECT query.
         }
 
@@ -157,7 +160,8 @@ namespace JustRipe2018
             string job= (string)myCommand.ExecuteScalar();//input the query result into the string through casting.
             myCommand.Connection.Close();//Close the connection
             return job ;
-        }      
+        }             
+
 
         //
         public int getBasicCrop()
@@ -170,6 +174,19 @@ namespace JustRipe2018
             int CropId = (int)myCommand.ExecuteScalar();//input the query result into the string through casting.
             myCommand.Connection.Close();//Close the connection
             return CropId;//return null error.
+        }
+
+        public int getBasicCustomer(string valFirstN, string valSurname)
+        {
+            //query of the value
+            var selCustomerId = "SELECT [CustomerID] FROM [dbo].[Customer] WHERE FirstName='" + valFirstN + "' AND Surname = '" + valSurname +"'";
+            SqlConnection sql = new SqlConnection(connectionStr);//set up the connection of it
+            SqlCommand myCommand = new SqlCommand(selCustomerId, sql);//the command to search for it
+            myCommand.Connection.Open();//open the connectionN [Crop]
+            int CustomerId = (int)myCommand.ExecuteScalar();//input the query result into the string through casting.
+            myCommand.Connection.Close();//Close the connection
+           
+            return CustomerId;//return null error.
         }
 
         // The attribute for replacing the calling part.
