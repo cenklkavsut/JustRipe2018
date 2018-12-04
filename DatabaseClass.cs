@@ -17,6 +17,8 @@ namespace JustRipe2018
         string getIDUser;
         string getDate;
         string getIDJobType;
+        string getJobname;
+        public string GetJobname { get { return getJobname; } set { getJobname = value; } }
         public string GetDate { get { return getDate; } set { getDate = value; } }
         public string GetIDCrop { get { return getIDCrop; } set { getIDCrop = value; } }
         public string GetIDUser { get { return getIDUser; } set { getIDUser = value; } }
@@ -98,7 +100,7 @@ namespace JustRipe2018
         //    FetchUserID.ExecuteNonQuery();
         //    Connect.Close();
         //}
-        public void Addjob(string valUser, string valCrop, string valDate, int valAmount, string valJobID, int ValVehicleID, string valJname)
+        public void Addjob(string valUser, string valCrop, string valDate, int valAmount, string valJobID, string ValVehicleID, string valJname)
         {
             SqlConnection Connect = new SqlConnection(connectionStr);
 
@@ -107,14 +109,38 @@ namespace JustRipe2018
             int valFromCrop = getBasicCrop();
             int valFromUser = getBasicUser();
             int valFromType = getBasicJobType();
-            using (SqlCommand sendJob = new SqlCommand("INSERT INTO[dbo].[Job]([UserID], [CropID],[Date],[amount],[JobTypeID],[VehicleID] ,[Job]) VALUES" +
+            using (SqlCommand sendJob = new SqlCommand("INSERT INTO[dbo].[Job] ([UserID], [CropID],[Date],[amount],[JobTypeID],[VehicleID] ,[Job]) VALUES" +
             "('" + valFromUser + "','" + valFromCrop + "','" + valDate + "','" + valAmount + "','" + valFromType + "','" + ValVehicleID + "','" + valJname + "')"))
             {
+                sendJob.Connection = Connect;
+                try
+                {
+                sendJob.ExecuteNonQuery();
+
+                }
+                catch (Exception)
+                {
+
+                   
+                }
+                Connect.Close();
+
+            }
+        }
+        public void AddFertalizer (string valUser, string valCrop, string valDate, int valAmount, string valJobID, string ValVehicleID, string valJname)
+        {
+            SqlConnection Connect = new SqlConnection(connectionStr);
+
+            Connect.Open();
+            int valFromUser = getBasicUser();
+            SqlCommand sendJob = new SqlCommand("INSERT INTO[dbo].[Job](UserID, CropID,Date,amount,JobTypeID,VehicleID ,Job) VALUES" +
+            "('" + valFromUser + "','" + valCrop + "','" + valDate + "','" + valAmount + "','" + valJobID + "','" + ValVehicleID + "','" + valJname + "')");
+      
                 sendJob.Connection = Connect;
                 sendJob.ExecuteNonQuery();
                 Connect.Close();
 
-            }
+           
         }
 
                 //sendJob.CommandType = CommandType.Text;
@@ -184,6 +210,44 @@ namespace JustRipe2018
             int JobTypeId = (int)myCommand.ExecuteScalar();//input the query result into the string through casting.
             myCommand.Connection.Close();//Close the connection
             return JobTypeId;//return null error.
+        }
+        public string Getvehicle(string Jobtype, string Date)// GET DATE
+        {
+            var getvehicle = "SELECT [VehicleID] FROM [dbo].[vehicle] INNER JOIN JobType ON vehicle.JobTypeID = JobType.JobTypeID WHERE JobName = '" + Jobtype + "'";
+            var getJobs = "SELECT [VehicleID] FROM [dbo].[Job] WHERE Date = '" + Date + "'";
+            SqlConnection conn = new SqlConnection(connectionStr);
+            conn.ConnectionString = connectionStr;
+            conn.Open();
+            SqlDataAdapter myvehicle = new SqlDataAdapter(getvehicle, conn);
+            SqlDataAdapter myjob = new SqlDataAdapter(getJobs, conn);
+            DataSet VehicleList= new DataSet();
+            DataSet JobList = new DataSet();
+            myvehicle.Fill(VehicleList, getvehicle);
+            myjob.Fill(JobList, getJobs);
+            string AvailableVehicle="";
+            for (int i = 0; i < VehicleList.Tables[0].Rows.Count; i++)
+            {
+                for (int j = 0; j < JobList.Tables[getvehicle].Rows.Count; j++)
+                    if (VehicleList.Tables[0].Rows[i][0].ToString() == JobList.Tables[0].Rows[i][0].ToString())
+                    {
+                        AvailableVehicle = "No available vehicle";
+                    }
+                    else
+                    {
+                      
+
+                         AvailableVehicle = VehicleList.Tables[0].Rows[i][0].ToString();
+                       /// return AvailableVehicle;
+
+                    }
+                                                                                                    
+            }
+          
+            return AvailableVehicle;
+
+
+            // IF THIS WORKS IMPLEMENT FOR THE FERTALIZER ! 
+
         }
         private static DatabaseClass instance;
         //properties for calling the database class 

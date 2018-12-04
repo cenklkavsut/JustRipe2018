@@ -12,6 +12,7 @@ namespace JustRipe2018
     {
         public Manager()
         {
+            //initilizes form and fills comboboxes
             InitializeComponent();
             fillcomboCropType();
             fillcomboJobType();
@@ -19,20 +20,12 @@ namespace JustRipe2018
             fillcomboFertalJobSelect();
         }
         private static string mdfPath = Path.Combine(Application.StartupPath, "JustRipeDatabase.mdf");
-        //private string connectionStr= @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\JustRipeDatabase.mdf;Integrated Security=True;Connect Timeout=30";
+        string getcropfert;
+        int getamountfert;
+        public string GetcropFert { get { return getcropfert; } set { getcropfert = value; } }
+        public int GetamountFert { get { return getamountfert; } set { getamountfert = value; } }
 
-        //private string connectionStr = Properties.Settings.Default.connectionToDB;
-
-        //var select = "SELECT DISTINCT [Crop_Name] FROM [dbo].[Crop]";//sql query to be executed
-        //var ds2 = dbDropDown.dataToCb(select);//the data to be selected
-        //cbCropType.DropDownStyle = ComboBoxStyle.DropDownList;//makes it a list
-        //    cbCropType.Enabled = true;//enables the dropdown.
-        //    cbCropType.SelectedIndex = -1;//allows to select the value from empty.
-        //    for (int i = 0; i<ds2.Tables[0].Rows.Count; i++)//a loop that inputs values based on the row.
-        //    {
-        //        cbCropType.Items.Add(ds2.Tables[0].Rows[i][0]); }
-
-
+        // methods to fill comboboxes
         void fillcomboCropType()
         {
             cbJCrop.Items.Clear();
@@ -69,11 +62,15 @@ namespace JustRipe2018
             string queryLabourerSelect = "SELECT * From [dbo].[users] WHERE [Role] = 'Labourer' ";
             DataSet DropDownLabourer = Connect.dataToCb(queryLabourerSelect);
             cbJLabouer.DropDownStyle = ComboBoxStyle.DropDownList;
+            SelectLabourerFertalise.DropDownStyle = ComboBoxStyle.DropDownList;
             cbJLabouer.Enabled = true;
+            SelectLabourerFertalise.Enabled = true;
             cbJLabouer.SelectedIndex = -1;
+            SelectLabourerFertalise.SelectedIndex = -1;
             for (int i = 0; i < DropDownLabourer.Tables[0].Rows.Count; i++)
             {
                 cbJLabouer.Items.Add(DropDownLabourer.Tables[0].Rows[i][3].ToString());
+                SelectLabourerFertalise.Items.Add(DropDownLabourer.Tables[0].Rows[i][3].ToString());
             }
         }
         void fillcomboFertalJobSelect()
@@ -87,11 +84,12 @@ namespace JustRipe2018
             SelectJobFert.SelectedIndex = -1;
             for (int i = 0; i < DropdownFert.Tables[0].Rows.Count; i++)
             {
-                SelectJobFert.Items.Add(DropdownFert.Tables[0].Rows[i][0].ToString());
+
+             SelectJobFert.Items.Add(DropdownFert.Tables[0].Rows[i][0].ToString());
             }
         }
 
-
+        //Loads Manager.cs and Sets Apperance
         private void Manager_Load(object sender, EventArgs e)
         {
              //Helps to keep the form maximized.
@@ -148,13 +146,6 @@ namespace JustRipe2018
                 //implementation
 
             }
-            //DatabaseClass dbDropDown = new DatabaseClass(ConnectionStrDB);
-            //var select = "SELECT [Crop_Name] FROM [dbo].[Crop]";
-            //var ds2 = dbDropDown.dataToCb(select);
-            //cbCropType.ValueMember = select;
-            //cbCropType.DataSource = ds2.Tables[select];
-            //cbCropType.DropDownStyle = ComboBoxStyle.DropDownList;
-            //cbCropType.Enabled = true;
 
         }
 
@@ -386,14 +377,12 @@ namespace JustRipe2018
                 dateContainer = cbJDate.Text;
                 jobTypeContainer = addJobType.SelectedText;
                 amountContainer = Cbjamount.SelectedText;
- 
                 DateTime dateContainerTest;
                 DateTime dateContainerHarvest;
-                
                 string date;
                 string dateHarvest;
                 DateTime.TryParse(dateContainer, out dateContainerTest);
-
+                // Test for Weekend Selection
                 if (dateContainerTest.DayOfWeek.ToString() == DayOfWeek.Saturday.ToString() ||
                     dateContainerTest.DayOfWeek.ToString() == DayOfWeek.Sunday.ToString())
                 {
@@ -412,7 +401,7 @@ namespace JustRipe2018
                 }
                 else
                 {
-
+                    //sets validated dates and calculates harvest date assumed 30 days growth
                     date = dateContainerTest.ToShortDateString();
                     dateContainerHarvest = dateContainerTest.AddDays(30);
                     dateHarvest = dateContainerHarvest.ToShortDateString();
@@ -430,45 +419,35 @@ namespace JustRipe2018
                     amountContainer = "";
                     return;
                 }
+                // if jobs is sowing auto add harvest aswell 
                 if (addJobType.Text == "Sowing")
                 {
                     DatabaseClass Data = DatabaseClass.Instance;
                     Data.GetDate = date;
-                    JobName = addJobType.Text + " " + cbJCrop.Text.ToString() + " " + date;
-                    jobnameHarvest = "Harvest" + " " + cbJCrop.Text.ToString() + " " + dateHarvest;
-                    Data.GetIDCrop = cbJCrop.SelectedItem.ToString();
-                    Data.GetIDJobType = addJobType.SelectedItem.ToString();
-                    Data.GetIDUser = cbJLabouer.SelectedItem.ToString();
-                    Data.Addjob(cbJLabouer.Text, cbJCrop.Text, date, validAmountContainer, addJobType.Text, 1, JobName);
-                    Data.Addjob(cbJLabouer.Text, cbJCrop.Text, dateHarvest, validAmountContainer, "Harvest", 1, JobName);
-                    MessageBox.Show("Saved Job");
+                    JobName = addJobType.Text + " " + cbJCrop.Text.ToString() + " " + date + " " + cbJLabouer.Text + " " + validAmountContainer;
+                    jobnameHarvest = "Harvest" + " " + cbJCrop.Text.ToString() + " " + dateHarvest + " " + cbJLabouer.Text + " " + validAmountContainer;
+                    Data.GetIDCrop = cbJCrop.Text.ToString();
+                    Data.GetIDJobType = addJobType.Text.ToString();
+                    Data.GetIDUser = cbJLabouer.Text.ToString();
+                    string Vehicle = Data.Getvehicle(Data.GetIDJobType, date);
+                    string HarvestVehicle = Data.Getvehicle("2", dateHarvest);
+                    //getvehicle();
+                    Data.Addjob(cbJLabouer.Text, cbJCrop.Text, date, validAmountContainer, addJobType.Text, Vehicle, JobName);
+                    Data.Addjob(cbJLabouer.Text, cbJCrop.Text, dateHarvest, validAmountContainer, "Harvest", HarvestVehicle, JobName);
+                    MessageBox.Show("Saved Job as "+JobName);
                 }
+                //else just add special
                 if (addJobType.Text == "Special")
                 {
                     DatabaseClass Data = DatabaseClass.Instance;
                     Data.GetDate = date;
-                    JobName = addJobType.Text  + " " +cbJCrop.Text.ToString() + " " + date;
+                    JobName = addJobType.Text  + " " +cbJCrop.Text.ToString() + " " + date + " " + cbJLabouer.Text + " " + validAmountContainer ;
                     Data.GetIDCrop = cbJCrop.SelectedItem.ToString();
                     Data.GetIDJobType = addJobType.SelectedItem.ToString();
                     Data.GetIDUser = cbJLabouer.SelectedItem.ToString(); 
-                    Data.Addjob(cbJLabouer.Text, cbJCrop.Text, date, 0 , addJobType.Text, 1, JobName);
-                    MessageBox.Show("Saved Job");
+                    Data.Addjob(cbJLabouer.Text, cbJCrop.Text, date, 0 , addJobType.Text, "1", JobName);
+                    MessageBox.Show("Saved Job as "+JobName);
                 }
-                
-
-                // Harvest Date Autoset (30Days) from Sowing! DONE
-                // Harvest Amount = Sowing Amount DONE 
-                // Amount set to NULL if Fertlise or Special n/a
-                // Fertalizer Tab + Fertalizer amount to database ! 
-                // 
-                // Pulls Job List
-                //Add Job name Autoset Crop+DatetoString() 
-
-
-
-
-
-
 
 
             }
@@ -707,6 +686,7 @@ namespace JustRipe2018
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
         {
             //www.dreamincode.net/forums/topic/235102-restricting-datetimepickermonthcalendar-to-specific-days/
+            // sets the date to monday on selected week
             var DateSeleciton = sender as DateTimePicker;
             var SelectedDate = DateSeleciton.Value;
 
@@ -737,7 +717,8 @@ namespace JustRipe2018
         private void cbDayofWeek_SelectedIndexChanged(object sender, EventArgs e)
         {
         }
-
+        
+        // buttons for viewing timetable
         private void btnMWednesday_Click(object sender, EventArgs e)
         {
             string Datestring = dateTimePicker1.Text;
@@ -816,9 +797,68 @@ namespace JustRipe2018
 
         private void BtnAddFertaliserConfirm_Click(object sender, EventArgs e)
         {
+            //SELECT job where
+            DatabaseClass Connect = DatabaseClass.Instance;
+            string queryFindJob = "Select * From [dbo].[Job] WHERE [Job] = '" +SelectJobFert.SelectedText+ "'";
+            DataSet FindJobname = Connect.dataToCb(queryFindJob);
+            
+            string User = SelectLabourerFertalise.Text;
+            
+            string valDate = DatePickFertaliser.Text;
+            DateTime valdatetest;
+            DateTime.TryParse(valDate, out valdatetest);
+            string valdateconfirmed;
+
+            if (valdatetest.DayOfWeek.ToString() == DayOfWeek.Saturday.ToString() ||
+                valdatetest.DayOfWeek.ToString() == DayOfWeek.Sunday.ToString())
+            {
+                MessageBox.Show("No Work On Weekends!");
+                return;
+
+            }
+            //Checks date is greater than todays date
+            else if (valdatetest < DateTime.Now.Date)
+            {
+                MessageBox.Show("Date entered is less than the current date");
+                DatePickFertaliser = null;
+                return;
+            }
+            else
+            {
+
+                valdateconfirmed = valdatetest.ToShortDateString();
+                string ValVehicle = "4";
+                
+                string CropQuery = "Select [cropID] From [dbo].[Job] WHERE [Job] = '" + SelectJobFert.Text + "'"; 
+                DataSet dsCrop = Connect.getDataSet(CropQuery);
+                for (int i=0; i < dsCrop.Tables[0].Rows.Count; i++)
+                {
+                    GetcropFert = dsCrop.Tables[0].Rows[i]["cropID"].ToString();
+                }
+                 
+                string AmountQuery = "Select [amount] From [dbo].[Job] WHERE [Job] = '" + SelectJobFert.Text + "'";
+                DataSet dsAmount = Connect.getDataSet(AmountQuery);
+                for (int i = 0; i < dsCrop.Tables[0].Rows.Count; i++)
+                {
+                    GetamountFert = int.Parse(dsAmount.Tables[0].Rows[i]["amount"].ToString());
+                }
+                string jobname = "Fertalise" + " " + getcropfert + " " + valDate + " " + User + " " + getamountfert;
+                Connect.GetIDUser = User;
+                Connect.AddFertalizer(User, getcropfert, valdateconfirmed, getamountfert, "4", ValVehicle, jobname);
+                MessageBox.Show("Saved Job as: " + jobname);
+
+
+
+
+            }
+
 
         }
-    }           // "Select Crop_Name AS 'Crop Name',StorageName AS 'Storage Name' ,Capacity ,Temperature AS 'Temperature (°C)' From [dbo].[CropsStorage] " +
-                //" JOIN Crop ON CropsStorage.CropID=Crop.CropID JOIN StorageType ON CropsStorage.StorageTypeId=StorageType.StorageTypeId "
+
+        private void SelectLabourerFertalise_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+    }          
 }
 

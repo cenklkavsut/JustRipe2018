@@ -89,7 +89,7 @@
             this.BtnAddFertaliserConfirm = new System.Windows.Forms.Button();
             this.label18 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
-            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
+            this.DatePickFertaliser = new System.Windows.Forms.DateTimePicker();
             this.btnEditJob = new System.Windows.Forms.Button();
             this.btnAddJob = new System.Windows.Forms.Button();
             this.tabUser = new System.Windows.Forms.TabPage();
@@ -157,6 +157,8 @@
             this.btnAddBuyers = new System.Windows.Forms.Button();
             this.btnViewBuyers = new System.Windows.Forms.Button();
             this.btnViewStock = new System.Windows.Forms.Button();
+            this.label19 = new System.Windows.Forms.Label();
+            this.SelectLabourerFertalise = new System.Windows.Forms.ComboBox();
             this.tabManager.SuspendLayout();
             this.tabReport.SuspendLayout();
             this.tabReportOpt.SuspendLayout();
@@ -834,11 +836,13 @@
             // AddFertaliserJob
             // 
             this.AddFertaliserJob.BackColor = System.Drawing.Color.Tan;
+            this.AddFertaliserJob.Controls.Add(this.SelectLabourerFertalise);
+            this.AddFertaliserJob.Controls.Add(this.label19);
             this.AddFertaliserJob.Controls.Add(this.SelectJobFert);
             this.AddFertaliserJob.Controls.Add(this.BtnAddFertaliserConfirm);
             this.AddFertaliserJob.Controls.Add(this.label18);
             this.AddFertaliserJob.Controls.Add(this.label17);
-            this.AddFertaliserJob.Controls.Add(this.dateTimePicker2);
+            this.AddFertaliserJob.Controls.Add(this.DatePickFertaliser);
             this.AddFertaliserJob.Location = new System.Drawing.Point(4, 34);
             this.AddFertaliserJob.Name = "AddFertaliserJob";
             this.AddFertaliserJob.Padding = new System.Windows.Forms.Padding(3);
@@ -849,9 +853,9 @@
             // SelectJobFert
             // 
             this.SelectJobFert.FormattingEnabled = true;
-            this.SelectJobFert.Location = new System.Drawing.Point(302, 167);
+            this.SelectJobFert.Location = new System.Drawing.Point(247, 142);
             this.SelectJobFert.Name = "SelectJobFert";
-            this.SelectJobFert.Size = new System.Drawing.Size(262, 33);
+            this.SelectJobFert.Size = new System.Drawing.Size(357, 33);
             this.SelectJobFert.TabIndex = 10;
             this.SelectJobFert.SelectedIndexChanged += new System.EventHandler(this.SelectJobFert_SelectedIndexChanged);
             // 
@@ -870,7 +874,7 @@
             // label18
             // 
             this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(182, 246);
+            this.label18.Location = new System.Drawing.Point(127, 244);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(113, 25);
             this.label18.TabIndex = 3;
@@ -879,18 +883,18 @@
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(190, 168);
+            this.label17.Location = new System.Drawing.Point(135, 141);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(105, 25);
             this.label17.TabIndex = 2;
             this.label17.Text = "Select Job";
             // 
-            // dateTimePicker2
+            // DatePickFertaliser
             // 
-            this.dateTimePicker2.Location = new System.Drawing.Point(301, 244);
-            this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(263, 30);
-            this.dateTimePicker2.TabIndex = 1;
+            this.DatePickFertaliser.Location = new System.Drawing.Point(246, 242);
+            this.DatePickFertaliser.Name = "DatePickFertaliser";
+            this.DatePickFertaliser.Size = new System.Drawing.Size(358, 30);
+            this.DatePickFertaliser.TabIndex = 1;
             // 
             // btnEditJob
             // 
@@ -1716,6 +1720,24 @@
             this.btnViewStock.UseVisualStyleBackColor = false;
             this.btnViewStock.Click += new System.EventHandler(this.btnViewStock_Click_1);
             // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(90, 192);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(150, 25);
+            this.label19.TabIndex = 11;
+            this.label19.Text = "Select Labourer";
+            // 
+            // SelectLabourerFertalise
+            // 
+            this.SelectLabourerFertalise.FormattingEnabled = true;
+            this.SelectLabourerFertalise.Location = new System.Drawing.Point(247, 192);
+            this.SelectLabourerFertalise.Name = "SelectLabourerFertalise";
+            this.SelectLabourerFertalise.Size = new System.Drawing.Size(357, 33);
+            this.SelectLabourerFertalise.TabIndex = 12;
+            this.SelectLabourerFertalise.SelectedIndexChanged += new System.EventHandler(this.SelectLabourerFertalise_SelectedIndexChanged);
+            // 
             // Manager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -1897,8 +1919,10 @@
         private System.Windows.Forms.TabPage AddFertaliserJob;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.DateTimePicker dateTimePicker2;
+        private System.Windows.Forms.DateTimePicker DatePickFertaliser;
         private System.Windows.Forms.Button BtnAddFertaliserConfirm;
         private System.Windows.Forms.ComboBox SelectJobFert;
+        private System.Windows.Forms.ComboBox SelectLabourerFertalise;
+        private System.Windows.Forms.Label label19;
     }
 }
