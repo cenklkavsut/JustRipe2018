@@ -183,4 +183,4 @@ H:\My Documents\Development\JustRipe\obj\Debug\JustRipe2018.csproj.GenerateResou
 H:\My Documents\Development\JustRipe\obj\Debug\JustRipe2018.csproj.CoreCompileInputs.cache
 H:\My Documents\Development\JustRipe\obj\Debug\JustRipe2018.exe
 H:\My Documents\Development\JustRipe\obj\Debug\JustRipe2018.pdb
-H:\My Documents\Development\JustRipe\obj\Debug\JustRipe2018.csprojAssemblyReference.cache
+H:\My Documents\Development\JustRipe\obj\Debug\JustRipe2018.csprojResolveAssemblyReference.cache

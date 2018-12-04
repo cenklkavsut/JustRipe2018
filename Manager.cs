@@ -618,5 +618,81 @@ namespace JustRipe2018
         {
            
         }
+
+        private void dateTimePicker2_ValueChanged(object sender, EventArgs e)
+        {
+            var DateSelection = sender as DateTimePicker;
+            var SelectedDate = DateSelection.Value;
+
+            if (SelectedDate.DayOfWeek != DayOfWeek.Monday)
+            {
+                var set = (int)DayOfWeek.Monday - (int)SelectedDate.DayOfWeek;
+                var Monday = SelectedDate + TimeSpan.FromDays(set);
+                DateSelection.Value = Monday;
+            }
+            var Selectedval = SelectedDate;
+        }
+
+        private void btnMMonday_Click(object sender, EventArgs e)
+        {
+            string Datestring = dateTimePicker2.Text;
+            DateTime Date = DateTime.Parse(Datestring);
+            DateTime Monday = Date;
+            DatabaseClass Connect = DatabaseClass.Instance;
+            String GetMonday = "SELECT [Crop_Name],[JobName],[FirstName],[Last Name] FROM [dbo].[Job]" + " JOIN Crop ON Job.CropID=Crop.CropID JOIN JobType ON Job.JobTypeId=JobType.JobtypeID JOIN users ON Job.UserID = users.UserID WHERE Date ='" + Monday.ToShortDateString() + "'";
+            DataSet Mondaydata = Connect.getDataSet(GetMonday);
+            DataViewDaily.ReadOnly = true;
+            DataViewDaily.DataSource = Mondaydata.Tables[0]; ;
+        }
+
+        private void btnMTuesday_Click(object sender, EventArgs e)
+        {
+            string Datestring = dateTimePicker2.Text;
+            DateTime Date = DateTime.Parse(Datestring);
+            DateTime Tuesday = Date.AddDays(1);
+            DatabaseClass Connect = DatabaseClass.Instance;
+            String GetTuesday = "SELECT [Crop_Name],[JobName],[FirstName],[Last Name] FROM [dbo].[Job]" + " JOIN Crop ON Job.CropID=Crop.CropID JOIN JobType ON Job.JobTypeId=JobType.JobtypeID JOIN users ON Job.UserID = users.UserID WHERE Date ='" + Tuesday.ToShortDateString() + "'";
+            DataSet Tuesdaydata = Connect.getDataSet(GetTuesday);
+            DataViewDaily.ReadOnly = true;
+            DataViewDaily.DataSource = Tuesdaydata.Tables[0]; ;
+        }
+
+        private void btnMWednesday_Click(object sender, EventArgs e)
+        {
+            string Datestring = dateTimePicker2.Text;
+            DateTime Date = DateTime.Parse(Datestring);
+            DateTime Wednesday = Date.AddDays(2);
+            DatabaseClass Connect = DatabaseClass.Instance;
+            String GetWednesday = "SELECT [Crop_Name],[JobName],[FirstName],[Last Name] FROM [dbo].[Job]" + " JOIN Crop ON Job.CropID=Crop.CropID JOIN JobType ON Job.JobTypeId=JobType.JobtypeID JOIN users ON Job.UserID = users.UserID WHERE Date ='" + Wednesday.ToShortDateString() + "'";
+            DataSet Wednesdaydata = Connect.getDataSet(GetWednesday);
+            DataViewDaily.ReadOnly = true;
+            DataViewDaily.DataSource = Wednesdaydata.Tables[0];
+        }
+
+        private void btnMThursday_Click(object sender, EventArgs e)
+        {
+            string Datestring = dateTimePicker2.Text;
+            DateTime Date = DateTime.Parse(Datestring);
+            DateTime Thursday = Date.AddDays(3);
+            DatabaseClass Connect = DatabaseClass.Instance;
+            String GetThursday = "SELECT [Crop_Name],[JobName],[FirstName],[Last Name] FROM [dbo].[Job]" + " JOIN Crop ON Job.CropID=Crop.CropID JOIN JobType ON Job.JobTypeId=JobType.JobtypeID JOIN users ON Job.UserID = users.UserID WHERE Date ='" + Thursday.ToShortDateString() + "'";
+            DataSet Thursdaydata = Connect.getDataSet(GetThursday);
+            DataViewDaily.ReadOnly = true;
+            DataViewDaily.DataSource = Thursdaydata.Tables[0]; ;
+        }
+
+        private void btnMFriday_Click(object sender, EventArgs e)
+        {
+            string Datestring = dateTimePicker2.Text;
+            DateTime Date = DateTime.Parse(Datestring);
+            DateTime Friday = Date.AddDays(4);
+            DatabaseClass Connect = DatabaseClass.Instance;
+            String GetFriday = "SELECT [Crop_Name],[JobName],[FirstName],[Last Name] FROM [dbo].[Job]" + " JOIN Crop ON Job.CropID=Crop.CropID JOIN JobType ON Job.JobTypeId=JobType.JobtypeID JOIN users ON Job.UserID = users.UserID WHERE Date ='" + Friday.ToShortDateString() + "'";
+            DataSet Fridaydata = Connect.getDataSet(GetFriday);
+            DataViewDaily.ReadOnly = true;
+            DataViewDaily.DataSource = Fridaydata.Tables[0]; ;
+        }
+
+        
     }
 }

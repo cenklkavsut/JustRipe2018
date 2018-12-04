@@ -31,23 +31,17 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Labourer));
             this.tabLabourer = new System.Windows.Forms.TabControl();
             this.tabTimetableLabourer = new System.Windows.Forms.TabPage();
-            this.LabUNameTest = new System.Windows.Forms.RichTextBox();
-            this.friTextTt = new System.Windows.Forms.RichTextBox();
-            this.wedTextTt = new System.Windows.Forms.RichTextBox();
-            this.thurTextTt = new System.Windows.Forms.RichTextBox();
-            this.tueTextTt = new System.Windows.Forms.RichTextBox();
-            this.monTextTt = new System.Windows.Forms.RichTextBox();
-            this.DailyTasksLab = new System.Windows.Forms.TextBox();
-            this.DailyTasksRtb = new System.Windows.Forms.RichTextBox();
-            this.friLabTt = new System.Windows.Forms.TextBox();
-            this.thurLabTt = new System.Windows.Forms.TextBox();
-            this.wedLabTt = new System.Windows.Forms.TextBox();
-            this.tueLabTt = new System.Windows.Forms.TextBox();
-            this.monLabTt = new System.Windows.Forms.TextBox();
-            this.dateTimePickerLab = new System.Windows.Forms.DateTimePicker();
             this.btnLogoutLabourer = new System.Windows.Forms.Button();
+            this.btnMFriday = new System.Windows.Forms.Button();
+            this.btnMThursday = new System.Windows.Forms.Button();
+            this.btnMWednesday = new System.Windows.Forms.Button();
+            this.btnMTuesday = new System.Windows.Forms.Button();
+            this.btnMMonday = new System.Windows.Forms.Button();
+            this.DataViewDaily = new System.Windows.Forms.DataGridView();
+            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
             this.tabLabourer.SuspendLayout();
             this.tabTimetableLabourer.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DataViewDaily)).BeginInit();
             this.SuspendLayout();
             // 
             // tabLabourer
@@ -63,20 +57,13 @@
             // tabTimetableLabourer
             // 
             this.tabTimetableLabourer.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("tabTimetableLabourer.BackgroundImage")));
-            this.tabTimetableLabourer.Controls.Add(this.LabUNameTest);
-            this.tabTimetableLabourer.Controls.Add(this.friTextTt);
-            this.tabTimetableLabourer.Controls.Add(this.wedTextTt);
-            this.tabTimetableLabourer.Controls.Add(this.thurTextTt);
-            this.tabTimetableLabourer.Controls.Add(this.tueTextTt);
-            this.tabTimetableLabourer.Controls.Add(this.monTextTt);
-            this.tabTimetableLabourer.Controls.Add(this.DailyTasksLab);
-            this.tabTimetableLabourer.Controls.Add(this.DailyTasksRtb);
-            this.tabTimetableLabourer.Controls.Add(this.friLabTt);
-            this.tabTimetableLabourer.Controls.Add(this.thurLabTt);
-            this.tabTimetableLabourer.Controls.Add(this.wedLabTt);
-            this.tabTimetableLabourer.Controls.Add(this.tueLabTt);
-            this.tabTimetableLabourer.Controls.Add(this.monLabTt);
-            this.tabTimetableLabourer.Controls.Add(this.dateTimePickerLab);
+            this.tabTimetableLabourer.Controls.Add(this.btnMFriday);
+            this.tabTimetableLabourer.Controls.Add(this.btnMThursday);
+            this.tabTimetableLabourer.Controls.Add(this.btnMWednesday);
+            this.tabTimetableLabourer.Controls.Add(this.btnMTuesday);
+            this.tabTimetableLabourer.Controls.Add(this.btnMMonday);
+            this.tabTimetableLabourer.Controls.Add(this.DataViewDaily);
+            this.tabTimetableLabourer.Controls.Add(this.dateTimePicker2);
             this.tabTimetableLabourer.Controls.Add(this.btnLogoutLabourer);
             this.tabTimetableLabourer.Location = new System.Drawing.Point(4, 29);
             this.tabTimetableLabourer.Name = "tabTimetableLabourer";
@@ -85,120 +72,6 @@
             this.tabTimetableLabourer.TabIndex = 0;
             this.tabTimetableLabourer.Text = "Timetable";
             this.tabTimetableLabourer.UseVisualStyleBackColor = true;
-            // 
-            // LabUNameTest
-            // 
-            this.LabUNameTest.Location = new System.Drawing.Point(539, 443);
-            this.LabUNameTest.Name = "LabUNameTest";
-            this.LabUNameTest.Size = new System.Drawing.Size(90, 51);
-            this.LabUNameTest.TabIndex = 39;
-            this.LabUNameTest.Text = "";
-            this.LabUNameTest.TextChanged += new System.EventHandler(this.LabUNameTest_TextChanged_1);
-            // 
-            // friTextTt
-            // 
-            this.friTextTt.Location = new System.Drawing.Point(629, 145);
-            this.friTextTt.Name = "friTextTt";
-            this.friTextTt.Size = new System.Drawing.Size(100, 253);
-            this.friTextTt.TabIndex = 38;
-            this.friTextTt.Text = "";
-            // 
-            // wedTextTt
-            // 
-            this.wedTextTt.Location = new System.Drawing.Point(417, 145);
-            this.wedTextTt.Name = "wedTextTt";
-            this.wedTextTt.Size = new System.Drawing.Size(100, 253);
-            this.wedTextTt.TabIndex = 36;
-            this.wedTextTt.Text = "";
-            // 
-            // thurTextTt
-            // 
-            this.thurTextTt.Location = new System.Drawing.Point(523, 145);
-            this.thurTextTt.Name = "thurTextTt";
-            this.thurTextTt.Size = new System.Drawing.Size(100, 253);
-            this.thurTextTt.TabIndex = 37;
-            this.thurTextTt.Text = "";
-            // 
-            // tueTextTt
-            // 
-            this.tueTextTt.Location = new System.Drawing.Point(311, 145);
-            this.tueTextTt.Name = "tueTextTt";
-            this.tueTextTt.Size = new System.Drawing.Size(100, 253);
-            this.tueTextTt.TabIndex = 35;
-            this.tueTextTt.Text = "";
-            // 
-            // monTextTt
-            // 
-            this.monTextTt.Location = new System.Drawing.Point(205, 145);
-            this.monTextTt.Name = "monTextTt";
-            this.monTextTt.Size = new System.Drawing.Size(100, 253);
-            this.monTextTt.TabIndex = 34;
-            this.monTextTt.Text = "";
-            // 
-            // DailyTasksLab
-            // 
-            this.DailyTasksLab.Location = new System.Drawing.Point(34, 70);
-            this.DailyTasksLab.Name = "DailyTasksLab";
-            this.DailyTasksLab.Size = new System.Drawing.Size(165, 26);
-            this.DailyTasksLab.TabIndex = 33;
-            this.DailyTasksLab.Text = "Daily Tasks";
-            // 
-            // DailyTasksRtb
-            // 
-            this.DailyTasksRtb.Location = new System.Drawing.Point(34, 102);
-            this.DailyTasksRtb.Name = "DailyTasksRtb";
-            this.DailyTasksRtb.Size = new System.Drawing.Size(165, 409);
-            this.DailyTasksRtb.TabIndex = 32;
-            this.DailyTasksRtb.Text = "";
-            this.DailyTasksRtb.TextChanged += new System.EventHandler(this.DailyTasksRtb_TextChanged);
-            // 
-            // friLabTt
-            // 
-            this.friLabTt.Location = new System.Drawing.Point(629, 113);
-            this.friLabTt.Name = "friLabTt";
-            this.friLabTt.Size = new System.Drawing.Size(100, 26);
-            this.friLabTt.TabIndex = 31;
-            this.friLabTt.Text = "Friday";
-            // 
-            // thurLabTt
-            // 
-            this.thurLabTt.Location = new System.Drawing.Point(523, 113);
-            this.thurLabTt.Name = "thurLabTt";
-            this.thurLabTt.Size = new System.Drawing.Size(100, 26);
-            this.thurLabTt.TabIndex = 30;
-            this.thurLabTt.Text = "Thursday";
-            // 
-            // wedLabTt
-            // 
-            this.wedLabTt.Location = new System.Drawing.Point(417, 113);
-            this.wedLabTt.Name = "wedLabTt";
-            this.wedLabTt.Size = new System.Drawing.Size(100, 26);
-            this.wedLabTt.TabIndex = 29;
-            this.wedLabTt.Text = "Wednesday";
-            // 
-            // tueLabTt
-            // 
-            this.tueLabTt.Location = new System.Drawing.Point(311, 113);
-            this.tueLabTt.Name = "tueLabTt";
-            this.tueLabTt.Size = new System.Drawing.Size(100, 26);
-            this.tueLabTt.TabIndex = 28;
-            this.tueLabTt.Text = "Tuesday";
-            // 
-            // monLabTt
-            // 
-            this.monLabTt.Location = new System.Drawing.Point(205, 113);
-            this.monLabTt.Name = "monLabTt";
-            this.monLabTt.Size = new System.Drawing.Size(100, 26);
-            this.monLabTt.TabIndex = 27;
-            this.monLabTt.Text = "Monday";
-            this.monLabTt.TextChanged += new System.EventHandler(this.monLabTt_TextChanged);
-            // 
-            // dateTimePickerLab
-            // 
-            this.dateTimePickerLab.Location = new System.Drawing.Point(539, 19);
-            this.dateTimePickerLab.Name = "dateTimePickerLab";
-            this.dateTimePickerLab.Size = new System.Drawing.Size(200, 26);
-            this.dateTimePickerLab.TabIndex = 26;
             // 
             // btnLogoutLabourer
             // 
@@ -211,6 +84,80 @@
             this.btnLogoutLabourer.Text = "LOGOUT";
             this.btnLogoutLabourer.UseVisualStyleBackColor = false;
             this.btnLogoutLabourer.Click += new System.EventHandler(this.btnLogoutLabourer_Click);
+            // 
+            // btnMFriday
+            // 
+            this.btnMFriday.Location = new System.Drawing.Point(62, 228);
+            this.btnMFriday.Margin = new System.Windows.Forms.Padding(2);
+            this.btnMFriday.Name = "btnMFriday";
+            this.btnMFriday.Size = new System.Drawing.Size(98, 37);
+            this.btnMFriday.TabIndex = 60;
+            this.btnMFriday.Text = "Friday";
+            this.btnMFriday.UseVisualStyleBackColor = true;
+            this.btnMFriday.Click += new System.EventHandler(this.btnMFriday_Click);
+            // 
+            // btnMThursday
+            // 
+            this.btnMThursday.Location = new System.Drawing.Point(62, 186);
+            this.btnMThursday.Margin = new System.Windows.Forms.Padding(2);
+            this.btnMThursday.Name = "btnMThursday";
+            this.btnMThursday.Size = new System.Drawing.Size(98, 37);
+            this.btnMThursday.TabIndex = 59;
+            this.btnMThursday.Text = "Thursday";
+            this.btnMThursday.UseVisualStyleBackColor = true;
+            this.btnMThursday.Click += new System.EventHandler(this.btnMThursday_Click);
+            // 
+            // btnMWednesday
+            // 
+            this.btnMWednesday.Location = new System.Drawing.Point(62, 144);
+            this.btnMWednesday.Margin = new System.Windows.Forms.Padding(2);
+            this.btnMWednesday.Name = "btnMWednesday";
+            this.btnMWednesday.Size = new System.Drawing.Size(98, 37);
+            this.btnMWednesday.TabIndex = 58;
+            this.btnMWednesday.Text = "Wednesday";
+            this.btnMWednesday.UseVisualStyleBackColor = true;
+            this.btnMWednesday.Click += new System.EventHandler(this.btnMWednesday_Click);
+            // 
+            // btnMTuesday
+            // 
+            this.btnMTuesday.Location = new System.Drawing.Point(62, 101);
+            this.btnMTuesday.Margin = new System.Windows.Forms.Padding(2);
+            this.btnMTuesday.Name = "btnMTuesday";
+            this.btnMTuesday.Size = new System.Drawing.Size(98, 37);
+            this.btnMTuesday.TabIndex = 57;
+            this.btnMTuesday.Text = "Tuesday";
+            this.btnMTuesday.UseVisualStyleBackColor = true;
+            this.btnMTuesday.Click += new System.EventHandler(this.btnMTuesday_Click);
+            // 
+            // btnMMonday
+            // 
+            this.btnMMonday.Location = new System.Drawing.Point(62, 59);
+            this.btnMMonday.Margin = new System.Windows.Forms.Padding(2);
+            this.btnMMonday.Name = "btnMMonday";
+            this.btnMMonday.Size = new System.Drawing.Size(98, 37);
+            this.btnMMonday.TabIndex = 56;
+            this.btnMMonday.Text = "Monday";
+            this.btnMMonday.UseVisualStyleBackColor = true;
+            this.btnMMonday.Click += new System.EventHandler(this.btnMMonday_Click);
+            // 
+            // DataViewDaily
+            // 
+            this.DataViewDaily.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DataViewDaily.Location = new System.Drawing.Point(163, 57);
+            this.DataViewDaily.Margin = new System.Windows.Forms.Padding(2);
+            this.DataViewDaily.Name = "DataViewDaily";
+            this.DataViewDaily.RowTemplate.Height = 24;
+            this.DataViewDaily.Size = new System.Drawing.Size(574, 445);
+            this.DataViewDaily.TabIndex = 55;
+            this.DataViewDaily.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataViewDaily_CellContentClick);
+            // 
+            // dateTimePicker2
+            // 
+            this.dateTimePicker2.Location = new System.Drawing.Point(163, 27);
+            this.dateTimePicker2.Name = "dateTimePicker2";
+            this.dateTimePicker2.Size = new System.Drawing.Size(200, 26);
+            this.dateTimePicker2.TabIndex = 54;
+            this.dateTimePicker2.ValueChanged += new System.EventHandler(this.dateTimePicker2_ValueChanged);
             // 
             // Labourer
             // 
@@ -228,7 +175,7 @@
             this.Load += new System.EventHandler(this.Labourer_Load);
             this.tabLabourer.ResumeLayout(false);
             this.tabTimetableLabourer.ResumeLayout(false);
-            this.tabTimetableLabourer.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DataViewDaily)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -238,19 +185,12 @@
         private System.Windows.Forms.TabControl tabLabourer;
         private System.Windows.Forms.TabPage tabTimetableLabourer;
         private System.Windows.Forms.Button btnLogoutLabourer;
-        private System.Windows.Forms.RichTextBox friTextTt;
-        private System.Windows.Forms.RichTextBox wedTextTt;
-        private System.Windows.Forms.RichTextBox thurTextTt;
-        private System.Windows.Forms.RichTextBox tueTextTt;
-        private System.Windows.Forms.RichTextBox monTextTt;
-        private System.Windows.Forms.TextBox DailyTasksLab;
-        private System.Windows.Forms.RichTextBox DailyTasksRtb;
-        private System.Windows.Forms.TextBox friLabTt;
-        private System.Windows.Forms.TextBox thurLabTt;
-        private System.Windows.Forms.TextBox wedLabTt;
-        private System.Windows.Forms.TextBox tueLabTt;
-        private System.Windows.Forms.TextBox monLabTt;
-        private System.Windows.Forms.DateTimePicker dateTimePickerLab;
-        private System.Windows.Forms.RichTextBox LabUNameTest;
+        private System.Windows.Forms.Button btnMFriday;
+        private System.Windows.Forms.Button btnMThursday;
+        private System.Windows.Forms.Button btnMWednesday;
+        private System.Windows.Forms.Button btnMTuesday;
+        private System.Windows.Forms.Button btnMMonday;
+        private System.Windows.Forms.DataGridView DataViewDaily;
+        private System.Windows.Forms.DateTimePicker dateTimePicker2;
     }
 }
