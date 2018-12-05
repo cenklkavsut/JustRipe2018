@@ -154,6 +154,7 @@
             this.btnAddBuyers = new System.Windows.Forms.Button();
             this.btnViewBuyers = new System.Windows.Forms.Button();
             this.btnViewStock = new System.Windows.Forms.Button();
+            this.label17 = new System.Windows.Forms.Label();
             this.tabManager.SuspendLayout();
             this.tabReport.SuspendLayout();
             this.tabReportOpt.SuspendLayout();
@@ -227,7 +228,6 @@
             this.btnLogout.Name = "btnLogout";
             this.btnLogout.Size = new System.Drawing.Size(89, 29);
             this.btnLogout.TabIndex = 6;
-            this.btnLogout.TabStop = false;
             this.btnLogout.Text = "LOGOUT";
             this.btnLogout.UseVisualStyleBackColor = false;
             this.btnLogout.Click += new System.EventHandler(this.btnLogout_Click);
@@ -263,6 +263,7 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(625, 311);
             this.dataGridView1.TabIndex = 0;
+            this.dataGridView1.TabStop = false;
             // 
             // tabPage4
             // 
@@ -283,6 +284,7 @@
             this.dataGridView4.Name = "dataGridView4";
             this.dataGridView4.Size = new System.Drawing.Size(621, 311);
             this.dataGridView4.TabIndex = 0;
+            this.dataGridView4.TabStop = false;
             // 
             // tabPage5
             // 
@@ -303,6 +305,7 @@
             this.dataGridView5.Name = "dataGridView5";
             this.dataGridView5.Size = new System.Drawing.Size(625, 311);
             this.dataGridView5.TabIndex = 0;
+            this.dataGridView5.TabStop = false;
             // 
             // tabPage6
             // 
@@ -323,6 +326,7 @@
             this.dataGridView6.Name = "dataGridView6";
             this.dataGridView6.Size = new System.Drawing.Size(625, 311);
             this.dataGridView6.TabIndex = 0;
+            this.dataGridView6.TabStop = false;
             // 
             // button4
             // 
@@ -868,7 +872,7 @@
             this.btnLogoutMU.Location = new System.Drawing.Point(795, 5);
             this.btnLogoutMU.Name = "btnLogoutMU";
             this.btnLogoutMU.Size = new System.Drawing.Size(89, 29);
-            this.btnLogoutMU.TabIndex = 7;
+            this.btnLogoutMU.TabIndex = 9;
             this.btnLogoutMU.TabStop = false;
             this.btnLogoutMU.Text = "LOGOUT";
             this.btnLogoutMU.UseVisualStyleBackColor = false;
@@ -916,14 +920,14 @@
             this.txtFNUsrCreate.Location = new System.Drawing.Point(180, 120);
             this.txtFNUsrCreate.Name = "txtFNUsrCreate";
             this.txtFNUsrCreate.Size = new System.Drawing.Size(200, 26);
-            this.txtFNUsrCreate.TabIndex = 15;
+            this.txtFNUsrCreate.TabIndex = 1;
             // 
             // txtLNUsrCreate
             // 
             this.txtLNUsrCreate.Location = new System.Drawing.Point(180, 152);
             this.txtLNUsrCreate.Name = "txtLNUsrCreate";
             this.txtLNUsrCreate.Size = new System.Drawing.Size(200, 26);
-            this.txtLNUsrCreate.TabIndex = 14;
+            this.txtLNUsrCreate.TabIndex = 2;
             this.txtLNUsrCreate.TextChanged += new System.EventHandler(this.textBox16_TextChanged_3);
             // 
             // txtLNUser
@@ -957,14 +961,15 @@
             this.txtPsswrdCreate.Location = new System.Drawing.Point(180, 220);
             this.txtPsswrdCreate.Name = "txtPsswrdCreate";
             this.txtPsswrdCreate.Size = new System.Drawing.Size(200, 26);
-            this.txtPsswrdCreate.TabIndex = 10;
+            this.txtPsswrdCreate.TabIndex = 4;
+            this.txtPsswrdCreate.TextChanged += new System.EventHandler(this.txtPsswrdCreate_TextChanged);
             // 
             // txtUsrnameCreate
             // 
             this.txtUsrnameCreate.Location = new System.Drawing.Point(180, 184);
             this.txtUsrnameCreate.Name = "txtUsrnameCreate";
             this.txtUsrnameCreate.Size = new System.Drawing.Size(200, 26);
-            this.txtUsrnameCreate.TabIndex = 9;
+            this.txtUsrnameCreate.TabIndex = 3;
             this.txtUsrnameCreate.TextChanged += new System.EventHandler(this.textBox6_TextChanged);
             // 
             // chkbxManagerCreate
@@ -974,7 +979,7 @@
             this.chkbxManagerCreate.Location = new System.Drawing.Point(375, 300);
             this.chkbxManagerCreate.Name = "chkbxManagerCreate";
             this.chkbxManagerCreate.Size = new System.Drawing.Size(91, 24);
-            this.chkbxManagerCreate.TabIndex = 8;
+            this.chkbxManagerCreate.TabIndex = 6;
             this.chkbxManagerCreate.Text = "Manager";
             this.chkbxManagerCreate.UseVisualStyleBackColor = false;
             this.chkbxManagerCreate.CheckedChanged += new System.EventHandler(this.chkbxManagerCreate_CheckedChanged);
@@ -986,7 +991,7 @@
             this.chkbxLaborCreate.Location = new System.Drawing.Point(225, 300);
             this.chkbxLaborCreate.Name = "chkbxLaborCreate";
             this.chkbxLaborCreate.Size = new System.Drawing.Size(92, 24);
-            this.chkbxLaborCreate.TabIndex = 7;
+            this.chkbxLaborCreate.TabIndex = 5;
             this.chkbxLaborCreate.Text = "Labourer";
             this.chkbxLaborCreate.UseVisualStyleBackColor = false;
             this.chkbxLaborCreate.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
@@ -997,7 +1002,7 @@
             this.btnResetCreate.Location = new System.Drawing.Point(298, 377);
             this.btnResetCreate.Name = "btnResetCreate";
             this.btnResetCreate.Size = new System.Drawing.Size(117, 50);
-            this.btnResetCreate.TabIndex = 5;
+            this.btnResetCreate.TabIndex = 8;
             this.btnResetCreate.Text = "Reset";
             this.btnResetCreate.UseVisualStyleBackColor = false;
             this.btnResetCreate.Click += new System.EventHandler(this.btnResetCreate_Click);
@@ -1008,7 +1013,7 @@
             this.btnCreate.Location = new System.Drawing.Point(144, 377);
             this.btnCreate.Name = "btnCreate";
             this.btnCreate.Size = new System.Drawing.Size(117, 50);
-            this.btnCreate.TabIndex = 4;
+            this.btnCreate.TabIndex = 7;
             this.btnCreate.Text = "Create";
             this.btnCreate.UseVisualStyleBackColor = false;
             this.btnCreate.Click += new System.EventHandler(this.button1_Click_1);
@@ -1080,6 +1085,7 @@
             // 
             // tabEditUsr
             // 
+            this.tabEditUsr.Controls.Add(this.label17);
             this.tabEditUsr.Controls.Add(this.txtFNUsrEdit);
             this.tabEditUsr.Controls.Add(this.txtLNUsrEdit);
             this.tabEditUsr.Controls.Add(this.textBox17);
@@ -1111,14 +1117,14 @@
             this.txtFNUsrEdit.Location = new System.Drawing.Point(180, 120);
             this.txtFNUsrEdit.Name = "txtFNUsrEdit";
             this.txtFNUsrEdit.Size = new System.Drawing.Size(200, 26);
-            this.txtFNUsrEdit.TabIndex = 29;
+            this.txtFNUsrEdit.TabIndex = 12;
             // 
             // txtLNUsrEdit
             // 
             this.txtLNUsrEdit.Location = new System.Drawing.Point(180, 152);
             this.txtLNUsrEdit.Name = "txtLNUsrEdit";
             this.txtLNUsrEdit.Size = new System.Drawing.Size(200, 26);
-            this.txtLNUsrEdit.TabIndex = 28;
+            this.txtLNUsrEdit.TabIndex = 13;
             this.txtLNUsrEdit.TextChanged += new System.EventHandler(this.txtLNUsrCreate_TextChanged);
             // 
             // textBox17
@@ -1166,7 +1172,7 @@
             this.drpdwnSelectUsr.Location = new System.Drawing.Point(206, 83);
             this.drpdwnSelectUsr.Name = "drpdwnSelectUsr";
             this.drpdwnSelectUsr.Size = new System.Drawing.Size(152, 28);
-            this.drpdwnSelectUsr.TabIndex = 23;
+            this.drpdwnSelectUsr.TabIndex = 11;
             this.drpdwnSelectUsr.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // btnDelete
@@ -1175,7 +1181,7 @@
             this.btnDelete.Location = new System.Drawing.Point(225, 392);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(117, 50);
-            this.btnDelete.TabIndex = 22;
+            this.btnDelete.TabIndex = 19;
             this.btnDelete.Text = "Delete";
             this.btnDelete.UseVisualStyleBackColor = false;
             this.btnDelete.Click += new System.EventHandler(this.button4_Click);
@@ -1185,14 +1191,14 @@
             this.txtPsswrdEdit.Location = new System.Drawing.Point(180, 220);
             this.txtPsswrdEdit.Name = "txtPsswrdEdit";
             this.txtPsswrdEdit.Size = new System.Drawing.Size(200, 26);
-            this.txtPsswrdEdit.TabIndex = 21;
+            this.txtPsswrdEdit.TabIndex = 15;
             // 
             // txtUsrnameEdit
             // 
             this.txtUsrnameEdit.Location = new System.Drawing.Point(180, 184);
             this.txtUsrnameEdit.Name = "txtUsrnameEdit";
             this.txtUsrnameEdit.Size = new System.Drawing.Size(200, 26);
-            this.txtUsrnameEdit.TabIndex = 20;
+            this.txtUsrnameEdit.TabIndex = 14;
             this.txtUsrnameEdit.TextChanged += new System.EventHandler(this.txtUsrnameEdit_TextChanged);
             // 
             // chkbxManagerEdit
@@ -1202,7 +1208,7 @@
             this.chkbxManagerEdit.Location = new System.Drawing.Point(375, 300);
             this.chkbxManagerEdit.Name = "chkbxManagerEdit";
             this.chkbxManagerEdit.Size = new System.Drawing.Size(91, 24);
-            this.chkbxManagerEdit.TabIndex = 19;
+            this.chkbxManagerEdit.TabIndex = 17;
             this.chkbxManagerEdit.Text = "Manager";
             this.chkbxManagerEdit.UseVisualStyleBackColor = false;
             this.chkbxManagerEdit.CheckedChanged += new System.EventHandler(this.chkbxManagerEdit_CheckedChanged);
@@ -1214,7 +1220,7 @@
             this.chkbxLaborEdit.Location = new System.Drawing.Point(225, 300);
             this.chkbxLaborEdit.Name = "chkbxLaborEdit";
             this.chkbxLaborEdit.Size = new System.Drawing.Size(92, 24);
-            this.chkbxLaborEdit.TabIndex = 18;
+            this.chkbxLaborEdit.TabIndex = 16;
             this.chkbxLaborEdit.Text = "Labourer";
             this.chkbxLaborEdit.UseVisualStyleBackColor = false;
             this.chkbxLaborEdit.CheckedChanged += new System.EventHandler(this.chkbxLaborEdit_CheckedChanged);
@@ -1225,7 +1231,7 @@
             this.btnResetEdit.Location = new System.Drawing.Point(375, 392);
             this.btnResetEdit.Name = "btnResetEdit";
             this.btnResetEdit.Size = new System.Drawing.Size(117, 50);
-            this.btnResetEdit.TabIndex = 16;
+            this.btnResetEdit.TabIndex = 20;
             this.btnResetEdit.Text = "Reset";
             this.btnResetEdit.UseVisualStyleBackColor = false;
             this.btnResetEdit.Click += new System.EventHandler(this.btnResetEdit_Click);
@@ -1236,7 +1242,7 @@
             this.btnEdit.Location = new System.Drawing.Point(71, 392);
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(117, 50);
-            this.btnEdit.TabIndex = 15;
+            this.btnEdit.TabIndex = 18;
             this.btnEdit.Text = "Edit";
             this.btnEdit.UseVisualStyleBackColor = false;
             this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
@@ -1313,7 +1319,7 @@
             this.btnEditUser.Location = new System.Drawing.Point(10, 273);
             this.btnEditUser.Name = "btnEditUser";
             this.btnEditUser.Size = new System.Drawing.Size(120, 77);
-            this.btnEditUser.TabIndex = 1;
+            this.btnEditUser.TabIndex = 10;
             this.btnEditUser.Text = "Edit User";
             this.btnEditUser.UseVisualStyleBackColor = false;
             this.btnEditUser.Click += new System.EventHandler(this.button1_Click);
@@ -1353,8 +1359,7 @@
             this.btnLogoutStore.Location = new System.Drawing.Point(795, 5);
             this.btnLogoutStore.Name = "btnLogoutStore";
             this.btnLogoutStore.Size = new System.Drawing.Size(89, 29);
-            this.btnLogoutStore.TabIndex = 9;
-            this.btnLogoutStore.TabStop = false;
+            this.btnLogoutStore.TabIndex = 12;
             this.btnLogoutStore.Text = "LOGOUT";
             this.btnLogoutStore.UseVisualStyleBackColor = false;
             this.btnLogoutStore.Click += new System.EventHandler(this.btnLogoutStore_Click);
@@ -1395,6 +1400,7 @@
             this.dataGridAddStore.RowTemplate.Height = 33;
             this.dataGridAddStore.Size = new System.Drawing.Size(591, 554);
             this.dataGridAddStore.TabIndex = 0;
+            this.dataGridAddStore.TabStop = false;
             this.dataGridAddStore.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridAddStore_CellContentClick);
             // 
             // tabPage2
@@ -1431,7 +1437,7 @@
             this.cbCropAmount.Margin = new System.Windows.Forms.Padding(2);
             this.cbCropAmount.Name = "cbCropAmount";
             this.cbCropAmount.Size = new System.Drawing.Size(172, 28);
-            this.cbCropAmount.TabIndex = 15;
+            this.cbCropAmount.TabIndex = 9;
             // 
             // cbCropType
             // 
@@ -1440,7 +1446,7 @@
             this.cbCropType.Margin = new System.Windows.Forms.Padding(2);
             this.cbCropType.Name = "cbCropType";
             this.cbCropType.Size = new System.Drawing.Size(172, 28);
-            this.cbCropType.TabIndex = 14;
+            this.cbCropType.TabIndex = 8;
             // 
             // txtUserEmail
             // 
@@ -1448,7 +1454,7 @@
             this.txtUserEmail.Margin = new System.Windows.Forms.Padding(2);
             this.txtUserEmail.Name = "txtUserEmail";
             this.txtUserEmail.Size = new System.Drawing.Size(226, 26);
-            this.txtUserEmail.TabIndex = 13;
+            this.txtUserEmail.TabIndex = 7;
             // 
             // txtContactNum
             // 
@@ -1456,7 +1462,7 @@
             this.txtContactNum.Margin = new System.Windows.Forms.Padding(2);
             this.txtContactNum.Name = "txtContactNum";
             this.txtContactNum.Size = new System.Drawing.Size(162, 26);
-            this.txtContactNum.TabIndex = 12;
+            this.txtContactNum.TabIndex = 6;
             // 
             // txtSurname
             // 
@@ -1464,7 +1470,7 @@
             this.txtSurname.Margin = new System.Windows.Forms.Padding(2);
             this.txtSurname.Name = "txtSurname";
             this.txtSurname.Size = new System.Drawing.Size(172, 26);
-            this.txtSurname.TabIndex = 9;
+            this.txtSurname.TabIndex = 5;
             // 
             // txtName
             // 
@@ -1472,7 +1478,7 @@
             this.txtName.Margin = new System.Windows.Forms.Padding(2);
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(172, 26);
-            this.txtName.TabIndex = 8;
+            this.txtName.TabIndex = 4;
             this.txtName.TextChanged += new System.EventHandler(this.txtName_TextChanged);
             // 
             // label5
@@ -1503,7 +1509,7 @@
             this.btnCancelUser.Margin = new System.Windows.Forms.Padding(2);
             this.btnCancelUser.Name = "btnCancelUser";
             this.btnCancelUser.Size = new System.Drawing.Size(122, 41);
-            this.btnCancelUser.TabIndex = 5;
+            this.btnCancelUser.TabIndex = 11;
             this.btnCancelUser.Text = "Cancel";
             this.btnCancelUser.UseVisualStyleBackColor = false;
             this.btnCancelUser.Click += new System.EventHandler(this.btnCancelUser_Click_1);
@@ -1516,7 +1522,7 @@
             this.btnBuyer.Margin = new System.Windows.Forms.Padding(2);
             this.btnBuyer.Name = "btnBuyer";
             this.btnBuyer.Size = new System.Drawing.Size(122, 41);
-            this.btnBuyer.TabIndex = 4;
+            this.btnBuyer.TabIndex = 10;
             this.btnBuyer.Text = "Save Buyer";
             this.btnBuyer.UseVisualStyleBackColor = false;
             this.btnBuyer.Click += new System.EventHandler(this.btnBuyer_Click);
@@ -1569,8 +1575,7 @@
             this.btnAddBuyers.Margin = new System.Windows.Forms.Padding(2);
             this.btnAddBuyers.Name = "btnAddBuyers";
             this.btnAddBuyers.Size = new System.Drawing.Size(120, 77);
-            this.btnAddBuyers.TabIndex = 7;
-            this.btnAddBuyers.TabStop = false;
+            this.btnAddBuyers.TabIndex = 3;
             this.btnAddBuyers.Text = "Add Buyers";
             this.btnAddBuyers.UseVisualStyleBackColor = false;
             this.btnAddBuyers.Click += new System.EventHandler(this.btnAddBuyers_Click_1);
@@ -1583,8 +1588,7 @@
             this.btnViewBuyers.Margin = new System.Windows.Forms.Padding(2);
             this.btnViewBuyers.Name = "btnViewBuyers";
             this.btnViewBuyers.Size = new System.Drawing.Size(120, 77);
-            this.btnViewBuyers.TabIndex = 6;
-            this.btnViewBuyers.TabStop = false;
+            this.btnViewBuyers.TabIndex = 2;
             this.btnViewBuyers.Text = "View Buyers";
             this.btnViewBuyers.UseVisualStyleBackColor = false;
             this.btnViewBuyers.Click += new System.EventHandler(this.btnViewBuyers_Click_1);
@@ -1597,11 +1601,23 @@
             this.btnViewStock.Margin = new System.Windows.Forms.Padding(2);
             this.btnViewStock.Name = "btnViewStock";
             this.btnViewStock.Size = new System.Drawing.Size(120, 77);
-            this.btnViewStock.TabIndex = 5;
-            this.btnViewStock.TabStop = false;
+            this.btnViewStock.TabIndex = 1;
             this.btnViewStock.Text = "View Stock";
             this.btnViewStock.UseVisualStyleBackColor = false;
             this.btnViewStock.Click += new System.EventHandler(this.btnViewStock_Click_1);
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.BackColor = System.Drawing.Color.Tan;
+            this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label17.ForeColor = System.Drawing.Color.Red;
+            this.label17.Location = new System.Drawing.Point(35, 264);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(498, 16);
+            this.label17.TabIndex = 28;
+            this.label17.Text = "Please re-enter your current Password or new Password before Editing.";
+            this.label17.Click += new System.EventHandler(this.label17_Click);
             // 
             // Manager
             // 
@@ -1782,5 +1798,6 @@
         private System.Windows.Forms.DataGridView dataGridView5;
         private System.Windows.Forms.TabPage tabPage6;
         private System.Windows.Forms.DataGridView dataGridView6;
+        private System.Windows.Forms.Label label17;
     }
 }

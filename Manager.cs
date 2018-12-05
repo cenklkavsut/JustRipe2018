@@ -855,5 +855,15 @@ namespace JustRipe2018
             chkbxLaborEdit.Checked = false;
             chkbxManagerEdit.Checked = false;
         }
+
+        private void txtPsswrdCreate_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label17_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
