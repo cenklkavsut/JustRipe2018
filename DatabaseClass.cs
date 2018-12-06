@@ -138,14 +138,15 @@ namespace JustRipe2018
                     Manager settingsForm = new Manager();
                  //Show the settings form
                 settingsForm.Show();
-                    x = true;
                 }//
                 else if (job == "Labourer")//
                 {//
                     //displays the labourer form
                     Labourer labrerForm = new Labourer();
                     labrerForm.Show();
-                }//
+                }//                    
+                x = true;
+
             }
             else
             {
