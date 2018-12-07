@@ -36,7 +36,7 @@ namespace JustRipe2018
         {
             DatabaseClass dbLogin = DatabaseClass.Instance;
 
-            bool r=dbLogin.loginFul(txtUserName.Text.ToLower(),txtPassword.Text.ToLower());
+            bool r=dbLogin.loginFul(txtUserName.Text,txtPassword.Text);//remove check
 
             if (r==true)
             {

@@ -577,11 +577,12 @@ namespace JustRipe2018
                 //implementation
 
             }
+
             DatabaseClass dbCon = DatabaseClass.Instance;
             var select = "Select FertilizerName AS 'Fertaliser Name' ,amount  From [dbo].[Fertiliser]";
             var ds = dbCon.getDataSet(select);
             dataGridView4.ReadOnly = true;
-            dataGridView4.DataSource = ds.Tables[0];
+            dataGridView4.DataSource = ds.Tables[0]; //sum fertiliser of the week //join crop sum fertiliser amount needer//datetime +6
         }
 
         private void btnRep3_Click(object sender, EventArgs e)
@@ -596,13 +597,23 @@ namespace JustRipe2018
             }
 
             DatabaseClass dbCon = DatabaseClass.Instance;
-            var select = "Select StorageName AS 'Storage Name',Capacity,Temperature AS 'Temperature (°C)' From [dbo].[StorageType]";
+            //copy paste query
+            var select = 
+                "Select " +
+                    "ST.StorageName AS 'Storage Type', " +
+                    "C.Crop_Name AS 'Crop Name'," +
+                    "ST.Capacity, " +
+                    "CS.Amount AS 'Amount Stored', " +
+                    "(ST.Capacity - CS.Amount) AS 'Amount Left'," +
+                    "ST.Temperature AS 'Temperature (°C)' " +
+                "From [dbo].[CropsStorage] CS " + 
+                "JOIN StorageType ST ON CS.StorageTypeID=ST.StorageTypeID " + 
+                "JOIN Crop C ON CS.CropID = C.CropID";
             var ds = dbCon.getDataSet(select);
             dataGridView5.ReadOnly = true;
-            dataGridView5.DataSource = ds.Tables[0];
-         
-        }
-
+            dataGridView5.DataSource = ds.Tables[0];//only display used storage and how much.//sum - capacity amount as Total left storage and amount
+        }//display storage type to table and display
+       
         private void btnRep4_Click(object sender, EventArgs e)
         {
             //allows selecting tab
@@ -614,8 +625,9 @@ namespace JustRipe2018
 
             }
             DatabaseClass dbCon = DatabaseClass.Instance;
+            //copy and paste query
             var select = "Select VehicleModel AS 'Vehicle Model' ,VehicleType AS 'Vehicle Type',VehicleRegistation AS 'Vehicle Registation'"
-                +",VehicleAvailability AS 'Vehicle Available' From [dbo].[Vehicle]";
+                + ",VehicleAvailability AS 'Vehicle Available' From [dbo].[Vehicle] Where VehicleID=2";
             var ds = dbCon.getDataSet(select);
             dataGridView6.ReadOnly = true;
             dataGridView6.DataSource = ds.Tables[0];

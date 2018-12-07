@@ -35,6 +35,7 @@ namespace JustRipe2018
         {//close the connection to the database
             connectionToDB.Close();//change to db name
         }
+
         //fill the data base with the sql statment.
         public DataSet getDataSet(string sqlStatement)
         {
@@ -100,7 +101,7 @@ namespace JustRipe2018
         //    // Create a SHA256 
         //    SHA256 sha256Hash = SHA256.Create();  //create a sha 256    after it works change sha to md5
 
-        //    // ComputeHash - returns byte array  
+        //   // ComputeHash - returns byte array  
         //        byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(rawData));//store sha256 data in a bytes
         //        // Convert byte array to a string   
         //        StringBuilder builder = new StringBuilder();//use the string builder to store a bytes.
@@ -110,27 +111,27 @@ namespace JustRipe2018
         //        }
         //        return builder.ToString();//return the builder as a sha256 string.Also store as nvarchar in database to store.
         //}
-        ////
+             //
 
         public bool loginFul(string name,string password)
         {
-            ////hash
+            //hash
             //string plainData = password.ToLower();//
             //string hashedData = ComputeSha256HashConverter(plainData);//after hash is finished then add hashedData in place of passwort to lower in query.
             //hash and add in place of password
 
             //variables for implementation.
             bool x = false;//confirms login
-            SqlDataAdapter sda = new SqlDataAdapter("SELECT COUNT(*) FROM [dbo].[users] WHERE username='" + name.ToLower() + "' AND password='" + password.ToLower()  
+            SqlDataAdapter sda = new SqlDataAdapter("SELECT COUNT(*) FROM [dbo].[users] WHERE username='" + name+ "' AND password='" + password 
                 + "'" ,connectionStr);//gets data from the database system through a adapter
-            /* in above line the program is selecting the whole data from table and the matching it with the user name and password provided by user. */
-            DataTable dt = new DataTable(); //this is creating a virtual table  
+            /* in above line the program is selecting the whole data from table and the matching it with the user name and password provided by user.*/
+            DataTable dt = new DataTable();//this is creating a virtual table  
             sda.Fill(dt);
 
             // This return input fromthe query         
             string job=getBasicVal(name,password);
-            //and stores it in the string job.
 
+            //and stores it in the string job.
             if (dt.Rows[0][0].ToString() == "1")
             {
                 if (job == "Manager")//
@@ -146,7 +147,6 @@ namespace JustRipe2018
                     labrerForm.Show();
                 }//                    
                 x = true;
-
             }
             else
             {
@@ -158,17 +158,15 @@ namespace JustRipe2018
         public string getBasicVal(string name,string password)
         {
             //query of the value
-            var selJob = "SELECT [Role] FROM [dbo].[users] WHERE username='" + name.ToLower() + "' AND password='" + password.ToLower() + "'";
+            var selJob = "SELECT [Role] FROM [dbo].[users] WHERE username='" + name + "' AND password='" + password + "'";
             SqlConnection sql = new SqlConnection(connectionStr);//set up the connection of it
             SqlCommand myCommand = new SqlCommand(selJob, sql);//the command to search for it
             myCommand.Connection.Open();//open the connection
             string job= (string)myCommand.ExecuteScalar();//input the query result into the string through casting.
             myCommand.Connection.Close();//Close the connection
             return job ;
-        }             
+        }
 
-
-        //
         public int getBasicCrop()
         {
             //query of the value
