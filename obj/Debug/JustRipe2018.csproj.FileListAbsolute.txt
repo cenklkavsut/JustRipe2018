@@ -156,3 +156,17 @@ H:\My Documents\Development\JustRipe2018_Master\JustRipe2018\obj\Debug\JustRipe2
 H:\My Documents\Development\JustRipe2018_Master\JustRipe2018\obj\Debug\JustRipe2018.csproj.CoreCompileInputs.cache
 H:\My Documents\Development\JustRipe2018_Master\JustRipe2018\obj\Debug\JustRipe2018.exe
 H:\My Documents\Development\JustRipe2018_Master\JustRipe2018\obj\Debug\JustRipe2018.pdb
+C:\Users\Charlie Bryant\Desktop\tet\JustRipe2018\obj\Debug\JustRipe2018.csprojAssemblyReference.cache
+C:\Users\Charlie Bryant\Desktop\tet\JustRipe2018\obj\Debug\JustRipe2018.Labourer.resources
+C:\Users\Charlie Bryant\Desktop\tet\JustRipe2018\obj\Debug\JustRipe2018.Login.resources
+C:\Users\Charlie Bryant\Desktop\tet\JustRipe2018\obj\Debug\JustRipe2018.Manager.resources
+C:\Users\Charlie Bryant\Desktop\tet\JustRipe2018\obj\Debug\JustRipe2018.Properties.Resources.resources
+C:\Users\Charlie Bryant\Desktop\tet\JustRipe2018\obj\Debug\JustRipe2018.csproj.GenerateResource.cache
+C:\Users\Charlie Bryant\Desktop\tet\JustRipe2018\obj\Debug\JustRipe2018.csproj.CoreCompileInputs.cache
+C:\Users\Charlie Bryant\Desktop\tet\JustRipe2018\obj\Debug\JustRipe2018.exe
+C:\Users\Charlie Bryant\Desktop\tet\JustRipe2018\obj\Debug\JustRipe2018.pdb
+C:\Users\Charlie Bryant\Desktop\tet\JustRipe2018\bin\Debug\JustRipeDatabase.mdf
+C:\Users\Charlie Bryant\Desktop\tet\JustRipe2018\bin\Debug\JustRipeDatabase_log.ldf
+C:\Users\Charlie Bryant\Desktop\tet\JustRipe2018\bin\Debug\JustRipe2018.exe.config
+C:\Users\Charlie Bryant\Desktop\tet\JustRipe2018\bin\Debug\JustRipe2018.exe
+C:\Users\Charlie Bryant\Desktop\tet\JustRipe2018\bin\Debug\JustRipe2018.pdb

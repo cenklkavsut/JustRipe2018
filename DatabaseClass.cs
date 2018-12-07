@@ -5,19 +5,31 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.Data;
-using System.Security.Cryptography;//
+using System.Security.Cryptography;
 
 
 namespace JustRipe2018
 {
     class DatabaseClass
     {
-        string getUsrNameID;
-        string getUserName;
-        string getID;
+        private string getUsrNameID;
+        private string getUserName;
+        private string getID;
+        private string getIDCrop;
+        private string getIDUser;
+        private string getDate;
+        private string getIDJobType;
+        private string getJobname;
+        private string getJobID;
+        public string GetJobID { get { return getJobID; } set { getJobID = value; } }
         public string GetID { get { return getID; } set { getID = value; } }
         public string GetUsrNameID { get { return getUsrNameID; } set { getUsrNameID = value; } }
         public string GetUserName { get { return getUserName; } set { getUserName = value; } }
+        public string GetJobname { get { return getJobname; } set { getJobname = value; } }
+        public string GetDate { get { return getDate; } set { getDate = value; } }
+        public string GetIDCrop { get { return getIDCrop; } set { getIDCrop = value; } }
+        public string GetIDUser { get { return getIDUser; } set { getIDUser = value; } }
+        public string GetIDJobType { get { return getIDJobType; } set { getIDJobType = value; } }
         //private string connectionStr= @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\JustRipeDatabase.mdf;Integrated Security=True;Connect Timeout=30";
         private string connectionStr = Properties.Settings.Default.connectionToDB;
         //Connection string for connecting to the db
@@ -259,7 +271,7 @@ namespace JustRipe2018
         public string getBasicDate()// also add incremention  based on the id. if it only takes one id.
         {
             //query of the value
-            var selDate = "SELECT Date FROM [dbo].[Job] WHERE JobTypeID=1";// increment through the query or change to a counter.
+            var selDate = "SELECT Date FROM [dbo].[Job] WHERE JobTypeID=2";// increment through the query or change to a counter.
             SqlConnection sql = new SqlConnection(connectionStr);//set up the connection of it
             SqlCommand myCommand = new SqlCommand(selDate, sql);//the command to search for it
             myCommand.Connection.Open();//open the connectionN 
@@ -273,7 +285,7 @@ namespace JustRipe2018
         public int getBasicAmount()
         {
             //query of the value
-            var selAmount = "SELECT Amount FROM [dbo].[Job] WHERE JobTypeID=1 AND JobID="+ChooserData;// increment through the query 
+            var selAmount = "SELECT Amount FROM [dbo].[Job] WHERE JobTypeID=2 AND JobID="+ChooserData;// increment through the query 
             SqlConnection sql = new SqlConnection(connectionStr);//set up the connection of it
             SqlCommand myCommand = new SqlCommand(selAmount, sql);//the command to search for it
             myCommand.Connection.Open();//open the connectionN 
@@ -410,5 +422,216 @@ namespace JustRipe2018
             return Username;//return null error.
         }
 
+        public void Addjob(string valUser, string valCrop, string valDate, int valAmount, string valJobID, string ValVehicleID, string valJname)
+        {
+            SqlConnection Connect = new SqlConnection(connectionStr);
+
+            Connect.Open();
+
+            int valFromCrop = getBasicCrops();
+            int valFromUser = getBasicUser();
+            int valFromType = getBasicJobType();
+            using (SqlCommand sendJob = new SqlCommand("INSERT INTO[dbo].[Job] ([UserID], [CropID],[Date],[amount],[JobTypeID],[VehicleID] ,[Job]) VALUES" +
+            "('" + valFromUser + "','" + valFromCrop + "','" + valDate + "','" + valAmount + "','" + valFromType + "','" + ValVehicleID + "','" + valJname + "')"))
+            {
+                sendJob.Connection = Connect;
+                try
+                {
+                    sendJob.ExecuteNonQuery();
+
+                }
+                catch (Exception)
+                {
+
+
+                }
+                Connect.Close();
+
+            }
+        }
+        public void AddFertalizer(string valUser, string valCrop, string valDate, int valAmount, string valJobID, string ValVehicleID, string valJname)
+        {
+            SqlConnection Connect = new SqlConnection(connectionStr);
+
+            Connect.Open();
+            int valFromUser = getBasicUser();
+            SqlCommand sendJob = new SqlCommand("INSERT INTO[dbo].[Job](UserID, CropID,Date,amount,JobTypeID,VehicleID ,Job) VALUES" +
+            "('" + valFromUser + "','" + valCrop + "','" + valDate + "','" + valAmount + "','" + valJobID + "','" + ValVehicleID + "','" + valJname + "')");
+
+            sendJob.Connection = Connect;
+            try
+            {
+                sendJob.ExecuteNonQuery();
+            }
+            catch
+            {
+
+            }
+            Connect.Close();
+
+
+        }
+        public void AddHarvest(string valUser, string valCrop, string valDate, int valAmount, string valJobID, string ValVehicleID, string valJname)
+        {
+            SqlConnection Connect = new SqlConnection(connectionStr);
+
+            Connect.Open();
+            GetIDCrop = valCrop;
+            GetIDJobType = valJobID;
+            GetIDUser = valUser;
+            int valFromCrop = getBasicCrops();
+            int valFromUser = getBasicUser();
+            int valFromType = getBasicJobType();
+            using (SqlCommand sendJob = new SqlCommand("INSERT INTO[dbo].[Job] ([UserID], [CropID],[Date],[amount],[JobTypeID],[VehicleID] ,[Job]) VALUES" +
+            "('" + valFromUser + "','" + valFromCrop + "','" + valDate + "','" + valAmount + "','" + valFromType + "','" + ValVehicleID + "','" + valJname + "')"))
+            {
+                sendJob.Connection = Connect;
+                try
+                {
+                    sendJob.ExecuteNonQuery();
+
+                }
+                catch (Exception)
+                {
+
+
+                }
+                Connect.Close();
+
+            }
+        }
+
+
+        public void ShowTimetable(string SelectDate)
+        {
+            SqlConnection Connect = new SqlConnection(connectionStr);
+            Connect.Open();
+            SqlCommand sendDate = new SqlCommand();
+            sendDate.CommandType = CommandType.Text;
+            sendDate.CommandText = "SELECT [CropID],[JobTypeID],[UserID] FROM [dbo].[Job] WHERE Date ='" + SelectDate + "'";
+
+
+
+        }
+
+        public int getBasicCrops()
+        {
+            //query of the value
+            var selCropId = "SELECT [CropID] FROM [dbo].[Crop] WHERE Crop_Name='" + GetIDCrop + "'";
+            SqlConnection sql = new SqlConnection(connectionStr);//set up the connection of it
+            SqlCommand myCommand = new SqlCommand(selCropId, sql);//the command to search for it
+            myCommand.Connection.Open();//open the connectionN [Crop]
+            int CropId = (int)myCommand.ExecuteScalar();//input the query result into the string through casting.
+            myCommand.Connection.Close();//Close the connection
+            return CropId;//return null error.
+
+        }
+        public int getBasicUser()
+        {
+            //query of the value
+            var selUserId = "SELECT [UserID] FROM [dbo].[users] WHERE [First Name]='" + GetIDUser + "'";
+            SqlConnection sql = new SqlConnection(connectionStr);//set up the connection of it
+            SqlCommand myCommand = new SqlCommand(selUserId, sql);//the command to search for it
+            myCommand.Connection.Open();//open the connectionN [Crop]
+            int UserId = (int)myCommand.ExecuteScalar();//input the query result into the string through casting.
+            myCommand.Connection.Close();//Close the connection
+            return UserId;//return null error.
+        }
+        public int getBasicJobType()
+        {
+            //query of the value
+            var selJobTypeId = "SELECT [JobTypeID] FROM [dbo].[JobType] WHERE JobName='" + GetIDJobType + "'";
+            SqlConnection sql = new SqlConnection(connectionStr);//set up the connection of it
+            SqlCommand myCommand = new SqlCommand(selJobTypeId, sql);//the command to search for it
+            myCommand.Connection.Open();//open the connectionN [Crop]
+            int JobTypeId = (int)myCommand.ExecuteScalar();//input the query result into the string through casting.
+            myCommand.Connection.Close();//Close the connection
+            return JobTypeId;//return null error.
+        }
+        public int GetIDJob(string job)
+        {            //query of the value
+            int JobId = 0;
+            var selJobId = "SELECT [JobID] FROM [dbo].[Job] WHERE Job='" + job + "'";
+            SqlConnection sql = new SqlConnection(connectionStr);//set up the connection of it
+            SqlCommand myCommand = new SqlCommand(selJobId, sql);//the command to search for it
+            myCommand.Connection.Open();//open the connectionN [Crop]
+            try
+            {
+                 JobId = (int)myCommand.ExecuteScalar();//input the query result into the string through casting.
+            }
+            catch
+            {
+
+            }
+        
+            myCommand.Connection.Close();//Close the connection
+            return JobId;//return null error.
+
+        }
+        private string thisAvailableVehicle;
+
+        public string Getvehicle(string Jobtype, string Date)// GET DATE
+        {
+            var getvehicle = "SELECT [VehicleID] FROM [dbo].[vehicle] JOIN [JobType] ON [vehicle].[JobTypeID] = [JobType].[JobTypeID] WHERE [JobName]='" + Jobtype + "'";
+            var getJobs = "SELECT VehicleID FROM Job WHERE Date = '" + Date + "'";
+            SqlConnection conn = new SqlConnection(connectionStr);
+            conn.ConnectionString = connectionStr;
+            conn.Open();
+            
+            SqlDataAdapter myvehicle = new SqlDataAdapter(getvehicle, conn);
+            SqlDataAdapter myjob = new SqlDataAdapter(getJobs, conn);
+            DataSet VehicleList = new DataSet();
+            DataSet JobList = new DataSet();
+            myvehicle.Fill(VehicleList, getvehicle);
+            myjob.Fill(JobList, getJobs);
+            string AvailableVehicle = "";
+            bool unavailablevehicle = false;
+            // IF BEFORE LOOP 
+            if (JobList.Tables[0].Rows.Count == 0)
+            {
+                AvailableVehicle = VehicleList.Tables[0].Rows[0][0].ToString();
+                return AvailableVehicle;
+            }
+            for (int i = 0; i < VehicleList.Tables[0].Rows.Count; i++)
+            {
+
+                unavailablevehicle = false;
+                for (int j = 0; j < JobList.Tables[0].Rows.Count; j++)
+                    if (VehicleList.Tables[0].Rows[i][0].ToString() == JobList.Tables[0].Rows[j][0].ToString())
+                    {
+                        AvailableVehicle = "0";
+                        unavailablevehicle = true;
+                    }
+                    else
+                    {
+
+                        thisAvailableVehicle = VehicleList.Tables[0].Rows[i][0].ToString();
+
+                    }
+
+                
+
+                if (unavailablevehicle == false)
+                {
+                    //AvailableVehicle = thisAvailableVehicle;
+                    return thisAvailableVehicle;
+
+                }
+            }
+            return AvailableVehicle;
+
+        }
+
+        public void DeleteJob(string SelectJob)
+        {
+            SqlConnection Connect = new SqlConnection(connectionStr);
+            SqlCommand sendJob = new SqlCommand(SelectJob,Connect);
+            sendJob.CommandType = CommandType.Text;
+            sendJob.CommandText = SelectJob;
+            sendJob.Connection = Connect;
+            Connect.Open();
+            sendJob.ExecuteNonQuery();
+            Connect.Close();
+        }
     }
 }
