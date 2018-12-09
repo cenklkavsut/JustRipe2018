@@ -27,6 +27,8 @@ namespace JustRipe2018
 {
     public partial class Login : Form
     {
+        string getuser;
+        public string GetUser { get { return getuser; } set { } }
         public Login()
         {
             InitializeComponent();
@@ -34,6 +36,8 @@ namespace JustRipe2018
         public int passwordCounter=0;//a counter for the password!
         private void btnLogin_Click(object sender, EventArgs e)
         {
+            getuser = txtUserName.Text;
+
             DatabaseClass dbLogin = DatabaseClass.Instance;
 
             bool r=dbLogin.loginFul(txtUserName.Text,txtPassword.Text);//remove check
@@ -84,6 +88,19 @@ namespace JustRipe2018
         private void txtPassword_TextChanged(object sender, EventArgs e)
         {
 
+        }
+        private static Login instance;
+        //properties for calling the database class 
+        public static Login Instance
+        {
+            get//allows for getting the information
+            {
+                if (instance == null)
+                {
+                    instance = new Login();
+                }
+                return instance;
+            }
         }
     }
 }
