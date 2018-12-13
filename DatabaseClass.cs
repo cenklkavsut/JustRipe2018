@@ -21,6 +21,7 @@ namespace JustRipe2018
         private string getIDJobType;
         private string getJobname;
         private string getJobID;
+        // Get sets
         public string GetJobID { get { return getJobID; } set { getJobID = value; } }
         public string GetID { get { return getID; } set { getID = value; } }
         public string GetUsrNameID { get { return getUsrNameID; } set { getUsrNameID = value; } }
@@ -178,7 +179,7 @@ namespace JustRipe2018
             myCommand.Connection.Close();//Close the connection
             return job ;
         }
-
+        //Gets Crop ID
         public int getBasicCrop()
         {
             //query of the value
@@ -190,7 +191,7 @@ namespace JustRipe2018
             myCommand.Connection.Close();//Close the connection
             return CropId;//return null error.
         }
-
+        //gets user ID 
         public int getBasicCustomer(string valFirstN, string valSurname)
         {
             //query of the value
@@ -421,7 +422,7 @@ namespace JustRipe2018
             myCommand.Connection.Close();//Close the connection
             return Username;//return null error.
         }
-
+        // Adds Job to database 
         public void Addjob(string valUser, string valCrop, string valDate, int valAmount, string valJobID, string ValVehicleID, string valJname)
         {
             SqlConnection Connect = new SqlConnection(connectionStr);
@@ -449,6 +450,7 @@ namespace JustRipe2018
 
             }
         }
+        //Adds Fertaliser Jobs to database 
         public void AddFertalizer(string valUser, string valCrop, string valDate, int valAmount, string valJobID, string ValVehicleID, string valJname)
         {
             SqlConnection Connect = new SqlConnection(connectionStr);
@@ -471,6 +473,7 @@ namespace JustRipe2018
 
 
         }
+        //Adds Harvest Job To database 
         public void AddHarvest(string valUser, string valCrop, string valDate, int valAmount, string valJobID, string ValVehicleID, string valJname)
         {
             SqlConnection Connect = new SqlConnection(connectionStr);
@@ -501,7 +504,7 @@ namespace JustRipe2018
             }
         }
 
-
+        //Gets Timetable Data
         public void ShowTimetable(string SelectDate)
         {
             SqlConnection Connect = new SqlConnection(connectionStr);
@@ -513,7 +516,7 @@ namespace JustRipe2018
 
 
         }
-
+        //gets Crop ID
         public int getBasicCrops()
         {
             //query of the value
@@ -526,6 +529,7 @@ namespace JustRipe2018
             return CropId;//return null error.
 
         }
+        //Gets User ID
         public int getBasicUser()
         {
             //query of the value
@@ -537,6 +541,7 @@ namespace JustRipe2018
             myCommand.Connection.Close();//Close the connection
             return UserId;//return null error.
         }
+        // Gets Job Type ID
         public int getBasicJobType()
         {
             //query of the value
@@ -548,6 +553,7 @@ namespace JustRipe2018
             myCommand.Connection.Close();//Close the connection
             return JobTypeId;//return null error.
         }
+        // Gets JobID
         public int GetIDJob(string job)
         {            //query of the value
             int JobId = 0;
@@ -569,7 +575,7 @@ namespace JustRipe2018
 
         }
         private string thisAvailableVehicle;
-
+        // Vehicle availibilty loop
         public string Getvehicle(string Jobtype, string Date)// GET DATE
         {
             var getvehicle = "SELECT [VehicleID] FROM [dbo].[vehicle] JOIN [JobType] ON [vehicle].[JobTypeID] = [JobType].[JobTypeID] WHERE [JobName]='" + Jobtype + "'";
@@ -577,7 +583,7 @@ namespace JustRipe2018
             SqlConnection conn = new SqlConnection(connectionStr);
             conn.ConnectionString = connectionStr;
             conn.Open();
-            
+            // Gets the 2 datasets 
             SqlDataAdapter myvehicle = new SqlDataAdapter(getvehicle, conn);
             SqlDataAdapter myjob = new SqlDataAdapter(getJobs, conn);
             DataSet VehicleList = new DataSet();
@@ -586,7 +592,7 @@ namespace JustRipe2018
             myjob.Fill(JobList, getJobs);
             string AvailableVehicle = "";
             bool unavailablevehicle = false;
-            // IF BEFORE LOOP 
+            // loops through dataset and compares the values of Vehicle ID for a match
             if (JobList.Tables[0].Rows.Count == 0)
             {
                 AvailableVehicle = VehicleList.Tables[0].Rows[0][0].ToString();
@@ -604,7 +610,7 @@ namespace JustRipe2018
                     }
                     else
                     {
-
+                        // Stores Available vehicle 
                         thisAvailableVehicle = VehicleList.Tables[0].Rows[i][0].ToString();
 
                     }
@@ -613,7 +619,7 @@ namespace JustRipe2018
 
                 if (unavailablevehicle == false)
                 {
-                    //AvailableVehicle = thisAvailableVehicle;
+                    // returns available vehicle breaking loop 
                     return thisAvailableVehicle;
 
                 }
@@ -621,7 +627,7 @@ namespace JustRipe2018
             return AvailableVehicle;
 
         }
-
+        // Deletes Job 
         public void DeleteJob(string SelectJob)
         {
             SqlConnection Connect = new SqlConnection(connectionStr);

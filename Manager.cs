@@ -1182,7 +1182,7 @@ namespace JustRipe2018
 
         
     }
-
+        
         private void btnAddJobCancel_Click_2(object sender, EventArgs e)
         {
             //Clears the Job Text Boxes
@@ -1192,7 +1192,7 @@ namespace JustRipe2018
             addJobType.SelectedIndex = -1;
 
         }
-
+        // Job Delete
         private void btnDeleteJobSave_Click_1(object sender, EventArgs e)
         {
             DatabaseClass Connect = DatabaseClass.Instance;
@@ -1229,7 +1229,7 @@ namespace JustRipe2018
 
         private void BtnAddFertaliserConfirm_Click(object sender, EventArgs e)
         {
-            //SELECT job where
+            //Processes Fertaliser Job
             DatabaseClass Connect = DatabaseClass.Instance;
             string queryFindJob = "Select * From [dbo].[Job] WHERE [Job] = '" + SelectJobFert.SelectedText + "'";
             DataSet FindJobname = Connect.dataToCb(queryFindJob);
@@ -1240,7 +1240,7 @@ namespace JustRipe2018
             DateTime valdatetest;
             DateTime.TryParse(valDate, out valdatetest);
             string valdateconfirmed;
-
+            // Validation for dates to not be weekends
             if (valdatetest.DayOfWeek.ToString() == DayOfWeek.Saturday.ToString() ||
                 valdatetest.DayOfWeek.ToString() == DayOfWeek.Sunday.ToString())
             {
@@ -1257,7 +1257,7 @@ namespace JustRipe2018
             }
             else
             {
-
+                // Gets ID's for inputed values as Job only stores IDs
                 valdateconfirmed = valdatetest.ToShortDateString();
                 string Vehicle = Connect.Getvehicle("Fertiliser", valdateconfirmed);
                 if (Vehicle == "0")
@@ -1332,9 +1332,10 @@ namespace JustRipe2018
             }
             var Selectedval = SelectedDate;
         }
-
+        
         private void btnMThursday_Click_1(object sender, EventArgs e)
         {
+            //Gets date for Thursday of Selected Week
             string Datestring = dateTimePicker1.Text;
             DateTime Date = DateTime.Parse(Datestring);
             DateTime Thursday = Date.AddDays(3);
@@ -1349,6 +1350,7 @@ namespace JustRipe2018
 
         private void btnMWednesday_Click_1(object sender, EventArgs e)
         {
+            //Gets date for Wednesday of Selected Week
             string Datestring = dateTimePicker1.Text;
             DateTime Date = DateTime.Parse(Datestring);
             DateTime Wednesday = Date.AddDays(2);
@@ -1363,6 +1365,7 @@ namespace JustRipe2018
 
         private void btnMTuesday_Click_1(object sender, EventArgs e)
         {
+            // Gets Jobs for Tuesday of Selected Week
             string Datestring = dateTimePicker1.Text;
             DateTime Date = DateTime.Parse(Datestring);
             DateTime Tuesday = Date.AddDays(1);
@@ -1377,6 +1380,7 @@ namespace JustRipe2018
 
         private void btnMMonday_Click_1(object sender, EventArgs e)
         {
+            // Gets Jobs for Monday Selection
             string Datestring = dateTimePicker1.Text;
             DateTime Date = DateTime.Parse(Datestring);
             DateTime Monday = Date;
@@ -1391,6 +1395,7 @@ namespace JustRipe2018
 
         private void btnMFriday_Click(object sender, EventArgs e)
         {
+            // Select Jobs for Friday of date selected 
             string Datestring = dateTimePicker1.Text;
             DateTime Date = DateTime.Parse(Datestring);
             DateTime Friday = Date.AddDays(4);
